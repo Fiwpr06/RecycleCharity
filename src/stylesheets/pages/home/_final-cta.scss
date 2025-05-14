@@ -1,0 +1,16 @@
+@use "../../abstracts/" as *;
+@use "sass:color";
+
+#final-cta .btn-secondary {
+  background-color: $bs-secondary;
+  border-color: $bs-secondary;
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+#final-cta .btn-secondary:hover {
+  background-color: color.adjust($bs-secondary, $lightness: -10%);
+  border-color: color.adjust($bs-secondary, $lightness: -10%);
+  color: white;
+}

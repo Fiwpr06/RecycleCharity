@@ -1,0 +1,15 @@
+@use "sass:color";
+
+$primary-font: "Open Sans", sans-serif;
+$font-heading: "Quicksand", sans-serif;
+
+$bs-primary: #28a745;
+$bs-secondary: #6c757d;
+$bs-success: #198754;
+$bs-info: #0dcaf0;
+$bs-warning: #ffc107;
+$bs-danger: #dc3545;
+$bs-light: #f8f9fa;
+$bs-dark: #212529;
+$link-hover-color: color.adjust($bs-primary, $lightness: -10%);
+$bg-light-gray: #f1f3f5;

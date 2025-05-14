@@ -1,0 +1,29 @@
+@use "../../abstracts/" as *;
+
+/* Fundraising Page Specific Styles */
+#fundraising-progress .progress {
+  font-size: 1rem; /* Make text inside progress bar readable */
+  border-radius: 0.5rem;
+}
+
+#fundraising-progress .progress-bar span {
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#transparency-report .table {
+  font-size: 0.95rem;
+}
+
+#transparency-report .table th {
+  font-weight: 600;
+}
+
+#transparency-report .table i {
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+#donationModal .modal-title i {
+  vertical-align: middle;
+}

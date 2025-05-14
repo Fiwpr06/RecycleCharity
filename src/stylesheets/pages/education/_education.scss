@@ -1,0 +1,70 @@
+@use "../../abstracts/" as *;
+@use "sass:color";
+
+#quizizz-section .quiz-card {
+  border: 2px solid $bs-success; /* Green frame for quiz cards */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#quizizz-section .quiz-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12) !important;
+}
+#quizizz-section .quiz-card .card-title {
+  color: $bs-success;
+}
+
+#ai-introduction .img-fluid.rounded-circle {
+  border: 5px solid $bs-info;
+}
+.btn-cta-orange {
+  /* Custom CTA button color for AI */
+  background-color: #fd7e14; /* Bootstrap Orange */
+  border-color: #fd7e14;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+.btn-cta-orange:hover {
+  background-color: color.adjust(#fd7e14, $lightness: -10%);
+  border-color: color.adjust(#fd7e14, $lightness: -10%);
+  color: white;
+  transform: translateY(-2px);
+}
+
+#downloadable-documents .list-group-item {
+  transition: background-color 0.2s ease;
+}
+#downloadable-documents .list-group-item:hover {
+  background-color: $bs-light !important;
+}
+#downloadable-documents .list-group-item i.bi-download {
+  color: $bs-secondary;
+}
+
+/* Quiz Modal Styles */
+#quizModal .modal-header {
+  border-bottom: none;
+}
+#quizModal #question-area {
+  background-color: #e9ecef; /* Light background for question box */
+}
+#quizModal #answer-options .list-group-item-action {
+  font-weight: 500;
+  border-color: #ced4da;
+}
+#quizModal #answer-options .list-group-item-action:hover,
+#quizModal #answer-options .list-group-item-action.active {
+  background-color: $bs-primary;
+  color: white;
+  border-color: $bs-primary;
+}
+#quizModal #answer-explanations p {
+  padding: 0.5rem;
+  border-bottom: 1px dashed #eee;
+}
+#quizModal #answer-explanations p:last-child {
+  border-bottom: none;
+}

@@ -1,0 +1,43 @@
+@use "../../abstracts/" as *;
+
+#contactForm .form-label {
+  font-weight: 600;
+}
+
+.contact-info-list {
+  padding-left: 0;
+}
+.contact-info-list li {
+  display: flex;
+  align-items: flex-start; /* Align icon with first line of text */
+}
+.contact-info-list li i {
+  font-size: 1.25rem;
+  width: 30px; /* Ensure consistent spacing for icons */
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+.contact-info-list a {
+  color: $bs-dark;
+  text-decoration: none;
+}
+.contact-info-list a:hover {
+  color: $bs-primary;
+  text-decoration: underline;
+}
+
+.social-icons-contact .btn {
+  width: 45px;
+  height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
+.social-icons-contact .btn:hover {
+  transform: scale(1.1);
+}
+
+#contact-map-placeholder {
+  min-height: 200px; /* Ensure map area has a good height */
+}

@@ -1,0 +1,95 @@
+@use "../../abstracts/" as *;
+
+.ai-chat-container {
+  border: none; /* Remove default card border if you prefer */
+  border-radius: 0.75rem;
+  overflow: hidden; /* Ensures rounded corners apply to children */
+}
+
+.ai-chat-container .card-header {
+  background-color: $bs-primary; /* Or your chosen AI theme color */
+}
+
+.ai-avatar-header {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.ai-chat-area {
+  height: 400px;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: $bg-light-gray;
+}
+
+.message-bubble {
+  padding: 0.75rem 1rem;
+  border-radius: 1.25rem;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+.ai-message {
+  display: flex;
+  justify-content: flex-start; /* AI messages on the left */
+}
+.ai-message .message-bubble.ai {
+  background-color: #e9ecef; /* Light gray for AI */
+  color: $bs-dark;
+  border-bottom-left-radius: 0.25rem; /* Chat bubble tail */
+}
+
+.user-message {
+  display: flex;
+  justify-content: flex-end; /* User messages on the right */
+}
+.user-message .message-bubble.user {
+  background-color: $bs-primary;
+  color: white;
+  border-bottom-right-radius: 0.25rem; /* Chat bubble tail */
+}
+
+.message-bubble p {
+  font-size: 0.95rem;
+}
+.message-time {
+  display: block;
+  font-size: 0.75rem !important; /* Ensure small class takes effect */
+  margin-top: 0.25rem;
+  text-align: right;
+}
+.ai-message .message-time {
+  text-align: left;
+  color: #6c757d !important;
+}
+.user-message .message-time {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.ai-chat-input-area .form-control-lg {
+  font-size: 1rem; /* Slightly smaller for better fit */
+}
+.ai-chat-input-area .btn {
+  padding: 0.5rem 1rem; /* Adjust button padding */
+}
+.ai-chat-input-area .btn i {
+  font-size: 1.25rem;
+}
+
+#suggested-questions .btn-outline-secondary {
+  border-color: #ced4da;
+  color: #495057;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+#suggested-questions .btn-outline-secondary:hover {
+  background-color: $bs-secondary;
+  color: white;
+}
+
+#ai-usage-guide ul {
+  padding-left: 0;
+}
+#ai-usage-guide li i {
+  color: $bs-info;
+}

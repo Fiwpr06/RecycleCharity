@@ -1,0 +1,37 @@
+@use "../../abstracts/" as *;
+
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../assets/images/hero-art.png") no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 6rem 0;
+}
+.hero-section h1 {
+  font-size: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .hero-section h1 {
+    font-size: 3.5rem;
+  }
+}
+
+.btn-cta {
+  background: linear-gradient(90deg, #00b894 70%, #00cec9 100%);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  font-size: 1.14rem;
+  padding: 13px 36px;
+  border-radius: 30px;
+  box-shadow: 0 4px 14px #00b89444;
+  transition: background 0.2s, transform 0.17s;
+}
+
+.btn-cta:hover {
+  background: linear-gradient(90deg, #00cec9 60%, #00b894 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 26px #00b89444;
+}
