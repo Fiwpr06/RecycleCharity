@@ -1,0 +1,13 @@
+@use "../../abstracts/" as *;
+
+#key-metrics {
+  background-color: $bg-light-gray;
+}
+.metric-item h3 {
+  font-size: 2.5rem;
+}
+@media (min-width: 768px) {
+  .metric-item h3 {
+    font-size: 3rem;
+  }
+}

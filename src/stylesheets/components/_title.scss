@@ -1,0 +1,13 @@
+@use "../abstracts/" as *;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand,
+.nav-link,
+.section-title {
+  @include font-style($family: $font-heading, $weight: 700);
+}

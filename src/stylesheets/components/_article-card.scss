@@ -1,0 +1,18 @@
+@use "../abstracts/" as *;
+
+.article-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+}
+.article-card .card-img-top {
+  height: 180px; /* Consistent image height */
+  object-fit: cover;
+}
+.article-card .card-footer {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}

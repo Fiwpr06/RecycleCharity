@@ -1,0 +1,135 @@
+@use "variables" as *;
+
+@mixin small {
+  @media screen and (max-width: $small) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: $tablet) and (min-width: $medium) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media screen and (min-width: $extra-large) {
+    @content;
+  }
+}
+
+@mixin flex(
+  $display: flex,
+  $direction: false,
+  $align: false,
+  $justify: false,
+  $wrap: false
+) {
+  display: $display;
+  @if $direction {
+    flex-direction: $direction;
+  }
+  @if $align {
+    align-items: $align;
+  }
+  @if $justify {
+    justify-content: $justify;
+  }
+  @if $wrap {
+    flex-wrap: $wrap;
+  }
+}
+
+@mixin dimensions(
+  $w: null,
+  $h: null,
+  $max-w: null,
+  $max-h: null,
+  $min-w: null,
+  $min-h: null
+) {
+  @if $w {
+    width: $w;
+  }
+
+  @if $h {
+    height: $h;
+  }
+
+  @if $max-w {
+    max-width: $max-w;
+  }
+
+  @if $max-h {
+    max-height: $max-h;
+  }
+
+  @if $min-w {
+    min-width: $min-w;
+  }
+
+  @if $min-h {
+    min-height: $min-h;
+  }
+}
+
+@mixin font-style(
+  $family: null,
+  $size: null,
+  $weight: null,
+  $height: null,
+  $spacing: null
+) {
+  @if $family {
+    font-family: $family;
+  }
+  @if $size {
+    font-size: $size;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+  @if $height {
+    line-height: $height;
+  }
+  @if $spacing {
+    letter-spacing: $spacing;
+  }
+}
+
+@mixin bg-img(
+  $bg: "",
+  $position: false,
+  $size: cover,
+  $repeat: no-repeat,
+  $attachment: "",
+  $color: ""
+) {
+  background-image: url($bg);
+
+  @if $position {
+    background-position: $position;
+  }
+
+  @if $size {
+    background-size: $size;
+  }
+
+  @if $repeat {
+    background-repeat: $repeat;
+  }
+
+  @if $attachment {
+    background-attachment: $attachment;
+  }
+
+  @if $color {
+    background-color: $color;
+  }
+}

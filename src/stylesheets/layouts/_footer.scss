@@ -1,0 +1,19 @@
+@use "../abstracts/" as *;
+
+.footer {
+  font-size: 0.9rem;
+}
+.footer h6 {
+  color: #fff;
+  font-size: 1rem;
+}
+.footer a.text-white-50:hover {
+  color: #fff !important;
+  text-decoration: underline;
+}
+.footer .bi {
+  transition: color 0.2s ease-in-out;
+}
+.footer .bi:hover {
+  color: $bs-primary !important;
+}

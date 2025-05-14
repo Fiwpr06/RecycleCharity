@@ -1,0 +1,27 @@
+@use "../abstracts/" as *;
+
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  @include dimensions($max-w: 100%, $w: 100%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $bs-light;
+  font-family: $primary-font;
+  color: $bs-dark;
+  @include dimensions($w: 100%, $min-h: 100vh);
+  @include font-style($weight: 400, $height: 1.5rem);
+  position: relative;
+  overflow-x: hidden;
+}

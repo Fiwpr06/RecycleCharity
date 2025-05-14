@@ -1,0 +1,147 @@
+<div class="row g-5">
+  <!-- Map Section -->
+  <div class="col-lg-7">
+    <h3 class="mb-3">
+      <i class="bi bi-geo-alt-fill me-2 text-primary"></i>Bản đồ điểm thu gom
+    </h3>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Nhập địa chỉ của bạn để tìm điểm gần nhất..."
+        aria-label="Tìm điểm thu gom"
+      />
+      <button class="btn btn-primary" type="button" id="button-search-map">
+        <i class="bi bi-search"></i> Tìm
+      </button>
+    </div>
+    <!-- Placeholder for Google Maps -->
+    <div
+      id="map-placeholder"
+      class="bg-light border rounded"
+      style="
+        height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <p class="text-muted">Khung bản đồ Google Maps sẽ hiển thị ở đây.</p>
+    </div>
+  </div>
+
+  <!-- Registration Form Section -->
+  <div class="col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h3 class="card-title text-center mb-4">
+          <i class="bi bi-pencil-square me-2 text-success"></i>Biểu mẫu đăng ký
+        </h3>
+        <form id="collectionForm">
+          <div class="mb-3">
+            <label for="fullName" class="form-label"
+              >Họ và tên <span class="text-danger">*</span></label
+            >
+            <input type="text" class="form-control" id="fullName" required />
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label"
+              >Địa chỉ thu gom <span class="text-danger">*</span></label
+            >
+            <input type="text" class="form-control" id="address" required />
+          </div>
+          <div class="mb-3">
+            <label for="phoneNumber" class="form-label"
+              >Số điện thoại <span class="text-danger">*</span></label
+            >
+            <input type="tel" class="form-control" id="phoneNumber" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label"
+              >Loại rác tái chế <span class="text-danger">*</span></label
+            >
+            <div class="row">
+              <div class="col-6">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="nhua"
+                    id="wasteTypePlastic"
+                  />
+                  <label class="form-check-label" for="wasteTypePlastic"
+                    >Nhựa</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="giay"
+                    id="wasteTypePaper"
+                  />
+                  <label class="form-check-label" for="wasteTypePaper"
+                    >Giấy</label
+                  >
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="kimloai"
+                    id="wasteTypeMetal"
+                  />
+                  <label class="form-check-label" for="wasteTypeMetal"
+                    >Kim loại</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="thuytinh"
+                    id="wasteTypeGlass"
+                  />
+                  <label class="form-check-label" for="wasteTypeGlass"
+                    >Thủy tinh</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label"
+              >Số lượng (ước tính kg)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="quantity"
+              min="0.5"
+              step="0.5"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="collectionTime" class="form-label"
+              >Thời gian thu gom mong muốn</label
+            >
+            <select class="form-select" id="collectionTime">
+              <option selected disabled value="">Chọn thời gian...</option>
+              <option value="sang_t2_t6">Buổi sáng (Thứ 2 - Thứ 6)</option>
+              <option value="chieu_t2_t6">Buổi chiều (Thứ 2 - Thứ 6)</option>
+              <option value="cuoi_tuan">Cuối tuần</option>
+              <option value="linh_hoat">Linh hoạt (sẽ liên hệ)</option>
+            </select>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success btn-lg">
+              <i class="bi bi-send-fill me-2"></i>Gửi yêu cầu
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
