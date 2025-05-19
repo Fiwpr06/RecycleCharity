@@ -1,0 +1,132 @@
+@use "../../abstracts/" as *;
+
+.partner-section {
+  padding: 5rem 0;
+  background: linear-gradient(
+    to bottom,
+    $bg-light-gray,
+    rgba($bs-primary, 0.05)
+  );
+
+  .text-muted {
+    @include font-style($family: $primary-font, $size: 1.1rem);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    @include font-style($family: $font-heading, $size: 2.5rem, $weight: 700);
+    color: $bs-dark;
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .partner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .partner-item {
+      position: relative;
+      width: 100%;
+      max-width: 180px;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: white;
+      box-shadow: 0 4px 15px rgba($bs-dark, 0.1);
+      transition: box-shadow 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 8px 25px rgba($bs-dark, 0.2);
+        .partner-image {
+          transform: scale(1.05);
+        }
+      }
+
+      .partner-image {
+        width: 100%;
+        height: 80%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+      }
+
+      .partner-caption {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: $bs-dark;
+        text-align: center;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .partner-section {
+    padding: 3rem 0;
+
+    .section-title {
+      @include font-style($family: $font-heading, $size: 2rem);
+    }
+
+    .partner-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.5rem;
+
+      .partner-item {
+        max-width: 150px;
+
+        .partner-caption {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .partner-section {
+    padding: 2rem 0;
+
+    .section-title {
+      @include font-style($family: $font-heading, $size: 1.5rem);
+
+      &::after {
+        width: 40px;
+        height: 3px;
+      }
+    }
+
+    .partner-grid {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+
+      .partner-item {
+        max-width: 120px;
+
+        .partner-image {
+          height: 70%;
+        }
+
+        .partner-caption {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
