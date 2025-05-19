@@ -1,0 +1,78 @@
+@use "../../abstracts/" as *;
+@use "sass:color";
+
+.intro-section {
+  background: linear-gradient(to bottom, $bs-light, rgba($bs-primary, 0.05));
+  padding: 5rem 0;
+
+  .intro-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+
+    img {
+      transition: transform 0.3s ease;
+      width: 100%;
+      height: auto;
+    }
+
+    .overlay-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba($bs-primary, 0.2), transparent);
+      border-radius: 0.75rem;
+      z-index: 1;
+    }
+  }
+
+  .intro-content {
+    background: linear-gradient(135deg, $bs-light, rgba($bs-primary, 0.1));
+    border-radius: 0.75rem;
+    padding: 2rem 2.5rem;
+  }
+
+  .intro-title {
+    @include font-style($family: $font-heading, $size: 2.5rem, $weight: 700);
+    color: $bs-dark;
+  }
+
+  .intro-text {
+    @include font-style($family: $primary-font, $size: 1.1rem, $weight: 400);
+    color: $bs-secondary;
+  }
+}
+
+@media (max-width: 991px) {
+  .intro-section {
+    padding: 3rem 0;
+
+    .intro-title {
+      @include font-style($family: $font-heading, $size: 2rem);
+    }
+
+    .intro-text {
+      @include font-style($family: $primary-font, $size: 1rem);
+    }
+
+    .intro-content {
+      padding: 1.5rem 2rem;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .intro-section {
+    padding: 2rem 0;
+
+    .intro-title {
+      @include font-style($family: $font-heading, $size: 1.5rem);
+    }
+
+    .intro-content {
+      padding: 1rem 1.5rem;
+    }
+  }
+}

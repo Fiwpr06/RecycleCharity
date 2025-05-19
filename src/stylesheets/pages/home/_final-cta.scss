@@ -1,16 +1,91 @@
 @use "../../abstracts/" as *;
 @use "sass:color";
 
-#final-cta .btn-secondary {
-  background-color: $bs-secondary;
-  border-color: $bs-secondary;
-  color: white;
-  padding: 0.75rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+#final-cta {
+  background: linear-gradient(
+    to bottom,
+    $bg-light-gray,
+    rgba($bs-primary, 0.05)
+  );
+  background-size: cover;
+  padding: 6rem 0;
+  position: relative;
+
+  // .cta-overlay {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   // background: linear-gradient(
+  //   //   135deg,
+  //   //   rgba($bs-dark, 0.4),
+  //   //   rgba($bs-primary, 0.3)
+  //   // );
+  //   z-index: 0;
+  // }
+
+  .container {
+    z-index: 1;
+  }
+
+  h2 {
+    @include font-style($family: $font-heading, $size: 2.5rem, $weight: 700);
+    color: $bs-dark;
+  }
+
+  .lead {
+    @include font-style($family: $primary-font, $size: 1.1rem);
+    color: color.adjust($bs-secondary, $lightness: 10%);
+  }
+
+  .btn-primary {
+    background-color: $bs-primary;
+    border-color: $bs-primary;
+    color: white;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: color.adjust($bs-primary, $lightness: -10%);
+      border-color: color.adjust($bs-primary, $lightness: -10%);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba($bs-dark, 0.2);
+    }
+  }
 }
-#final-cta .btn-secondary:hover {
-  background-color: color.adjust($bs-secondary, $lightness: -10%);
-  border-color: color.adjust($bs-secondary, $lightness: -10%);
-  color: white;
+
+@media (max-width: 991px) {
+  #final-cta {
+    padding: 4rem 0;
+
+    h2 {
+      @include font-style($family: $font-heading, $size: 2rem);
+    }
+
+    .lead {
+      @include font-style($family: $primary-font, $size: 1rem);
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #final-cta {
+    padding: 3rem 0;
+
+    h2 {
+      @include font-style($family: $font-heading, $size: 1.5rem);
+    }
+
+    .lead {
+      @include font-style($family: $primary-font, $size: 0.9rem);
+    }
+
+    .btn-primary {
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
 }
