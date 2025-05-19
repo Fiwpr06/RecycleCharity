@@ -1,13 +1,19 @@
-<section id="fundraising-progress" class="mb-5">
+<section
+  id="fundraising-progress"
+  class="mb-5"
+  data-aos="fade-up"
+  data-aos-duration="1000"
+>
+  <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="card shadow-sm">
           <div class="card-body p-4">
             <div class="d-flex justify-content-between mb-2">
-              <span class="fw-bold fs-5 text-success"
-                >Đã quyên góp: 50.000.000 VNĐ</span
+              <span class="fw-bold fs-5 text-success" id="totalDonated"
+                >Đã quyên góp: 0 VNĐ</span
               >
-              <span class="fw-bold fs-5 text-secondary"
+              <span class="fw-bold fs-5 text-secondary" id="targetAmount"
                 >Mục tiêu: 100.000.000 VNĐ</span
               >
             </div>
@@ -15,19 +21,56 @@
               <div
                 class="progress-bar bg-success progress-bar-striped progress-bar-animated"
                 role="progressbar"
-                style="width: 50%"
-                aria-valuenow="50"
+                id="progressBar"
+                style="width: 0%"
+                aria-valuenow="0"
                 aria-valuemin="0"
                 aria-valuemax="100"
               >
-                <span class="fw-bold">50%</span>
+                <span class="fw-bold" id="progressPercentage">0%</span>
               </div>
             </div>
             <p class="text-center mt-3 text-muted small">
-              Cập nhật lần cuối: <span id="lastUpdatedDate">01/08/2024</span>
+              Cập nhật lần cuối: <span id="lastUpdatedDate"></span>
             </p>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<section
+  id="donation-list"
+  class="mb-5"
+  data-aos="fade-up"
+  data-aos-duration="1000"
+>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <h3
+          class="text-center mb-4 fw-bold"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          style="font-size: 2rem"
+        >
+          Danh sách nhà hảo tâm
+        </h3>
+        <div
+          id="donationTableContainer"
+          class="table-responsive"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+        </div>
+        <p
+          class="text-center mt-3 text-muted small"
+          data-aos="fade-up"
+        >
+          Xin chân thành cảm ơn sự đóng góp quý báu của các bạn!
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
