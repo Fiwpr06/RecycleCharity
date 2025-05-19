@@ -1,29 +1,367 @@
 @use "../../abstracts/" as *;
+@use "sass:color";
 
-/* Fundraising Page Specific Styles */
-#fundraising-progress .progress {
-  font-size: 1rem; /* Make text inside progress bar readable */
-  border-radius: 0.5rem;
+// Fundraising Page Specific Styles
+#fundraising-progress {
+  font-family: $primary-font;
+
+  .card {
+    border: none;
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 8px 20px rgba($bs-dark, 0.15);
+    }
+  }
+
+  .text-success {
+    color: $bs-success !important;
+  }
+
+  .text-secondary {
+    color: $bs-secondary !important;
+  }
+
+  .progress {
+    background-color: $bg-light-gray;
+    border-radius: 1rem;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 2px 10px rgba($bs-dark, 0.1);
+    }
+  }
+
+  @keyframes growProgressBar {
+    from {
+      width: 0;
+    }
+    to {
+      width: var(--target-width);
+    }
+  }
+
+  .progress-bar {
+    border-radius: 1rem;
+    background: linear-gradient(90deg, $bs-success, $bs-info);
+    animation: growProgressBar 5s ease-out forwards;
+
+    span {
+      color: $bs-light;
+      text-shadow: 1px 1px 2px rgba($bs-dark, 0.3);
+      font-weight: 600;
+    }
+  }
+
+  .text-muted {
+    color: $bs-secondary !important;
+  }
 }
 
-#fundraising-progress .progress-bar span {
-  color: white;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+#donation-list {
+  font-family: $primary-font;
+
+  h3 {
+    font-family: $font-heading;
+    background: linear-gradient(
+      90deg,
+      $primary-color,
+      $bs-primary
+    ); // Gradient từ #00b894 đến #2ecc71
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 3px rgba($bs-dark, 0.1);
+  }
+
+  .table {
+    font-size: 0.95rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: $bs-light;
+    box-shadow: 0 4px 15px rgba($primary-color, 0.1); // Bóng đổ với màu chủ đạo
+
+    thead {
+      text-align: center;
+    }
+
+    th {
+      font-family: $font-heading;
+      font-weight: 600;
+      background: linear-gradient(
+        135deg,
+        $bs-light,
+        rgba($primary-color, 0.15)
+      );
+      color: $bs-dark;
+      padding: 0.75rem;
+      border-bottom: 2px solid rgba($primary-color, 0.3);
+    }
+
+    td {
+      padding: 0.75rem;
+      border-bottom: 1px solid rgba($primary-color, 0.1);
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: rgba($bs-primary, 0.15);
+      }
+    }
+
+    .text-end {
+      font-family: "Roboto Mono", monospace;
+      color: $bs-success;
+    }
+
+    .text-muted {
+      color: color.adjust($bs-secondary, $lightness: 15%) !important;
+    }
+  }
+
+  .text-primary {
+    color: $primary-color !important;
+  }
 }
 
-#transparency-report .table {
-  font-size: 0.95rem;
+#donationTableContainer {
+  max-height: 400px;
+  overflow-y: auto;
 }
 
-#transparency-report .table th {
-  font-weight: 600;
+#transparency-report {
+  font-family: $primary-font;
+  background-color: $bg-light-gray;
+  border-radius: 1rem;
+  padding: 3rem 0;
+
+  .section-title-sm {
+    font-family: $font-heading;
+    background: linear-gradient(90deg, $primary-color, $bs-primary);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 3px rgba($bs-dark, 0.1);
+    font-size: 2rem;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    color: $bs-dark;
+  }
+
+  .table {
+    font-size: 0.95rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: $bs-light;
+    box-shadow: 0 4px 20px rgba($primary-color, 0.15);
+
+    .table-header {
+      background: linear-gradient(135deg, rgba($primary-color, 0.2), $bs-light);
+      color: $bs-dark;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    th {
+      padding: 1rem;
+      border-bottom: 2px solid rgba($primary-color, 0.3);
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba($primary-color, 0.1);
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: rgba($bs-primary, 0.2);
+      }
+    }
+
+    .text-end {
+      font-family: "Roboto Mono", monospace;
+      color: $bs-success;
+      font-weight: 500;
+    }
+
+    i {
+      font-size: 1.2rem;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.2);
+        color: $bs-primary;
+      }
+    }
+
+    .table-footer {
+      background-color: rgba($primary-color, 0.05);
+      font-weight: 600;
+
+      th,
+      td {
+        padding: 1rem;
+      }
+    }
+  }
+
+  .text-muted {
+    color: color.adjust($bs-secondary, $lightness: 15%) !important;
+  }
 }
 
-#transparency-report .table i {
-  font-size: 1.1rem;
-  vertical-align: middle;
+#donationModal {
+  .modal-content {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 5px 25px rgba($bs-dark, 0.15);
+  }
+
+  .modal-header {
+    border-bottom: 1px solid rgba($primary-color, 0.2);
+    background: linear-gradient(90deg, rgba($primary-color, 0.1), $bs-light);
+  }
+
+  .modal-title {
+    background: linear-gradient(
+      90deg,
+      $primary-color,
+      $bs-primary
+    ); // Gradient từ #00b894 đến #2ecc71
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 3px rgba($bs-dark, 0.1);
+
+    i {
+      vertical-align: middle;
+      background: linear-gradient(90deg, $primary-color, $bs-info);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-right: 0.5rem;
+      animation: pulse 1.5s infinite;
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+
+    .lead {
+      font-family: $font-heading;
+      color: $bs-dark;
+    }
+
+    .text-success {
+      color: $bs-success !important;
+    }
+
+    .list-group-item {
+      border: none;
+      padding: 0.25rem 0;
+      background: transparent;
+      color: $bs-dark;
+
+      span.text-muted {
+        color: $bs-dark;
+      }
+
+      span.fw-semibold {
+        color: $bs-success;
+      }
+
+      span.fst-italic {
+        color: $bs-secondary;
+      }
+    }
+
+    .qr-code {
+      z-index: 2;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      background: $bs-light;
+      box-shadow: 0 2px 10px rgba($primary-color, 0.1);
+
+      &:hover {
+        transform: scale(1.5);
+      }
+    }
+
+    .text-muted {
+      color: $bs-dark;
+    }
+  }
+
+  .modal-footer {
+    border-top: 1px solid rgba($primary-color, 0.2);
+    background: linear-gradient(90deg, $bs-light, rgba($primary-color, 0.1));
+
+    .btn-secondary {
+      background-color: $bs-secondary;
+      border: none;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: color.adjust($bs-secondary, $lightness: -10%);
+      }
+    }
+  }
 }
 
-#donationModal .modal-title i {
-  vertical-align: middle;
+// Responsive Adjustments
+@media (max-width: 768px) {
+  #fundraising-progress .progress {
+    font-size: 0.9rem;
+    height: 25px;
+  }
+
+  #donation-list .table th,
+  #donation-list .table td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  #transparency-report {
+    padding: 2rem 0;
+
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .section-title-sm {
+      font-size: 1.5rem;
+    }
+
+    .lead {
+      font-size: 1rem;
+    }
+  }
+
+  #donationModal {
+    .modal-body {
+      padding: 1rem;
+    }
+
+    .qr-code {
+      max-width: 150px;
+    }
+  }
 }
