@@ -1,73 +1,47 @@
-<section id="transparency-report" class="py-5 bg-light-gray rounded">
+<section
+  id="transparency-report"
+  class="py-5 bg-light-gray rounded"
+  data-aos="fade-up"
+  data-aos-duration="1000"
+>
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="section-title-sm">
+    <div class="text-center mb-5" data-aos="zoom-in" data-aos-duration="800">
+      <h2
+        class="section-title-sm fw-bold"
+        style="font-family: 'Quicksand', sans-serif"
+      >
         <i class="bi bi-patch-check-fill me-2 text-primary"></i>Quỹ được sử dụng
         như thế nào?
       </h2>
-      <p class="text-muted">
+      <p class="text-muted lead" style="font-family: 'Open Sans', sans-serif">
         Chúng tôi cam kết minh bạch trong mọi hoạt động tài chính của dự án.
       </p>
     </div>
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered shadow-sm bg-white">
-        <thead class="table-primary">
+    <div
+      class="table-responsive"
+      data-aos="fade-up"
+      data-aos-delay="200"
+      data-aos-duration="1000"
+    >
+      <table
+        class="table table-hover table-bordered shadow-sm bg-white rounded"
+      >
+        <thead class="table-header">
           <tr>
-            <th scope="col">Hạng mục chi tiêu</th>
+            <th scope="col" class="text-center">Hạng mục chi tiêu</th>
             <th scope="col" class="text-end">Số tiền (VNĐ)</th>
             <th scope="col">Mô tả chi tiết</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              <i class="bi bi-tree-fill me-2 text-success"></i>Trồng cây xanh
-            </td>
-            <td class="text-end">20.000.000</td>
-            <td>
-              Mua cây giống, phân bón và chi phí tổ chức các buổi trồng cây tại
-              cộng đồng.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <i class="bi bi-people-fill me-2 text-info"></i>Hỗ trợ cộng đồng
-            </td>
-            <td class="text-end">15.000.000</td>
-            <td>
-              Tặng quà, nhu yếu phẩm cho các hộ gia đình khó khăn tham gia tích
-              cực vào việc tái chế.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <i class="bi bi-book-half me-2 text-warning"></i>Hoạt động giáo
-              dục
-            </td>
-            <td class="text-end">10.000.000</td>
-            <td>
-              Tổ chức workshop, in ấn tài liệu, phát triển nội dung giáo dục về
-              tái chế.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <i class="bi bi-gear-fill me-2 text-secondary"></i>Chi phí vận
-              hành dự án
-            </td>
-            <td class="text-end">5.000.000</td>
-            <td>
-              Chi phí vận chuyển rác, thuê kho bãi (nếu có), và các chi phí hành
-              chính nhỏ.
-            </td>
-          </tr>
+        <tbody id="transparencyTableBody">
+          <!-- Dữ liệu sẽ được render bằng JavaScript -->
         </tbody>
-        <tfoot class="table-light">
-          <tr>
-            <th scope="row" class="fw-bold">Tổng chi</th>
-            <td class="text-end fw-bold">50.000.000</td>
-            <td></td>
-          </tr>
+        <tfoot
+          id="transparencyTableFooter"
+          class="table-footer"
+          data-aos="fade-up"
+        >
+          <!-- Tổng chi sẽ được render bằng JavaScript -->
         </tfoot>
       </table>
     </div>

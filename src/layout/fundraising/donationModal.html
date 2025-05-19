@@ -7,7 +7,7 @@
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" data-aos="fade-down" data-aos-duration="800">
         <h5 class="modal-title" id="donationModalLabel">
           <i class="bi bi-gift-fill me-2 text-primary"></i>Thông tin quyên góp
         </h5>
@@ -19,40 +19,62 @@
         ></button>
       </div>
       <div class="modal-body">
-        <p>
-          Cảm ơn bạn đã quan tâm đến việc đóng góp cho dự án "Biến Rác Thành
-          Quỹ"!
+        <p
+          class="lead text-center mb-4"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          Cảm ơn bạn đã quan tâm đến việc đóng góp cho dự án
+          <strong>"Biến Rác Thành Quỹ"</strong>!
         </p>
-        <p>Bạn có thể quyên góp qua các hình thức sau:</p>
-        <ul>
-          <li>
-            <strong>Chuyển khoản ngân hàng:</strong>
-            <ul>
-              <li>Ngân hàng: [Tên Ngân Hàng]</li>
-              <li>Số tài khoản: [Số Tài Khoản]</li>
-              <li>Chủ tài khoản: [Tên Chủ Tài Khoản Dự Án]</li>
-              <li>Nội dung: Quyen gop BRTQ - [Tên bạn]</li>
+        <p class="fw-semibold mb-3" data-aos="fade-up" data-aos-delay="200">
+          Bạn có thể quyên góp qua các hình thức sau:
+        </p>
+        <ul class="list-unstyled" data-aos="fade-up" data-aos-delay="300">
+          <li class="mb-3">
+            <strong class="text-success">Chuyển khoản ngân hàng:</strong>
+            <ul class="list-group list-group-flush mt-2">
+              <li class="list-group-item">
+                Ngân hàng:
+                <span class="text-muted"
+                  >Ngân hàng Thương mại cổ phần Đầu tư và Phát triển Việt Nam
+                  (BIDV)</span
+                >
+              </li>
+              <li class="list-group-item">
+                Số tài khoản: <span class="fw-semibold">0792258781</span>
+              </li>
+              <li class="list-group-item">
+                Chủ tài khoản: <span class="fw-semibold">HÀ TRỌNG PHI</span>
+              </li>
+              <li class="list-group-item">
+                Nội dung:
+                <span class="fst-italic">Quyen gop BRTQ - [Tên bạn]</span>
+              </li>
             </ul>
           </li>
-          <li>
-            <strong>Ví điện tử Momo/ZaloPay:</strong> Quét mã QR bên dưới (hoặc
-            số điện thoại [Số Điện Thoại Ví])
-          </li>
         </ul>
-        <div class="text-center my-3">
+        <div class="text-center my-4" data-aos="zoom-in" data-aos-delay="400">
           <img
-            src="https://via.placeholder.com/200x200/cccccc/000000?text=QR+Code+Ví"
+            src="../assets/images/fundraising/qrcode.png"
             alt="QR Code Ví Điện Tử"
-            class="img-fluid"
-            style="max-width: 200px"
+            class="img-fluid qr-code"
+            style="max-width: 200px; transition: transform 0.3s ease"
           />
+          <p class="small text-muted mt-2">
+            Quét mã QR để quyên góp qua ví điện tử
+          </p>
         </div>
-        <p class="small text-muted">
+        <p
+          class="small text-muted text-center"
+          data-aos="fade-up"
+          data-aos-delay="500"
+        >
           Mọi đóng góp sẽ được cập nhật và công khai trên trang web. Xin chân
           thành cảm ơn!
         </p>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" data-aos="fade-up" data-aos-delay="600">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Đóng
         </button>
