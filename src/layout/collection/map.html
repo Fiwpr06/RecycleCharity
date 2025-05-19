@@ -1,60 +1,74 @@
 <div class="row g-5">
   <!-- Map Section -->
-  <div class="col-lg-7">
-    <h3 class="mb-3">
+  <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1000">
+    <h3 class="mb-3 fw-bold text-dark">
       <i class="bi bi-geo-alt-fill me-2 text-primary"></i>Bản đồ điểm thu gom
     </h3>
     <div class="input-group mb-3">
       <input
         type="text"
-        class="form-control form-control-lg"
+        class="form-control form-control-lg shadow-sm"
         placeholder="Nhập địa chỉ của bạn để tìm điểm gần nhất..."
         aria-label="Tìm điểm thu gom"
+        id="map-search-input"
       />
       <button class="btn btn-primary" type="button" id="button-search-map">
         <i class="bi bi-search"></i> Tìm
       </button>
     </div>
-    <!-- Placeholder for Google Maps -->
     <div
       id="map-placeholder"
-      class="bg-light border rounded"
-      style="
-        height: 450px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <p class="text-muted">Khung bản đồ Google Maps sẽ hiển thị ở đây.</p>
-    </div>
+      class="border rounded shadow-sm bg-light"
+      style="height: 450px"
+    ></div>
   </div>
 
   <!-- Registration Form Section -->
-  <div class="col-lg-5">
-    <div class="card shadow-sm">
-      <div class="card-body p-4">
-        <h3 class="card-title text-center mb-4">
+  <div class="col-lg-5" data-aos="fade-left" data-aos-duration="1000">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4 p-lg-5">
+        <h3 class="card-title text-center mb-4 fw-bold text-dark">
           <i class="bi bi-pencil-square me-2 text-success"></i>Biểu mẫu đăng ký
         </h3>
-        <form id="collectionForm">
+        <form id="collectionForm" novalidate>
           <div class="mb-3">
             <label for="fullName" class="form-label"
               >Họ và tên <span class="text-danger">*</span></label
             >
-            <input type="text" class="form-control" id="fullName" required />
+            <input
+              type="text"
+              class="form-control shadow-sm"
+              id="fullName"
+              required
+            />
+            <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
           </div>
           <div class="mb-3">
             <label for="address" class="form-label"
               >Địa chỉ thu gom <span class="text-danger">*</span></label
             >
-            <input type="text" class="form-control" id="address" required />
+            <input
+              type="text"
+              class="form-control shadow-sm"
+              id="address"
+              required
+            />
+            <div class="invalid-feedback">Vui lòng nhập địa chỉ thu gom.</div>
           </div>
           <div class="mb-3">
             <label for="phoneNumber" class="form-label"
               >Số điện thoại <span class="text-danger">*</span></label
             >
-            <input type="tel" class="form-control" id="phoneNumber" required />
+            <input
+              type="tel"
+              class="form-control shadow-sm"
+              id="phoneNumber"
+              required
+              pattern="^\+?\d{10,15}$"
+            />
+            <div class="invalid-feedback">
+              Vui lòng nhập số điện thoại hợp lệ.
+            </div>
           </div>
           <div class="mb-3">
             <label class="form-label"
@@ -110,6 +124,9 @@
                 </div>
               </div>
             </div>
+            <div class="invalid-feedback d-block" id="wasteTypeFeedback">
+              Vui lòng chọn ít nhất một loại rác tái chế.
+            </div>
           </div>
           <div class="mb-3">
             <label for="quantity" class="form-label"
@@ -117,7 +134,7 @@
             >
             <input
               type="number"
-              class="form-control"
+              class="form-control shadow-sm"
               id="quantity"
               min="0.5"
               step="0.5"
@@ -127,7 +144,7 @@
             <label for="collectionTime" class="form-label"
               >Thời gian thu gom mong muốn</label
             >
-            <select class="form-select" id="collectionTime">
+            <select class="form-select shadow-sm" id="collectionTime">
               <option selected disabled value="">Chọn thời gian...</option>
               <option value="sang_t2_t6">Buổi sáng (Thứ 2 - Thứ 6)</option>
               <option value="chieu_t2_t6">Buổi chiều (Thứ 2 - Thứ 6)</option>
