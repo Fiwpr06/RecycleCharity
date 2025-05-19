@@ -1,0 +1,19 @@
+@use "../abstracts/" as *;
+
+.btn-cta {
+  background: linear-gradient(90deg, #00b894 70%, #00cec9 100%);
+  color: $bs-light;
+  border: none;
+  font-weight: 600;
+  font-size: 1.14rem;
+  padding: 13px 36px;
+  border-radius: 30px;
+  box-shadow: 0 4px 14px #00b89444;
+  transition: background 0.2s;
+}
+
+.btn-cta:hover {
+  background: linear-gradient(90deg, #00cec9 60%, #00b894 100%);
+  color: $bs-light;
+  box-shadow: 0 8px 26px #00b89444;
+}

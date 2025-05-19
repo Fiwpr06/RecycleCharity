@@ -1,15 +1,30 @@
 @use "sass:color";
 
-$primary-font: "Open Sans", sans-serif;
-$font-heading: "Quicksand", sans-serif;
+$primary-font: "Roboto", sans-serif;
+$font-heading: "Montserrat", sans-serif;
 
-$bs-primary: #28a745;
-$bs-secondary: #6c757d;
-$bs-success: #198754;
-$bs-info: #0dcaf0;
-$bs-warning: #ffc107;
-$bs-danger: #dc3545;
-$bs-light: #f8f9fa;
+$primary-color: #00b894; // Xanh lá nhạt (giữ nguyên)
+$bs-primary: #2ecc71; // Xanh lá tươi sáng
+$bs-primary-hover: rgba(#2ecc71, 0.2); // Hiệu ứng hover mờ
+$bs-secondary: #7f8c8d; // Xám nhạt
+$bs-success: #198754; // Xanh đậm (giữ nguyên)
+$bs-success-gradient: #27ae60; // Xanh đậm hơn cho gradient
+$bs-info: #3498db; // Xanh dương pastel
+$bs-warning: #f1c40f; // Vàng nhạt
+$bs-danger: #e74c3c; // Đỏ nhạt
+$bs-light: #ffffff;
 $bs-dark: #212529;
 $link-hover-color: color.adjust($bs-primary, $lightness: -10%);
 $bg-light-gray: #f1f3f5;
+$bg-gradient-light: linear-gradient(
+  135deg,
+  $bs-light,
+  color.adjust($bg-light-gray, $lightness: -5%)
+);
+
+// Breakpoint
+$small: 359px;
+$medium: 768px;
+$extra-large: 1200px;
+$mobile: calc($medium - 1px);
+$tablet: calc($extra-large - 1px);
