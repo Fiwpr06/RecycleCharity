@@ -1,66 +1,24 @@
 <!-- Main Content for AI Support Page -->
 <section class="container py-5">
   <div class="text-center mb-5">
-    <h1 class="section-title display-5">Hỗ trợ từ AI tái chế</h1>
-    <p class="lead text-muted">
+    <h2
+      class="section-title display-5"
+      data-aos="fade-down"
+      data-aos-easing="linear"
+      data-aos-duration="1500"
+    >
+      Hỗ trợ từ AI tái chế
+    </h2>
+    <p class="lead text-muted" data-aos="fade-down" data-aos-duration="2000">
       Hỏi bất kỳ câu hỏi nào về tái chế, AI của chúng tôi sẽ trả lời ngay qua
       giọng nói hoặc văn bản!
     </p>
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-lg-10 col-xl-8">
-      <div class="card shadow-lg ai-chat-container">
-        <div
-          class="card-header bg-primary text-white d-flex align-items-center"
-        >
-          <img
-            src="https://via.placeholder.com/50x50/ffffff/28a745?text=AI"
-            alt="AI Avatar"
-            class="rounded-circle me-3 ai-avatar-header"
-          />
-          <h5 class="mb-0">AI Tái Chế Thông Minh</h5>
-        </div>
-        <div class="card-body ai-chat-area" id="aiChatArea">
-          <!-- Chat messages will appear here -->
-          <div class="ai-message mb-3">
-            <div class="message-bubble ai">
-              <p class="mb-0">
-                Chào bạn! Tôi là AI Tái Chế. Bạn có câu hỏi nào về tái chế
-                không?
-              </p>
-              <span class="message-time small text-muted">Bây giờ</span>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer ai-chat-input-area p-3">
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control form-control-lg"
-              id="userInput"
-              placeholder="Gõ câu hỏi của bạn ở đây..."
-              aria-label="User input"
-            />
-            <button
-              class="btn btn-primary"
-              type="button"
-              id="sendTextBtn"
-              title="Gửi văn bản"
-            >
-              <i class="bi bi-send-fill"></i>
-            </button>
-            <button
-              class="btn btn-cta-orange"
-              type="button"
-              id="sendVoiceBtn"
-              title="Gửi bằng giọng nói (mockup)"
-            >
-              <i class="bi bi-mic-fill"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+    <div class="col-lg-12 col-xl-10">
+      <!-- AI Chat Box -->
+      <include src="./layout/support/ai-chat.html" locals="{}"> </include>
 
       <!-- Suggested Questions Section -->
       <include src="./layout/support/suggested-questions.html" locals="{}">

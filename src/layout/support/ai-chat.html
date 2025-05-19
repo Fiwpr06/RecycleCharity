@@ -1,0 +1,65 @@
+<div
+  class="card shadow-lg ai-chat-container"
+  data-aos="zoom-in"
+  data-aos-duration="800"
+>
+  <div
+    class="card-header bg-primary text-white d-flex align-items-center"
+    data-aos="fade-down"
+    data-aos-delay="100"
+  >
+    <img
+      src="../assets/images/education/AI.png"
+      alt="AI Avatar"
+      class="rounded-circle me-3 ai-avatar-header"
+    />
+    <h5 class="mb-0">AI Tái Chế Thông Minh</h5>
+  </div>
+  <div
+    class="card-body ai-chat-area"
+    id="aiChatArea"
+    data-aos="fade-up"
+    data-aos-delay="200"
+  >
+    <!-- Chat messages will appear here -->
+    <div class="ai-message mb-3" data-aos="fade-right" data-aos-delay="300">
+      <div class="message-bubble ai">
+        <p class="mb-0">
+          Chào bạn! Tôi là AI Tái Chế. Bạn có câu hỏi nào về tái chế không?
+        </p>
+        <span class="message-time small text-muted">Bây giờ</span>
+      </div>
+    </div>
+  </div>
+  <div
+    class="card-footer ai-chat-input-area p-3"
+    data-aos="fade-up"
+    data-aos-delay="400"
+  >
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        id="userInput"
+        placeholder="Gõ câu hỏi của bạn ở đây..."
+        aria-label="User input"
+      />
+      <button
+        class="btn btn-primary"
+        type="button"
+        id="sendTextBtn"
+        title="Gửi văn bản"
+      >
+        <i class="bi bi-send-fill"></i>
+      </button>
+      <button
+        class="btn btn-cta-orange"
+        type="button"
+        id="sendVoiceBtn"
+        title="Gửi bằng giọng nói (mockup)"
+      >
+        <i class="bi bi-mic-fill"></i>
+      </button>
+    </div>
+  </div>
+</div>
