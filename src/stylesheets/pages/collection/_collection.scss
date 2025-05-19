@@ -1,24 +1,146 @@
 @use "../../abstracts/" as *;
 
 #map-placeholder {
-  min-height: 400px; /* Ensure map area has a good height */
+  min-height: 400px;
+  background: linear-gradient(135deg, $bs-light, rgba($bs-primary, 0.1));
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 20px rgba($bs-dark, 0.1);
+  }
 }
 
-#collectionForm .form-label {
-  font-weight: 600;
+#collectionForm {
+  .form-label {
+    font-weight: 600;
+    color: $bs-dark;
+  }
+
+  .form-control,
+  .form-select {
+    border-radius: 0.5rem;
+    border: 1px solid $bs-secondary;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: $bs-primary;
+      box-shadow: 0 0 5px rgba($bs-primary, 0.3);
+    }
+  }
+
+  .form-check-input:checked {
+    background-color: $bs-primary;
+    border-color: $bs-primary;
+  }
+
+  .invalid-feedback {
+    display: none;
+  }
+
+  .was-validated .form-control:invalid,
+  .was-validated .form-select:invalid {
+    border-color: $bs-danger;
+  }
+
+  .was-validated .form-control:invalid ~ .invalid-feedback,
+  .was-validated .form-select:invalid ~ .invalid-feedback {
+    display: block;
+  }
+
+  .btn-success {
+    background-color: $bs-primary;
+    border-color: $bs-primary;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $link-hover-color;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba($bs-dark, 0.2);
+    }
+  }
 }
 
-#recycling-guide .list-group-item {
-  border-left: 3px solid $bs-info !important; /* Example: add a left border to list items */
-  padding-left: 1.5rem;
-  margin-bottom: 0.5rem;
-  background-color: transparent !important; /* Ensure bg is transparent if parent is colored */
+#recycling-guide {
+  background: linear-gradient(to bottom, $bg-light-gray, rgba($bs-primary, 0.05));
+
+  .section-title-sm {
+    @include font-style($family: $font-heading, $size: 1.5rem, $weight: 700);
+    color: $bs-dark;
+  }
+
+  .text-muted {
+    @include font-style($family: $primary-font, $size: 1rem);
+  }
+
+  .list-group-item {
+    border-left: 3px solid $bs-primary;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    background-color: transparent;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba($bs-primary, 0.05);
+      transform: translateX(5px);
+    }
+  }
 }
 
-.section-title-sm {
-  /* For smaller section titles like in the guide */
-  font-weight: 700;
-  color: $bs-dark;
-  margin-bottom: 0.5rem;
-  font-size: 1.5rem;
+@media (max-width: 991px) {
+  #map-placeholder {
+    height: 350px;
+  }
+
+  #collectionForm {
+    .form-label {
+      font-size: 0.9rem;
+    }
+
+    .form-control,
+    .form-select {
+      font-size: 0.9rem;
+    }
+  }
+
+  #recycling-guide {
+    .section-title-sm {
+      font-size: 1.3rem;
+    }
+
+    .text-muted {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #map-placeholder {
+    height: 300px;
+  }
+
+  #collectionForm {
+    .form-label {
+      font-size: 0.85rem;
+    }
+
+    .form-control,
+    .form-select {
+      font-size: 0.85rem;
+    }
+
+    .btn-success {
+      font-size: 0.9rem;
+      padding: 0.5rem 1.5rem;
+    }
+  }
+
+  #recycling-guide {
+    .section-title-sm {
+      font-size: 1.2rem;
+    }
+
+    .text-muted {
+      font-size: 0.85rem;
+    }
+  }
 }
