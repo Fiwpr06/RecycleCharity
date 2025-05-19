@@ -1,43 +1,268 @@
 @use "../../abstracts/" as *;
 
-#contactForm .form-label {
-  font-weight: 600;
+.contact-card {
+  border: none;
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    rgba(#00b894, 0.1)
+  ); // Gradient trắng đến xanh lá nhạt
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(#212529, 0.1); // Bóng đổ nhẹ
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(#00b894, 0.2); // Bóng đổ xanh lá khi hover
+  }
+
+  .card-body {
+    padding: 2rem;
+
+    .card-title {
+      font-family: "Quicksand", sans-serif; // Font heading
+      font-size: 1.8rem;
+      color: #2ecc71; // Xanh lá tươi sáng
+      margin-bottom: 1.5rem;
+
+      i {
+        color: #00b894; // Xanh lá nhạt cho icon
+        animation: pulse 1.5s infinite;
+
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.2);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+      }
+    }
+  }
+}
+
+#contactForm {
+  .form-label {
+    font-family: "Open Sans", sans-serif; // Font chính
+    font-weight: 600;
+    color: #212529; // Màu đen đậm
+    font-size: 1rem;
+  }
+
+  .form-control {
+    border-radius: 0.5rem;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: "Open Sans", sans-serif;
+
+    &:focus {
+      border-color: #2ecc71; // Xanh lá tươi sáng khi focus
+      box-shadow: 0 0 0 0.25rem rgba(#2ecc71, 0.2); // Halo xanh lá
+      outline: none;
+    }
+
+    &::placeholder {
+      color: #7f8c8d; // Xám nhạt
+      opacity: 0.8;
+    }
+  }
+
+  textarea.form-control {
+    resize: vertical; // Chỉ cho phép resize dọc
+  }
+
+  .btn-success {
+    background-color: #198754; // Xanh đậm
+    border: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #27ae60; // Xanh đậm hơn khi hover
+      transform: scale(1.05);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgba(#198754, 0.3);
+    }
+
+    i {
+      vertical-align: middle;
+    }
+  }
+}
+
+#formFeedback {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.contact-info-card {
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    rgba(#00b894, 0.05)
+  ); // Gradient trắng đến xanh lá nhạt
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(#212529, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1.5rem rgba(#00b894, 0.2);
+  }
+
+  .section-title-sm {
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.6rem;
+    color: #2ecc71; // Xanh lá tươi sáng
+    margin-bottom: 1rem;
+
+    i {
+      animation: pulse 1.5s infinite;
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    }
+  }
 }
 
 .contact-info-list {
   padding-left: 0;
-}
-.contact-info-list li {
-  display: flex;
-  align-items: flex-start; /* Align icon with first line of text */
-}
-.contact-info-list li i {
-  font-size: 1.25rem;
-  width: 30px; /* Ensure consistent spacing for icons */
-  flex-shrink: 0; /* Prevent icon from shrinking */
-}
-.contact-info-list a {
-  color: $bs-dark;
-  text-decoration: none;
-}
-.contact-info-list a:hover {
-  color: $bs-primary;
-  text-decoration: underline;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1rem;
+    color: #212529;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    i {
+      font-size: 1.3rem;
+      width: 30px;
+      flex-shrink: 0;
+      color: #00b894; // Xanh lá nhạt
+    }
+
+    strong {
+      margin-right: 0.5rem;
+    }
+
+    a {
+      color: #212529;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #2ecc71; // Xanh lá tươi sáng
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
-.social-icons-contact .btn {
-  width: 45px;
-  height: 45px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 1.2rem;
-}
-.social-icons-contact .btn:hover {
-  transform: scale(1.1);
+.social-icons-contact {
+  .btn {
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 0.5rem rgba(#00b894, 0.3);
+    }
+  }
 }
 
 #contact-map-placeholder {
-  min-height: 200px; /* Ensure map area has a good height */
+  min-height: 200px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.75rem;
+
+  p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.95rem;
+    color: #6c757d;
+  }
+}
+
+// Responsive Adjustments
+@media (max-width: 768px) {
+  .contact-card {
+    .card-body {
+      padding: 1.5rem;
+
+      .card-title {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  #contactForm {
+    .form-label {
+      font-size: 0.9rem;
+    }
+
+    .btn-success {
+      font-size: 0.9rem;
+      padding: 0.75rem;
+    }
+  }
+
+  .contact-info-card {
+    padding: 1rem;
+
+    .section-title-sm {
+      font-size: 1.4rem;
+    }
+  }
+
+  .contact-info-list li {
+    font-size: 0.9rem;
+
+    i {
+      font-size: 1.2rem;
+    }
+  }
+
+  .social-icons-contact .btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  #contact-map-placeholder {
+    height: 200px;
+  }
 }
