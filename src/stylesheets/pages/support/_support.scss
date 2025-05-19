@@ -1,95 +1,436 @@
 @use "../../abstracts/" as *;
+@use "sass:color";
 
+// AI Chat Container Styles
 .ai-chat-container {
-  border: none; /* Remove default card border if you prefer */
-  border-radius: 0.75rem;
-  overflow: hidden; /* Ensures rounded corners apply to children */
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    rgba(#00b894, 0.05)
+  ); // Gradient trắng đến xanh lá nhạt
+  box-shadow: 0 0.5rem 1.5rem rgba(#212529, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(#00b894, 0.2);
+  }
+
+  .card-header {
+    background: linear-gradient(
+      90deg,
+      #2ecc71,
+      #00b894
+    ); // Gradient từ xanh lá tươi sáng đến xanh lá nhạt
+    padding: 1rem 1.5rem;
+    border-bottom: none;
+
+    h5 {
+      font-family: "Quicksand", sans-serif;
+      font-size: 1.4rem;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(#212529, 0.2);
+    }
+
+    .ai-avatar-header {
+      width: 45px;
+      height: 45px;
+      border: 3px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 0 0.5rem rgba(#212529, 0.2);
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .ai-chat-area {
+    height: 400px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: #f1f3f5; // Xám nhạt
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f3f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #ced4da;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #adb5bd;
+    }
+  }
+
+  .message-bubble {
+    padding: 0.75rem 1.25rem;
+    border-radius: 1.25rem;
+    max-width: 75%;
+    word-wrap: break-word;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.95rem;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(#212529, 0.1);
+  }
+
+  .ai-message {
+    display: flex;
+    justify-content: flex-start;
+
+    .message-bubble.ai {
+      background: #e9ecef; // Xám nhạt
+      color: #212529;
+      border-bottom-left-radius: 0.25rem;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-bottom: 10px solid #e9ecef;
+        border-left: 10px solid transparent;
+      }
+    }
+
+    .message-time {
+      text-align: left;
+      color: #6c757d !important;
+    }
+  }
+
+  .user-message {
+    display: flex;
+    justify-content: flex-end;
+
+    .message-bubble.user {
+      background: #2ecc71; // Xanh lá tươi sáng
+      color: #ffffff;
+      border-bottom-right-radius: 0.25rem;
+
+      &:before {
+        content: "";
+        position: absolute;
+        right: -8px;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-bottom: 10px solid #2ecc71;
+        border-right: 10px solid transparent;
+      }
+    }
+
+    .message-time {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+  }
+
+  .message-time {
+    display: block;
+    font-size: 0.75rem !important;
+    margin-top: 0.25rem;
+    text-align: right;
+  }
+
+  .ai-chat-input-area {
+    padding: 1rem 1.5rem;
+    background: #ffffff;
+
+    .form-control-lg {
+      font-family: "Open Sans", sans-serif;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ced4da;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:focus {
+        border-color: #2ecc71;
+        box-shadow: 0 0 0 0.25rem rgba(#2ecc71, 0.2);
+        outline: none;
+      }
+
+      &::placeholder {
+        color: #7f8c8d;
+        opacity: 0.8;
+      }
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      i {
+        font-size: 1.25rem;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 0.5rem rgba(#212529, 0.2);
+      }
+    }
+
+    .btn-primary {
+      background: #2ecc71;
+      border: none;
+
+      &:hover {
+        background: #27ae60; // Xanh đậm hơn
+      }
+    }
+
+    .btn-cta-orange {
+      background: #f1c40f; // Vàng nhạt
+      border: none;
+
+      &:hover {
+        background: #e2b60e; // Vàng đậm hơn
+      }
+    }
+  }
 }
 
-.ai-chat-container .card-header {
-  background-color: $bs-primary; /* Or your chosen AI theme color */
+#ai-feedback-cta {
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    rgba(#00b894, 0.05)
+  ); // Gradient trắng đến xanh lá nhạt
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(#212529, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1.5rem rgba(#00b894, 0.2);
+  }
+
+  .lead {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.25rem;
+    color: #212529;
+    margin-bottom: 1rem;
+  }
+
+  .btn-outline-primary {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    color: #2ecc71; // Xanh lá tươi sáng
+    border-color: #2ecc71;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
+    i {
+      color: #2ecc71;
+    }
+
+    &:hover {
+      background-color: #2ecc71;
+      color: #ffffff;
+      transform: scale(1.05);
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
 }
 
-.ai-avatar-header {
-  width: 40px;
-  height: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+// Suggested Questions Styles
+#suggested-questions {
+  background: #f8f9fa; // Xám nhạt nhẹ
+  padding: 2rem;
+  border-radius: 1rem;
+
+  .section-title-sm {
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.6rem;
+    color: #212529;
+    margin-bottom: 1.5rem;
+
+    i {
+      color: #f1c40f; // Vàng nhạt
+      animation: pulse 1.5s infinite;
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  .suggested-question-btn {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.9rem;
+    border-color: #ced4da;
+    color: #495057;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1.25rem;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(#212529, 0.1);
+
+    &:hover {
+      background-color: #7f8c8d; // Xám nhạt
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(#212529, 0.15);
+    }
+  }
 }
 
-.ai-chat-area {
-  height: 400px;
-  overflow-y: auto;
-  padding: 1rem;
-  background-color: $bg-light-gray;
+// AI Usage Guide Styles
+#ai-usage-guide {
+  padding: 2rem 0;
+  border-top: 1px solid #dee2e6;
+
+  .section-title-sm {
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.6rem;
+    color: #212529;
+    margin-bottom: 1.5rem;
+
+    i {
+      color: #3498db;
+      animation: pulse 1.5s infinite;
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  ul {
+    padding-left: 0;
+
+    li {
+      font-size: 1rem;
+      color: #212529;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      margin-bottom: 1rem;
+
+      i {
+        color: #3498db;
+        font-size: 1.2rem;
+        margin-right: 0.75rem;
+      }
+    }
+  }
 }
 
-.message-bubble {
-  padding: 0.75rem 1rem;
-  border-radius: 1.25rem;
-  max-width: 75%;
-  word-wrap: break-word;
-}
+// Responsive Adjustments
+@media (max-width: 768px) {
+  .ai-chat-container {
+    .card-header {
+      padding: 0.75rem 1rem;
 
-.ai-message {
-  display: flex;
-  justify-content: flex-start; /* AI messages on the left */
-}
-.ai-message .message-bubble.ai {
-  background-color: #e9ecef; /* Light gray for AI */
-  color: $bs-dark;
-  border-bottom-left-radius: 0.25rem; /* Chat bubble tail */
-}
+      h5 {
+        font-size: 1.2rem;
+      }
 
-.user-message {
-  display: flex;
-  justify-content: flex-end; /* User messages on the right */
-}
-.user-message .message-bubble.user {
-  background-color: $bs-primary;
-  color: white;
-  border-bottom-right-radius: 0.25rem; /* Chat bubble tail */
-}
+      .ai-avatar-header {
+        width: 35px;
+        height: 35px;
+      }
+    }
 
-.message-bubble p {
-  font-size: 0.95rem;
-}
-.message-time {
-  display: block;
-  font-size: 0.75rem !important; /* Ensure small class takes effect */
-  margin-top: 0.25rem;
-  text-align: right;
-}
-.ai-message .message-time {
-  text-align: left;
-  color: #6c757d !important;
-}
-.user-message .message-time {
-  color: rgba(255, 255, 255, 0.7) !important;
-}
+    .ai-chat-area {
+      height: 300px;
+      padding: 1rem;
+    }
 
-.ai-chat-input-area .form-control-lg {
-  font-size: 1rem; /* Slightly smaller for better fit */
-}
-.ai-chat-input-area .btn {
-  padding: 0.5rem 1rem; /* Adjust button padding */
-}
-.ai-chat-input-area .btn i {
-  font-size: 1.25rem;
-}
+    .message-bubble {
+      font-size: 0.9rem;
+    }
 
-#suggested-questions .btn-outline-secondary {
-  border-color: #ced4da;
-  color: #495057;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-#suggested-questions .btn-outline-secondary:hover {
-  background-color: $bs-secondary;
-  color: white;
-}
+    .ai-chat-input-area {
+      padding: 0.75rem 1rem;
 
-#ai-usage-guide ul {
-  padding-left: 0;
-}
-#ai-usage-guide li i {
-  color: $bs-info;
+      .form-control-lg {
+        font-size: 0.9rem;
+      }
+
+      .btn {
+        padding: 0.4rem 0.8rem;
+
+        i {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  #ai-feedback-cta {
+    padding: 1.5rem;
+
+    .lead {
+      font-size: 1.1rem;
+    }
+
+    .btn-outline-primary {
+      padding: 0.4rem 1.25rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  #suggested-questions {
+    padding: 1.5rem;
+
+    .section-title-sm {
+      font-size: 1.4rem;
+    }
+
+    .suggested-question-btn {
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+    }
+  }
+
+  #ai-usage-guide {
+    padding: 1.5rem 0;
+
+    .section-title-sm {
+      font-size: 1.4rem;
+    }
+
+    ul li {
+      font-size: 0.9rem;
+
+      i {
+        font-size: 1.1rem;
+      }
+    }
+  }
 }
