@@ -1,0 +1,59 @@
+@use "../abstracts/" as *;
+
+.navbar {
+  padding: 16px 0;
+  transition: background-color 0.3s ease;
+
+  &-brand {
+    @include font-style($size: 1.6rem, $spacing: 2px);
+    color: $primary-color !important;
+  }
+
+  .nav-link {
+    @include font-style($weight: 600);
+    color: $bs-secondary;
+    transition: color 0.2s ease-in-out;
+
+    &:hover,
+    &.active {
+      color: $bs-primary;
+    }
+  }
+
+  .d-flex.flex-nowrap {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .btn {
+    &-outline-success,
+    &-success {
+      width: 49%;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    &-outline-success {
+      &:hover {
+        background-color: $bs-primary-hover;
+        color: $bs-primary;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .navbar {
+    &-brand {
+      @include font-style($size: 1.2rem, $spacing: 2px);
+    }
+
+    .nav-link {
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+  }
+}
