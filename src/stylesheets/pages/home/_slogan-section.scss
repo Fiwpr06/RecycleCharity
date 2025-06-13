@@ -206,7 +206,8 @@
     border-radius: 1rem;
 
     img,
-    video {
+    video,
+    iframe {
       transition: transform 0.5s ease;
       width: 100%;
       height: auto;
@@ -217,11 +218,19 @@
       outline: none;
     }
 
-    video {
+    video,
+    iframe {
       &:focus {
         outline: none;
         border: none;
       }
+    }
+
+    // Specific styling for YouTube iframe
+    iframe {
+      aspect-ratio: 16/9;
+      height: auto;
+      min-height: 300px;
     }
 
     .image-overlay {
@@ -370,7 +379,8 @@
     .slogan-image {
       // Slightly reduce video and image width on tablet for better proportion
       img,
-      video {
+      video,
+      iframe {
         width: 95% !important;
         max-width: 95% !important;
         margin: 0 auto;
@@ -462,7 +472,8 @@
     .slogan-image {
       // Reduce video and image width on mobile for better viewing
       img,
-      video {
+      video,
+      iframe {
         width: 85% !important;
         max-width: 85% !important;
         margin: 0 auto;
@@ -498,7 +509,8 @@
     .slogan-image {
       // Medium tablets and large phones
       img,
-      video {
+      video,
+      iframe {
         width: 88% !important;
         max-width: 88% !important;
         border-radius: 1rem !important;
@@ -515,7 +527,8 @@
     .slogan-image {
       // Small phones
       img,
-      video {
+      video,
+      iframe {
         width: 92% !important;
         max-width: 92% !important;
         border-radius: 0.8rem !important;
@@ -532,7 +545,8 @@
     .slogan-image {
       // Very small phones
       img,
-      video {
+      video,
+      iframe {
         width: 95% !important;
         max-width: 95% !important;
         border-radius: 0.6rem !important;
@@ -544,8 +558,9 @@
   }
 }
 
-// Global video styling to ensure no borders and proper border-radius
-video {
+// Global video and iframe styling to ensure no borders and proper border-radius
+video,
+iframe {
   border: none !important;
   outline: none !important;
   max-width: 100%;
@@ -565,7 +580,8 @@ video {
 @media (max-width: 1200px) {
   .slogan-section .slogan-image {
     img,
-    video {
+    video,
+    iframe {
       transition: all 0.3s ease;
     }
   }
@@ -574,13 +590,15 @@ video {
 @media (max-width: 992px) {
   .slogan-section .slogan-image {
     img,
-    video {
+    video,
+    iframe {
       transform: none !important; // Disable hover transform on tablets
     }
 
     &:hover {
       img,
-      video {
+      video,
+      iframe {
         transform: none !important;
       }
     }
@@ -592,7 +610,8 @@ video {
   .slogan-section {
     .slogan-image {
       img,
-      video {
+      video,
+      iframe {
         width: 80% !important;
         max-width: 80% !important;
       }
@@ -605,7 +624,8 @@ video {
   .slogan-section {
     .slogan-image {
       img,
-      video {
+      video,
+      iframe {
         width: 90% !important;
         max-width: 90% !important;
       }
