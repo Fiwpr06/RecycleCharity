@@ -1,11 +1,41 @@
-<!-- Hero Section -->
+<!-- Hero Section with Carousel - Updated: Added image carousel -->
 <header class="hero-section text-white text-center d-flex align-items-center">
+  <!-- Hero Carousel -->
+  <div class="hero-carousel">
+    <!-- Carousel slides -->
+    <div class="carousel-slides">
+      <div class="slide slide1"></div>
+      <div class="slide slide2"></div>
+      <div class="slide slide3"></div>
+      <div class="slide slide4"></div>
+    </div>
+
+    <!-- Carousel indicators (dots) -->
+    <div class="carousel-indicators">
+      <button class="indicator" data-slide="0"></button>
+      <button class="indicator" data-slide="1"></button>
+      <button class="indicator" data-slide="2"></button>
+      <button class="indicator" data-slide="3"></button>
+    </div>
+  </div>
+
   <div class="container">
-    <h1 class="display-3 fw-bold">Biến Rác Thành Quỹ - Xây Tương Lai Xanh</h1>
-    <p class="lead my-4 col-md-8 mx-auto">
+    <h1 class="display-3 fw-bold" data-aos="fade-up" data-aos-delay="200">
+      Biến Rác Thành Quỹ - Xây Tương Lai Xanh
+    </h1>
+    <p
+      class="lead my-4 col-md-8 mx-auto"
+      data-aos="fade-up"
+      data-aos-delay="400"
+      style="color: white !important"
+    >
       Chung tay giảm thiểu rác thải, gây quỹ cho các hoạt động vì môi trường, và
       xây dựng một cộng đồng xanh, sạch, đẹp cho thế hệ mai sau.
     </p>
-    <a href="./collection.html" class="btn btn-cta btn-lg">Tham gia ngay</a>
+    <div class="hero-actions" data-aos="fade-up" data-aos-delay="600">
+      <a href="./collection.html" class="btn btn-cta btn-lg">
+        <i class="bi bi-play-fill me-2"></i>Tham gia ngay
+      </a>
+    </div>
   </div>
 </header>

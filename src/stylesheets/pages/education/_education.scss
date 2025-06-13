@@ -1,6 +1,65 @@
 @use "../../abstracts/" as *;
 @use "sass:color";
 
+// Main Education Page Header Styling
+.container .section-label {
+  display: inline-block;
+  background: linear-gradient(135deg, $bs-primary, $primary-color);
+  color: $bs-light;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-family: $font-heading;
+  font-weight: 600;
+  font-size: $font-size-sm;
+  letter-spacing: $letter-spacing-normal;
+  box-shadow: 0 4px 15px rgba($bs-primary, 0.2);
+
+  i {
+    color: $bs-light;
+  }
+}
+
+// Education page main title styling
+.container .section-title {
+  font-family: $font-heading !important;
+  color: #1e40af !important;
+  font-weight: 700;
+  letter-spacing: $letter-spacing-tight;
+  line-height: $line-height-sm;
+}
+
+// Education page lead text styling
+.container .lead {
+  font-family: $primary-font !important;
+  color: $bs-secondary !important;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+// Feature cards styling
+.container .bg-light {
+  background-color: rgba($bs-light, 0.8) !important;
+  border: 1px solid rgba($bs-primary, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba($bs-primary, 0.15) !important;
+    background-color: $bs-light !important;
+  }
+
+  h6 {
+    font-family: $font-heading !important;
+    color: #1e40af !important;
+    font-weight: 700;
+  }
+
+  small {
+    font-family: $primary-font !important;
+    color: $bs-secondary !important;
+  }
+}
+
 #ai-introduction {
   font-family: $primary-font;
   background: linear-gradient(135deg, $bs-light, rgba($primary-color, 0.05));
@@ -540,15 +599,81 @@
       --bs-gutter-x: 1rem;
     }
 
-    .ratio {
-      &:hover {
-        transform: none;
-        box-shadow: 0 4px 10px rgba($primary-color, 0.1);
+    .col {
+      // Reduce video width on mobile for better viewing
+      .ratio {
+        width: 90%;
+        margin: 0 auto;
+        border-radius: 0.5rem !important;
+        overflow: hidden;
+
+        &:hover {
+          transform: none;
+          box-shadow: 0 4px 10px rgba($primary-color, 0.1);
+        }
+
+        iframe {
+          border-radius: 0.5rem;
+          border: none;
+        }
       }
     }
 
     .text-muted {
       font-size: 0.9rem;
+    }
+  }
+}
+
+// Additional responsive breakpoints for educational videos
+@media (max-width: 992px) {
+  #educational-videos {
+    .col {
+      .ratio {
+        width: 85%;
+        margin: 0 auto 1.5rem auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #educational-videos {
+    padding: 1.5rem 0;
+
+    .section-title-sm {
+      font-size: 1.3rem;
+    }
+
+    .col {
+      .ratio {
+        width: 95%;
+        margin: 0 auto 1rem auto;
+        border-radius: 0.4rem !important;
+
+        iframe {
+          border-radius: 0.4rem;
+        }
+      }
+    }
+
+    .text-muted {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  #educational-videos {
+    .col {
+      .ratio {
+        width: 98%;
+        border-radius: 0.3rem !important;
+
+        iframe {
+          border-radius: 0.3rem;
+        }
+      }
     }
   }
 }

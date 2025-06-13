@@ -22,7 +22,12 @@ body {
   font-family: $primary-font;
   color: $bs-dark;
   @include dimensions($w: 100%, $min-h: 100vh);
-  @include font-style($weight: 400, $height: 1.5rem);
+  @include font-style(
+    $weight: $font-weight-normal,
+    $height: $line-height-base,
+    $size: $font-size-base,
+    $spacing: $letter-spacing-normal
+  );
   position: relative;
   overflow-x: hidden;
 }

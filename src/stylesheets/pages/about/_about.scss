@@ -4,80 +4,172 @@
 #mission-vision {
   font-family: $primary-font;
   padding: 4rem 0;
-  background: $bg-gradient-light; // Sử dụng gradient đã định nghĩa
+  background: linear-gradient(135deg, $bs-light, rgba($primary-color, 0.03));
 
   .container {
     max-width: $extra-large;
   }
 
-  .row {
-    --bs-gutter-x: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .col-lg-6 {
-    display: flex;
-  }
-
-  .mission-box,
-  .vision-box {
-    background: linear-gradient(135deg, $bs-light, rgba($primary-color, 0.1));
-    border-left: 5px solid $bs-primary;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 1rem;
-    padding: 2rem;
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    min-height: 300px;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px $bs-primary-hover; // Sử dụng màu hover mờ
-    }
-
-    p {
-      color: $bs-dark;
-      line-height: 1.6;
-      margin-bottom: 0;
-      flex-grow: 1;
-    }
-  }
-
-  .vision-box {
-    border-left-color: $bs-success;
-  }
-
-  .section-title-sm {
+  // Section Header Styling
+  .section-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, $bs-primary, $primary-color);
+    color: $bs-light;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
     font-family: $font-heading;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    letter-spacing: $letter-spacing-normal;
+    box-shadow: 0 4px 15px rgba($bs-primary, 0.2);
 
     i {
-      vertical-align: middle;
-      animation: pulse 1.5s infinite;
-
-      @keyframes pulse {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.2);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
+      color: $bs-light;
     }
   }
 
-  .text-primary {
-    color: $primary-color !important;
+  .section-main-title {
+    font-family: $font-heading !important;
+    color: #1e40af !important;
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: $letter-spacing-tight;
+    line-height: $line-height-sm;
   }
 
-  .text-success {
-    color: $bs-success !important;
+  // Modern Card Design
+  .modern-card {
+    background: linear-gradient(145deg, $bs-light, rgba($bs-light, 0.8));
+    border-radius: 1.5rem;
+    padding: 0;
+    box-shadow: 0 10px 30px rgba($bs-dark, 0.1);
+    transition: all 0.4s ease;
+    overflow: visible; // Changed from hidden to visible
+    position: relative;
+    border: 1px solid rgba($bs-primary, 0.1);
+    min-height: 420px; // Added minimum height
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba($bs-primary, 0.15);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, $bs-primary, $primary-color);
+      border-radius: 1.5rem 1.5rem 0 0; // Match card border radius
+    }
+  }
+
+  .mission-card::before {
+    background: linear-gradient(90deg, $bs-primary, $accent-cyan);
+  }
+
+  .vision-card::before {
+    background: linear-gradient(90deg, $bs-success, $light-green);
+  }
+
+  .card-icon-wrapper {
+    position: absolute;
+    top: -20px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba($bs-primary, 0.2);
+    z-index: 10; // Ensure icon is visible
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 12px 25px rgba($bs-primary, 0.3);
+    }
+
+    i {
+      font-size: 1.5rem;
+      color: $bs-light;
+    }
+  }
+
+  .mission-icon {
+    background: linear-gradient(135deg, $bs-primary, $accent-cyan);
+  }
+
+  .vision-icon {
+    background: linear-gradient(135deg, $bs-success, $light-green);
+  }
+
+  .card-content {
+    padding: 3rem 2rem 2.5rem; // Increased top and bottom padding
+    position: relative;
+  }
+
+  .card-title {
+    font-family: $font-heading !important;
+    color: #1e40af !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  .card-divider {
+    width: 60px;
+    height: 3px;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .mission-divider {
+    background: linear-gradient(90deg, $bs-primary, $accent-cyan);
+  }
+
+  .vision-divider {
+    background: linear-gradient(90deg, $bs-success, $light-green);
+  }
+
+  .card-text {
+    font-family: $primary-font !important;
+    color: $bs-dark;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .card-footer-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba($bs-secondary, 0.1);
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+
+      i {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      span {
+        font-family: $primary-font;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: $bs-secondary;
+      }
+    }
   }
 }
 
@@ -85,16 +177,12 @@
 #team {
   font-family: $primary-font;
   padding: 4rem 0;
-  background: $bg-gradient-light; // Sử dụng gradient đã định nghĩa
+  background: $bg-gradient-light;
   border-radius: 1rem;
 
   .section-title-sm {
     font-family: $font-heading;
-    background: linear-gradient(
-      90deg,
-      $bs-info,
-      $bs-primary
-    ); // Sử dụng $bs-info và $bs-primary
+    background: linear-gradient(90deg, $bs-info, $bs-primary);
     -webkit-background-clip: text;
     color: transparent;
     text-shadow: 0 1px 3px rgba($bs-dark, 0.1);
@@ -121,7 +209,7 @@
 
     &:hover {
       transform: translateY(-10px);
-      box-shadow: 0 1rem 2rem $bs-primary-hover !important; // Sử dụng màu hover mờ
+      box-shadow: 0 1rem 2rem $bs-primary-hover !important;
       .card-img-top {
         transform: scale(1.1);
       }
@@ -186,24 +274,53 @@
   #mission-vision {
     padding: 2rem 0;
 
-    .row {
-      flex-direction: column;
+    .section-main-title {
+      font-size: 2rem;
     }
 
-    .mission-box,
-    .vision-box {
-      padding: 1.5rem;
-      min-height: auto;
+    .modern-card {
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 30px rgba($bs-primary, 0.1);
+      }
     }
 
-    .section-title-sm {
-      font-size: 1.5rem;
+    .card-content {
+      padding: 2rem 1.5rem 1.5rem;
     }
 
-    .mission-box:hover,
-    .vision-box:hover {
-      transform: none;
-      box-shadow: 0 4px 10px $bs-primary-hover; // Sử dụng màu hover mờ
+    .card-title {
+      font-size: 1.3rem;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-icon-wrapper {
+      width: 50px;
+      height: 50px;
+      top: -15px;
+      right: 20px;
+
+      i {
+        font-size: 1.2rem;
+      }
+    }
+
+    .card-footer-stats {
+      padding-top: 1rem;
+
+      .stat-item {
+        i {
+          font-size: 1rem;
+        }
+
+        span {
+          font-size: 0.8rem;
+        }
+      }
     }
   }
 
@@ -221,7 +338,7 @@
     .team-member-card {
       &:hover {
         transform: none;
-        box-shadow: 0 0.5rem 1rem $bs-primary-hover !important; // Sử dụng màu hover mờ
+        box-shadow: 0 0.5rem 1rem $bs-primary-hover !important;
         .card-img-top {
           transform: none;
         }

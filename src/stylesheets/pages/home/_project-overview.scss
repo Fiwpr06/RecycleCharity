@@ -3,13 +3,45 @@
 #project-overview {
   background: linear-gradient(to bottom, $bs-light, rgba($bs-primary, 0.05));
 
+  .section-label {
+    display: inline-block;
+    background: linear-gradient(135deg, $bs-primary, $primary-color);
+    color: $bs-light;
+    padding: 0.25rem 1rem;
+    border-radius: 50px;
+    @include font-style(
+      $family: $font-heading,
+      $weight: 500,
+      $size: $font-size-sm,
+      $spacing: $letter-spacing-normal
+    );
+    margin-bottom: 1rem;
+  }
+
   .section-title {
-    @include font-style($family: $font-heading, $size: 2.5rem, $weight: 700);
-    
+    @include font-style(
+      $family: $font-heading,
+      $size: 2.5rem,
+      $weight: 700,
+      $height: $line-height-sm,
+      $spacing: $letter-spacing-tight
+    );
+
+    &.text-gradient {
+      background: linear-gradient(135deg, $primary-color, $bs-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   }
 
   .text-muted {
-    @include font-style($family: $primary-font, $size: 1.1rem);
+    @include font-style(
+      $family: $primary-font,
+      $size: $font-size-lg,
+      $height: $line-height-lg,
+      $spacing: $letter-spacing-normal
+    );
   }
 
   .overview-item {
@@ -58,38 +90,168 @@
         color: $link-hover-color;
       }
     }
-  }
-}
 
-@media (max-width: 991px) {
-  #project-overview {
-    .section-title {
-      @include font-style($family: $font-heading, $size: 2rem);
-    }
+    &.featured-card {
+      border: 2px solid $accent-cyan;
+      background: linear-gradient(135deg, #ffffff, rgba($accent-cyan, 0.08));
+      transform: scale(1.02);
+      position: relative;
 
-    .text-muted {
-      @include font-style($family: $primary-font, $size: 1rem);
-    }
+      &:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 1rem 2rem rgba($accent-cyan, 0.25) !important;
+      }
 
-    .overview-item {
-      .card-img-top {
-        height: 180px;
+      .featured-badge {
+        position: absolute;
+        top: -10px;
+        right: 15px;
+        background: linear-gradient(135deg, $bs-warning, $accent-orange);
+        color: $bs-light;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        @include font-style(
+          $family: $font-heading,
+          $weight: 600,
+          $size: 0.75rem
+        );
+        z-index: 3;
+        box-shadow: 0 4px 15px rgba($bs-warning, 0.3);
+
+        i {
+          font-size: 0.7rem;
+        }
+      }
+
+      .card-stats {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba($accent-cyan, 0.2);
       }
     }
   }
 }
 
+// Large tablets and small desktops
+@media (max-width: 1200px) {
+  #project-overview {
+    padding: 4.5rem 0;
+
+    .section-title {
+      @include font-style($family: $font-heading, $size: 2.3rem);
+      margin-bottom: 1rem;
+    }
+
+    .text-muted {
+      @include font-style($family: $primary-font, $size: 1.05rem);
+      margin-bottom: 3rem;
+    }
+
+    .overview-item {
+      margin-bottom: 2rem;
+
+      .card-img-top {
+        height: 200px;
+      }
+
+      .card-title {
+        @include font-style($family: $font-heading, $size: 1.2rem);
+      }
+
+      .card-text {
+        @include font-style($family: $primary-font, $size: 0.95rem);
+      }
+    }
+  }
+}
+
+// Tablets
+@media (max-width: 991px) {
+  #project-overview {
+    padding: 4rem 0;
+
+    .section-title {
+      @include font-style($family: $font-heading, $size: 2rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .text-muted {
+      @include font-style($family: $primary-font, $size: 1rem);
+      margin-bottom: 2.5rem;
+      padding: 0 1rem;
+    }
+
+    .overview-item {
+      margin-bottom: 2rem;
+
+      .card-img-top {
+        height: 180px;
+      }
+
+      .card-title {
+        @include font-style($family: $font-heading, $size: 1.15rem);
+      }
+
+      .card-text {
+        @include font-style($family: $primary-font, $size: 0.9rem);
+      }
+    }
+  }
+}
+
+// Mobile landscape
+@media (max-width: 768px) {
+  #project-overview {
+    padding: 3.5rem 0;
+
+    .section-title {
+      @include font-style($family: $font-heading, $size: 1.8rem);
+      margin-bottom: 0.7rem;
+    }
+
+    .text-muted {
+      @include font-style($family: $primary-font, $size: 0.95rem);
+      margin-bottom: 2rem;
+      padding: 0 1.5rem;
+    }
+
+    .overview-item {
+      margin-bottom: 1.8rem;
+
+      .card-img-top {
+        height: 160px;
+      }
+
+      .card-title {
+        @include font-style($family: $font-heading, $size: 1.1rem);
+      }
+
+      .card-text {
+        @include font-style($family: $primary-font, $size: 0.88rem);
+      }
+    }
+  }
+}
+
+// Mobile portrait
 @media (max-width: 576px) {
   #project-overview {
+    padding: 3rem 0;
+
     .section-title {
       @include font-style($family: $font-heading, $size: 1.5rem);
+      margin-bottom: 0.6rem;
     }
 
     .text-muted {
       @include font-style($family: $primary-font, $size: 0.9rem);
+      margin-bottom: 1.5rem;
+      padding: 0 1rem;
     }
 
     .overview-item {
+      margin-bottom: 1.5rem;
+
       .card-img-top {
         height: 150px;
       }

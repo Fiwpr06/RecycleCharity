@@ -1,40 +1,341 @@
 @use "../../abstracts/" as *;
+@use "sass:color";
 
-#map-placeholder {
-  min-height: 400px;
-  background: linear-gradient(135deg, $bs-light, rgba($bs-primary, 0.1));
-  transition: all 0.3s ease;
+// Global font for collection page - exclude icon fonts
+body.collection-page,
+.collection-page
+  *:not(i):not(.fa):not(.fas):not(.far):not(.fab):not(.bi):not(
+    [class*="icon"]
+  ) {
+  font-family: $primary-font !important; // Nunito for entire collection page
+}
 
-  &:hover {
-    box-shadow: 0 8px 20px rgba($bs-dark, 0.1);
+// Ensure icon fonts are preserved
+.collection-page i,
+.collection-page .fa,
+.collection-page .fas,
+.collection-page .far,
+.collection-page .fab,
+.collection-page .bi,
+.collection-page [class*="icon"],
+.collection-page [class^="fa-"],
+.collection-page [class*=" fa-"],
+.collection-page [class^="bi-"],
+.collection-page [class*=" bi-"] {
+  font-family: inherit !important; // Keep original icon font
+}
+
+// Specific icon font families
+.collection-page .fas,
+.collection-page .far,
+.collection-page .fab,
+.collection-page .fa {
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro",
+    "Font Awesome 5 Free", "Font Awesome 5 Pro" !important;
+}
+
+.collection-page .bi,
+.collection-page [class^="bi-"],
+.collection-page [class*=" bi-"] {
+  font-family: "bootstrap-icons" !important;
+}
+
+// Collection Section Styles
+.collection-section {
+  font-family: $primary-font; // Nunito
+  background: linear-gradient(135deg, $bs-light, rgba($bs-primary, 0.02));
+
+  .collection-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(
+      135deg,
+      rgba($bs-primary, 0.1),
+      rgba($bs-success, 0.1)
+    );
+    color: $bs-primary;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid rgba($bs-primary, 0.2);
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  .collection-title {
+    font-family: $font-heading;
+    line-height: 1.2;
+    color: #1e40af !important;
+
+    .text-gradient {
+      color: #1e40af !important;
+      background: none !important;
+      -webkit-background-clip: unset !important;
+    }
+  }
+
+  .collection-description {
+    color: color.adjust($bs-secondary, $lightness: 10%);
+    font-size: 1.1rem;
+    line-height: 1.6;
+
+    // Ensure text stays on one line on larger screens
+    @media (min-width: 768px) {
+      white-space: nowrap;
+    }
+  }
+}
+
+// Map Container Styles
+.map-container {
+  font-family: $primary-font; // Nunito for entire map container
+  width: 100%;
+  overflow-x: hidden;
+
+  .map-header {
+    .map-title {
+      font-family: $font-heading; // Nunito
+      color: #1e40af !important;
+      font-size: 1.75rem;
+
+      i {
+        color: #1e40af !important;
+      }
+    }
+
+    .map-subtitle {
+      color: $bs-secondary;
+      font-size: 1rem;
+    }
+  }
+
+  .map-search-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0 auto;
+
+    .input-group-text {
+      border-color: rgba($bs-secondary, 0.3);
+    }
+
+    .form-control {
+      border-color: rgba($bs-secondary, 0.3);
+
+      &:focus {
+        border-color: $bs-primary;
+        box-shadow: 0 0 0 0.2rem rgba($bs-primary, 0.25);
+      }
+    }
+
+    // Ensure proper styling on all screen sizes
+    .input-group {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+
+      .input-group-text,
+      .form-control {
+        border: 1px solid rgba($bs-secondary, 0.3);
+      }
+
+      .form-control.border-start-0 {
+        border-left: 1px solid rgba($bs-secondary, 0.3) !important;
+        border-radius: 0 0.5rem 0.5rem 0 !important;
+      }
+
+      .input-group-text.border-end-0 {
+        border-right: 1px solid rgba($bs-secondary, 0.3) !important;
+        border-radius: 0.5rem 0 0 0.5rem !important;
+      }
+    }
+  }
+
+  .map-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba($bs-dark, 0.1);
+
+    .map-display {
+      min-height: 450px;
+      background: linear-gradient(135deg, $bs-light, rgba($bs-primary, 0.05));
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 8px 25px rgba($bs-dark, 0.15);
+      }
+    }
+  }
+}
+
+// Registration Form Styles
+.registration-card {
+  font-family: $primary-font; // Nunito for entire form
+  border-radius: 1.5rem;
+  overflow: hidden;
+
+  .card-header {
+    background: $bs-light;
+    border: none;
+    border-bottom: 3px solid #1e40af;
+
+    .form-icon {
+      i {
+        font-size: 2rem;
+        opacity: 0.9;
+        color: #1e40af !important;
+      }
+    }
+
+    .card-title {
+      font-family: $font-heading; // Nunito
+      font-size: 1.5rem;
+      color: #1e40af !important;
+      font-weight: 700;
+    }
+
+    .card-subtitle {
+      font-size: 0.95rem;
+      color: rgba(30, 64, 175, 0.7) !important;
+    }
+  }
+
+  .card-body {
+    background: $bs-light;
+    padding: 1.5rem 2rem !important; // Reduce top/bottom padding
   }
 }
 
 #collectionForm {
-  .form-label {
-    font-weight: 600;
-    color: $bs-dark;
+  font-family: $primary-font; // Nunito for entire form
+
+  // Ultra compact form spacing
+  .row.g-3.mb-3 {
+    margin-bottom: 0.5rem !important;
   }
 
-  .form-control,
-  .form-select {
-    border-radius: 0.5rem;
-    border: 1px solid $bs-secondary;
-    transition: all 0.3s ease;
+  // Remove top margin from first form row
+  .row.g-3.mb-3:first-child {
+    margin-top: 0 !important;
+  }
 
-    &:focus {
-      border-color: $bs-primary;
-      box-shadow: 0 0 5px rgba($bs-primary, 0.3);
+  .form-label {
+    font-family: $primary-font; // Nunito
+    font-weight: 600;
+    color: $bs-dark;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+
+    i {
+      font-size: 0.85rem;
+      color: $bs-primary;
     }
   }
 
-  .form-check-input:checked {
-    background-color: $bs-primary;
-    border-color: $bs-primary;
+  .form-group {
+    .form-label {
+      font-weight: 600;
+      color: $bs-dark;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+
+      i {
+        font-size: 0.9rem;
+      }
+    }
+
+    .input-group-text {
+      background-color: rgba($bs-light, 0.8);
+      border-color: rgba($bs-secondary, 0.3);
+      color: $bs-secondary;
+    }
+
+    .form-control,
+    .form-select {
+      font-family: $primary-font; // Nunito
+      border-radius: 0.5rem;
+      border-color: rgba($bs-secondary, 0.3);
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+
+      &:focus {
+        border-color: $bs-primary;
+        box-shadow: 0 0 0 0.2rem rgba($bs-primary, 0.25);
+      }
+
+      &::placeholder {
+        color: rgba($bs-secondary, 0.6);
+        font-style: italic;
+      }
+    }
+  }
+
+  // Waste Type Cards - Ultra Compact Design
+  .waste-type-container {
+    .waste-type-card {
+      position: relative;
+
+      .waste-type-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        padding: 0.5rem 0.25rem;
+        background: $bs-light;
+        border: 2px solid rgba($bs-secondary, 0.2);
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        font-size: 0.75rem;
+        min-height: 60px;
+
+        &:hover {
+          border-color: $bs-primary;
+          background: rgba($bs-primary, 0.05);
+          transform: translateY(-1px);
+          box-shadow: 0 2px 8px rgba($bs-primary, 0.15);
+        }
+
+        i {
+          font-size: 1.1rem;
+          color: $bs-secondary;
+          transition: color 0.3s ease;
+        }
+
+        span {
+          font-family: $primary-font; // Nunito
+          font-weight: 600;
+          color: $bs-dark;
+          line-height: 1.2;
+        }
+      }
+
+      input:checked + .waste-type-label {
+        border-color: $bs-success;
+        background: rgba($bs-success, 0.1);
+
+        i {
+          color: $bs-success;
+        }
+
+        span {
+          color: $bs-success;
+        }
+      }
+    }
   }
 
   .invalid-feedback {
     display: none;
+    font-size: 0.875rem;
+    color: $bs-danger;
   }
 
   .was-validated .form-control:invalid,
@@ -46,53 +347,182 @@
   .was-validated .form-select:invalid ~ .invalid-feedback {
     display: block;
   }
+}
 
-  .btn-success {
-    background-color: $bs-primary;
-    border-color: $bs-primary;
-    transition: all 0.3s ease;
+// Recycling Guide Section
+.recycling-guide-section {
+  font-family: $primary-font; // Nunito for entire guide section
+  background: linear-gradient(
+    135deg,
+    rgba($bg-light-gray, 0.5),
+    rgba($bs-primary, 0.02)
+  );
+  border-radius: 2rem;
+  margin-top: 3rem;
 
-    &:hover {
-      background-color: $link-hover-color;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba($bs-dark, 0.2);
+  .guide-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(
+      135deg,
+      rgba($bs-success, 0.1),
+      rgba($accent-cyan, 0.1)
+    );
+    color: $bs-success;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid rgba($bs-success, 0.2);
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  .guide-title {
+    font-family: $font-heading; // Nunito
+    line-height: 1.2;
+    color: #1e40af !important;
+
+    .text-gradient {
+      color: #1e40af !important;
+      background: none !important;
+      -webkit-background-clip: unset !important;
+    }
+  }
+
+  .guide-description {
+    color: color.adjust($bs-secondary, $lightness: 10%);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .guide-steps {
+    .guide-step-card {
+      position: relative;
+      background: $bs-light;
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      height: 100%;
+      border: 1px solid rgba($bs-primary, 0.1);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba($bs-primary, 0.15);
+        border-color: rgba($bs-primary, 0.3);
+      }
+
+      .step-number {
+        position: absolute;
+        top: -15px;
+        left: 1.5rem;
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, $bs-primary, $bs-success);
+        color: $bs-light;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        box-shadow: 0 2px 10px rgba($bs-primary, 0.3);
+      }
+
+      .step-icon {
+        text-align: center;
+        margin-bottom: 1rem;
+
+        i {
+          font-size: 2.5rem;
+          color: $bs-primary;
+          opacity: 0.8;
+        }
+      }
+
+      .step-content {
+        text-align: center;
+
+        .step-title {
+          font-family: $font-heading; // Nunito
+          font-weight: 700;
+          color: #1e40af !important;
+          margin-bottom: 0.75rem;
+          font-size: 1.1rem;
+        }
+
+        .step-description {
+          font-family: $primary-font; // Nunito
+          color: $bs-secondary;
+          font-size: 0.95rem;
+          line-height: 1.5;
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }
 
-#recycling-guide {
-  background: linear-gradient(to bottom, $bg-light-gray, rgba($bs-primary, 0.05));
-
-  .section-title-sm {
-    @include font-style($family: $font-heading, $size: 1.5rem, $weight: 700);
-    color: $bs-dark;
-  }
-
-  .text-muted {
-    @include font-style($family: $primary-font, $size: 1rem);
-  }
-
-  .list-group-item {
-    border-left: 3px solid $bs-primary;
-    padding-left: 1.5rem;
-    margin-bottom: 0.5rem;
-    background-color: transparent;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: rgba($bs-primary, 0.05);
-      transform: translateX(5px);
-    }
-  }
-}
-
+// Responsive Design
 @media (max-width: 991px) {
-  #map-placeholder {
-    height: 350px;
+  .collection-section {
+    .collection-title {
+      font-size: 2.5rem;
+    }
+
+    .collection-description {
+      font-size: 1rem;
+    }
+  }
+
+  .map-container {
+    .map-wrapper .map-display {
+      min-height: 350px;
+    }
+
+    .map-header .map-title {
+      font-size: 1.5rem;
+    }
+
+    .map-search-container {
+      padding: 0 0.25rem;
+
+      .input-group {
+        .input-group-text {
+          display: flex; // Hiển thị lại icon trên tablet
+        }
+
+        .form-control {
+          font-size: 0.95rem;
+          padding: 0.7rem;
+        }
+
+        .btn {
+          font-size: 0.95rem;
+          padding: 0.7rem 1.5rem;
+        }
+      }
+    }
+  }
+
+  .registration-card {
+    margin-top: 2rem;
+
+    .card-header {
+      .form-icon i {
+        font-size: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.3rem;
+      }
+    }
   }
 
   #collectionForm {
-    .form-label {
+    .form-group .form-label {
       font-size: 0.9rem;
     }
 
@@ -100,26 +530,163 @@
     .form-select {
       font-size: 0.9rem;
     }
+
+    .waste-type-container {
+      .waste-type-card .waste-type-label {
+        padding: 0.4rem 0.2rem;
+        font-size: 0.7rem;
+        min-height: 50px;
+
+        i {
+          font-size: 0.9rem;
+        }
+      }
+    }
   }
 
-  #recycling-guide {
-    .section-title-sm {
-      font-size: 1.3rem;
+  .recycling-guide-section {
+    .guide-title {
+      font-size: 2rem;
     }
 
-    .text-muted {
-      font-size: 0.9rem;
+    .guide-description {
+      font-size: 1rem;
+    }
+
+    .guide-steps .guide-step-card {
+      padding: 1.5rem 1rem;
+
+      .step-icon i {
+        font-size: 2rem;
+      }
+
+      .step-content .step-title {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+// Medium mobile breakpoint
+@media (max-width: 768px) {
+  .map-container {
+    .map-search-container {
+      .input-group {
+        .input-group-text {
+          display: none; // Ẩn icon từ 768px trở xuống
+        }
+
+        .form-control {
+          // Khi ẩn icon, input field cần có border radius đầy đủ
+          border-radius: 0.5rem !important;
+          border: 1px solid rgba($bs-secondary, 0.3) !important;
+
+          &.border-start-0 {
+            border-left: 1px solid rgba($bs-secondary, 0.3) !important;
+            border-radius: 0.5rem !important;
+          }
+        }
+      }
     }
   }
 }
 
 @media (max-width: 576px) {
-  #map-placeholder {
-    height: 300px;
+  .collection-section {
+    .collection-title {
+      font-size: 2rem;
+    }
+
+    .collection-badge {
+      font-size: 0.8rem;
+      padding: 0.4rem 1rem;
+    }
+  }
+
+  .map-container {
+    padding: 0 0.25rem;
+
+    .map-wrapper .map-display {
+      min-height: 300px;
+    }
+
+    .map-search-container {
+      margin-bottom: 1rem;
+      padding: 0 1rem;
+      width: 100%;
+      box-sizing: border-box;
+
+      .input-group {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+
+        .input-group-text {
+          display: none; // Ẩn icon kính lúp trên mobile
+        }
+
+        .form-control {
+          border-radius: 0.5rem !important;
+          border: 1px solid rgba($bs-secondary, 0.3) !important;
+          font-size: 0.9rem;
+          padding: 0.75rem 1rem;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+          margin: 0;
+
+          // Override Bootstrap input-group styling
+          &.border-start-0 {
+            border-left: 1px solid rgba($bs-secondary, 0.3) !important;
+            border-radius: 0.5rem !important;
+          }
+
+          &:focus {
+            border-color: $bs-primary !important;
+            box-shadow: 0 0 0 0.2rem rgba($bs-primary, 0.25) !important;
+          }
+        }
+
+        .btn {
+          font-family: $primary-font;
+          border-radius: 0.5rem !important;
+          margin: 0;
+          padding: 0.75rem 1.5rem;
+          font-size: 0.9rem;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+
+          i {
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  .registration-card {
+    .card-header {
+      padding: 1.5rem;
+
+      .card-title {
+        font-size: 1.2rem;
+      }
+
+      .card-subtitle {
+        font-size: 0.9rem;
+      }
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
   }
 
   #collectionForm {
-    .form-label {
+    .form-group .form-label {
       font-size: 0.85rem;
     }
 
@@ -128,19 +695,137 @@
       font-size: 0.85rem;
     }
 
-    .btn-success {
-      font-size: 0.9rem;
-      padding: 0.5rem 1.5rem;
+    .waste-type-container {
+      .waste-type-card .waste-type-label {
+        padding: 0.35rem 0.2rem;
+        font-size: 0.65rem;
+        min-height: 45px;
+
+        i {
+          font-size: 0.8rem;
+        }
+      }
     }
   }
 
-  #recycling-guide {
-    .section-title-sm {
-      font-size: 1.2rem;
+  .recycling-guide-section {
+    border-radius: 1rem;
+    margin-top: 2rem;
+
+    .guide-title {
+      font-size: 1.75rem;
     }
 
-    .text-muted {
-      font-size: 0.85rem;
+    .guide-badge {
+      font-size: 0.8rem;
+      padding: 0.4rem 1rem;
     }
+
+    .guide-steps .guide-step-card {
+      padding: 1.25rem 0.75rem;
+
+      .step-number {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8rem;
+      }
+
+      .step-icon i {
+        font-size: 1.75rem;
+      }
+
+      .step-content {
+        .step-title {
+          font-size: 0.95rem;
+        }
+
+        .step-description {
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+}
+
+// Additional responsive breakpoint for very small screens
+@media (max-width: 360px) {
+  .map-container {
+    padding: 0 0.5rem;
+    .map-search-container {
+      padding: 0 1rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+      box-sizing: border-box;
+
+      .input-group {
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+
+        .input-group-text {
+          display: none; // Ẩn icon kính lúp trên màn hình nhỏ
+        }
+
+        .form-control {
+          font-size: 0.85rem;
+          padding: 0.6rem 0.8rem;
+          border: 1px solid rgba($bs-secondary, 0.3) !important;
+          border-radius: 0.4rem !important;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+          margin: 0;
+
+          // Override Bootstrap input-group styling
+          &.border-start-0 {
+            border-left: 1px solid rgba($bs-secondary, 0.3) !important;
+            border-radius: 0.4rem !important;
+          }
+
+          &:focus {
+            border-color: $bs-primary !important;
+            box-shadow: 0 0 0 0.15rem rgba($bs-primary, 0.25) !important;
+          }
+        }
+
+        .btn {
+          font-size: 0.85rem;
+          padding: 0.6rem 1.2rem;
+          border-radius: 0.4rem;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+          margin: 0;
+        }
+      }
+    }
+
+    .map-header {
+      .map-title {
+        font-size: 1.3rem;
+      }
+
+      .map-subtitle {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// Pulse animation for buttons
+.pulse-btn {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
   }
 }

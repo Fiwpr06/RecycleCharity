@@ -1,22 +1,237 @@
 @use "../abstracts/" as *;
 
+// Fix modal scrollbar issue - prevent body padding when modal opens
+body.modal-open {
+  padding-right: 0 !important;
+  overflow: hidden;
+
+  // Fix navbar shift when modal opens - keep original container behavior
+  .navbar {
+    padding-right: 0 !important;
+
+    .container {
+      // Don't override container max-width and behavior
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+    }
+  }
+}
+
+// Ensure modal backdrop doesn't cause layout shift
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+}
+
+// General modal improvements
+.modal {
+  // Smooth fade transition
+  &.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translate(0, -50px);
+  }
+
+  &.show .modal-dialog {
+    transform: none;
+  }
+
+  // Prevent scrollbar jump
+  &.show {
+    padding-right: 0 !important;
+  }
+}
+
+// Auth Modal Specific Styles
+#authModal {
+  .modal-content {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .modal-header {
+    border-bottom: 1px solid rgba($primary-color, 0.2);
+    background: linear-gradient(90deg, rgba($primary-color, 0.1), $bs-light);
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .modal-title {
+    font-family: $font-heading;
+    background: linear-gradient(90deg, $primary-color, $bs-primary);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 3px rgba($bs-dark, 0.1);
+
+    i {
+      vertical-align: middle;
+      background: linear-gradient(90deg, $primary-color, $bs-info);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .modal-body {
+    padding: 2rem;
+  }
+
+  .nav-pills {
+    .nav-link {
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+
+      &.active {
+        background-color: $primary-color;
+        border-color: $primary-color;
+      }
+
+      &:not(.active):hover {
+        background-color: rgba($primary-color, 0.1);
+      }
+    }
+  }
+
+  .btn-cta {
+    background: linear-gradient(90deg, $primary-color, $bs-success);
+    border: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+    }
+  }
+}
+
 .navbar {
   padding: 16px 0;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1030;
+  box-sizing: border-box;
+
+  // Prevent navbar shift during modal
+  .container {
+    transition: none !important;
+    position: relative;
+    box-sizing: border-box;
+    // Ensure container maintains its responsive behavior
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @media (min-width: 576px) {
+      max-width: 540px;
+    }
+
+    @media (min-width: 768px) {
+      max-width: 720px;
+    }
+
+    @media (min-width: 992px) {
+      max-width: 960px;
+    }
+
+    @media (min-width: 1200px) {
+      max-width: 1140px;
+    }
+
+    @media (min-width: 1400px) {
+      max-width: 1320px;
+    }
+  }
+
+  // Modern scroll effects
+  &.navbar-scrolled {
+    padding: 8px 0;
+    background-color: rgba(248, 250, 252, 0.95) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+  }
+
+  &.navbar-hidden {
+    transform: translateY(-100%);
+  }
 
   &-brand {
-    @include font-style($size: 1.6rem, $spacing: 2px);
-    color: $primary-color !important;
+    @include font-style(
+      $family: $font-heading,
+      $size: 1.6rem,
+      $weight: 700,
+      $spacing: $letter-spacing-wide
+    );
+    color: #1e40af !important;
+    transition: all 0.3s ease;
+
+    i {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover i {
+      transform: rotate(360deg);
+    }
+  }
+
+  &.navbar-scrolled &-brand {
+    @include font-style($size: 1.4rem);
   }
 
   .nav-link {
-    @include font-style($weight: 600);
+    @include font-style(
+      $family: $font-heading,
+      $weight: 500,
+      $size: $font-size-base,
+      $spacing: $letter-spacing-normal
+    );
     color: $bs-secondary;
-    transition: color 0.2s ease-in-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, $accent-cyan, $bs-primary);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+    }
 
     &:hover,
     &.active {
-      color: $bs-primary;
+      color: $accent-cyan;
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &.active {
+      font-weight: 600;
+
+      &::after {
+        width: 0; // Remove underline for active state
+      }
+    }
+
+    &:hover:not(.active) {
+      transform: translateY(-1px);
     }
   }
 
@@ -32,8 +247,19 @@
     &-outline-success,
     &-success {
       width: 49%;
-      font-weight: 600;
-      transition: all 0.2s ease;
+      @include font-style(
+        $family: $font-heading,
+        $weight: 600,
+        $size: $font-size-sm,
+        $spacing: $letter-spacing-normal
+      );
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 25px;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
     }
 
     &-outline-success {
@@ -41,6 +267,14 @@
         background-color: $bs-primary-hover;
         color: $bs-primary;
       }
+    }
+  }
+
+  &.navbar-scrolled .btn {
+    &-outline-success,
+    &-success {
+      @include font-style($size: 0.8rem);
+      padding: 0.4rem 0.8rem;
     }
   }
 }

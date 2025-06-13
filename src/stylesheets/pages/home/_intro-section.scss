@@ -1,78 +1,544 @@
 @use "../../abstracts/" as *;
-@use "sass:color";
 
 .intro-section {
-  background: linear-gradient(to bottom, $bs-light, rgba($bs-primary, 0.05));
-  padding: 5rem 0;
+  background: linear-gradient(
+    135deg,
+    rgba($bs-light, 0.95) 0%,
+    rgba($accent-cyan, 0.02) 50%,
+    rgba($bs-primary, 0.01) 100%
+  );
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
 
-  .intro-image {
-    position: relative;
-    overflow: hidden;
-    border-radius: 0.75rem;
-
-    img {
-      transition: transform 0.3s ease;
-      width: 100%;
-      height: auto;
-    }
-
-    .overlay-gradient {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba($bs-primary, 0.2), transparent);
-      border-radius: 0.75rem;
-      z-index: 1;
-    }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(
+        circle at 25% 25%,
+        rgba($accent-cyan, 0.03) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 75% 75%,
+        rgba($bs-primary, 0.02) 0%,
+        transparent 50%
+      );
+    z-index: 0;
   }
 
-  .intro-content {
-    background: linear-gradient(135deg, $bs-light, rgba($bs-primary, 0.1));
-    border-radius: 0.75rem;
-    padding: 2rem 2.5rem;
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .intro-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, $accent-cyan, $bs-primary);
+    color: $bs-light;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    @include font-style(
+      $family: $font-heading,
+      $weight: 600,
+      $size: $font-size-sm,
+      $spacing: $letter-spacing-wide
+    );
+    text-transform: uppercase;
+    box-shadow: 0 8px 25px rgba($accent-cyan, 0.25);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba($accent-cyan, 0.35);
+    }
+
+    i {
+      font-size: 1rem;
+    }
   }
 
   .intro-title {
-    @include font-style($family: $font-heading, $size: 2.5rem, $weight: 700);
-    color: $bs-dark;
+    @include font-style(
+      $family: $font-heading,
+      $size: 3.2rem,
+      $weight: 700,
+      $height: $line-height-sm,
+      $spacing: $letter-spacing-tight
+    );
+    margin-bottom: 1.5rem;
+
+    .text-gradient {
+      color: $light-green;
+    }
+
+    @media (max-width: 991px) {
+      @include font-style($size: 2.5rem);
+    }
+
+    @media (max-width: 576px) {
+      @include font-style($size: 2rem);
+    }
   }
 
-  .intro-text {
-    @include font-style($family: $primary-font, $size: 1.1rem, $weight: 400);
+  .intro-description {
+    @include font-style(
+      $family: $primary-font,
+      $size: $font-size-lg,
+      $height: $line-height-lg,
+      $spacing: $letter-spacing-normal
+    );
     color: $bs-secondary;
+    max-width: 800px;
+    margin: 0 auto;
   }
 }
 
-@media (max-width: 991px) {
+.intro-card {
+  background: rgba($bs-light, 0.8) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba($bs-light, 0.3) !important;
+  border-radius: 1.5rem !important;
+  padding: 2.5rem 2rem !important;
+  text-align: center !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 40px rgba($bs-dark, 0.08) !important;
+  height: 100% !important;
+  display: block !important;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba($bs-dark, 0.15);
+  }
+
+  .card-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, $accent-cyan, $bs-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+
+    i {
+      font-size: 2rem;
+      color: $bs-light;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &:hover .card-icon {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba($accent-cyan, 0.3);
+
+    i {
+      transform: scale(1.1);
+    }
+  }
+
+  .card-title {
+    @include font-style(
+      $family: $font-heading,
+      $weight: 700,
+      $size: $font-size-lg,
+      $spacing: $letter-spacing-normal
+    );
+    color: $bs-dark;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-description {
+    @include font-style(
+      $family: $primary-font,
+      $size: $font-size-base,
+      $height: $line-height-base,
+      $spacing: $letter-spacing-normal
+    );
+    color: $bs-secondary;
+    margin-bottom: 0;
+  }
+
+  .card-accent {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, $accent-cyan, $bs-primary);
+    border-radius: 2px 2px 0 0;
+    transition: width 0.4s ease;
+  }
+
+  &:hover .card-accent {
+    width: 100px;
+  }
+
+  &.intro-card-left .card-icon {
+    background: linear-gradient(135deg, $bs-success, $accent-cyan);
+  }
+
+  &.intro-card-right .card-icon {
+    background: linear-gradient(135deg, $bs-primary, $bs-info);
+  }
+
+  &.intro-card-bottom .card-icon {
+    background: linear-gradient(135deg, $bs-success, $bs-warning);
+  }
+}
+
+.intro-visual-center {
+  position: relative;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.intro-image-container {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  min-height: 350px;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba($bs-dark, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 80px rgba($bs-dark, 0.2);
+  }
+
+  .intro-image {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover .intro-image {
+    transform: scale(1.05);
+  }
+}
+
+.intro-badge-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba($bs-light, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba($bs-light, 0.3);
+  border-radius: 2rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 8px 32px rgba($bs-dark, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+
+  .badge-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+      font-size: 1.25rem;
+      color: $bs-warning;
+    }
+
+    .badge-text {
+      @include font-style(
+        $family: $font-heading,
+        $weight: 600,
+        $size: $font-size-sm,
+        $spacing: $letter-spacing-normal
+      );
+      color: $bs-dark;
+      white-space: nowrap;
+    }
+  }
+}
+
+.intro-image-container:hover .intro-badge-overlay {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+// Force display for cards
+.intro-card {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.intro-card-left,
+.intro-card-right,
+.intro-card-bottom {
+  display: block !important;
+  visibility: visible !important;
+}
+
+// Large tablets and small desktops
+@media (max-width: 1200px) {
   .intro-section {
-    padding: 3rem 0;
+    padding: 4.5rem 0;
 
     .intro-title {
-      @include font-style($family: $font-heading, $size: 2rem);
+      @include font-style($size: 2.8rem);
+      line-height: 1.2;
     }
 
-    .intro-text {
-      @include font-style($family: $primary-font, $size: 1rem);
+    .intro-description {
+      @include font-style($size: 1.05rem);
+      padding: 0 1rem;
+      margin-bottom: 3rem;
+    }
+  }
+
+  .intro-card {
+    padding: 2.2rem 1.8rem;
+    margin-bottom: 1.5rem;
+
+    .card-icon {
+      width: 75px;
+      height: 75px;
+
+      i {
+        font-size: 1.9rem;
+      }
     }
 
-    .intro-content {
-      padding: 1.5rem 2rem;
+    .card-title {
+      @include font-style($size: 1.15rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .card-description {
+      @include font-style($size: 1rem);
+    }
+  }
+
+  .intro-image-container {
+    max-width: 380px;
+    min-height: 320px;
+  }
+}
+
+// Tablets
+@media (max-width: 991px) {
+  .intro-section {
+    padding: 4rem 0;
+
+    .intro-title {
+      @include font-style($size: 2.5rem);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-description {
+      @include font-style($size: 1rem);
+      padding: 0 1.5rem;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    // Responsive ordering for mobile
+    .row.g-4.align-items-center {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .col-lg-4:nth-child(1) {
+      order: 2; // Left card appears second
+    }
+
+    .col-lg-4:nth-child(2) {
+      order: 1; // Center image appears first
+      margin-bottom: 2rem;
+    }
+
+    .col-lg-4:nth-child(3) {
+      order: 3; // Right card appears third
+    }
+  }
+
+  .intro-card {
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+
+    .card-icon {
+      width: 70px;
+      height: 70px;
+
+      i {
+        font-size: 1.75rem;
+      }
+    }
+
+    .card-title {
+      @include font-style($size: 1.1rem);
+      margin-bottom: 0.6rem;
+    }
+
+    .card-description {
+      @include font-style($size: 0.95rem);
+    }
+  }
+
+  .intro-image-container {
+    max-width: 350px;
+    min-height: 300px;
+    margin: 0 auto 2rem;
+
+    .intro-image {
+      min-height: 300px;
+    }
+  }
+
+  .intro-badge-overlay {
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+// Mobile landscape and small tablets
+@media (max-width: 768px) {
+  .intro-section {
+    padding: 3.5rem 0;
+
+    .intro-title {
+      @include font-style($size: 2.2rem);
+      line-height: 1.4;
+      margin-bottom: 1.2rem;
+    }
+
+    .intro-description {
+      @include font-style($size: 0.95rem);
+      padding: 0 2rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+  }
+
+  .intro-card {
+    padding: 1.8rem 1.3rem;
+    margin-bottom: 1.8rem;
+
+    .card-icon {
+      width: 65px;
+      height: 65px;
+
+      i {
+        font-size: 1.6rem;
+      }
+    }
+
+    .card-title {
+      @include font-style($size: 1.05rem);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-description {
+      @include font-style($size: 0.9rem);
+    }
+  }
+
+  .intro-image-container {
+    max-width: 320px;
+    min-height: 280px;
+    margin: 0 auto 1.5rem;
+
+    .intro-image {
+      min-height: 280px;
+    }
+  }
+
+  .intro-badge-overlay {
+    bottom: 1.2rem;
+    padding: 0.8rem 1.2rem;
+
+    .badge-content {
+      gap: 0.3rem;
+
+      i {
+        font-size: 1.1rem;
+      }
+
+      .badge-text {
+        @include font-style($size: 0.85rem);
+      }
     }
   }
 }
 
 @media (max-width: 576px) {
   .intro-section {
-    padding: 2rem 0;
+    padding: 3rem 0;
 
     .intro-title {
-      @include font-style($family: $font-heading, $size: 1.5rem);
+      @include font-style($size: 2rem);
     }
 
-    .intro-content {
-      padding: 1rem 1.5rem;
+    .intro-description {
+      @include font-style($size: $font-size-base);
+    }
+  }
+
+  .intro-card {
+    padding: 1.5rem 1rem;
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+
+      i {
+        font-size: 1.5rem;
+      }
+    }
+
+    .card-title {
+      @include font-style($size: $font-size-base);
+    }
+
+    .card-description {
+      @include font-style($size: $font-size-sm);
+    }
+  }
+
+  .intro-image-container {
+    max-width: 320px;
+    min-height: 250px;
+
+    .intro-image {
+      min-height: 250px;
+    }
+  }
+
+  .intro-badge-overlay {
+    bottom: 1rem;
+    padding: 0.75rem 1rem;
+
+    .badge-content {
+      gap: 0.25rem;
+
+      i {
+        font-size: 1rem;
+      }
+
+      .badge-text {
+        @include font-style($size: $font-size-sm);
+      }
     }
   }
 }

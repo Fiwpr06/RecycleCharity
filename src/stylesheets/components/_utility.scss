@@ -3,6 +3,13 @@
 .bg-light-gray {
   background-color: $bg-light-gray !important;
 }
+
 .shadow-sm {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, $light-green, $bs-success);
+  -webkit-background-clip: text;
+  color: transparent;
 }

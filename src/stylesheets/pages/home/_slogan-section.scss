@@ -1,0 +1,614 @@
+@use "../../abstracts/" as *;
+
+.slogan-section {
+  background: linear-gradient(135deg, $bs-light, rgba($accent-cyan, 0.03));
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba($bs-primary, 0.05) 0%,
+      rgba($accent-cyan, 0.02) 50%,
+      transparent 70%
+    );
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .slogan-content {
+    padding: 2rem 0;
+  }
+
+  .slogan-title {
+    @include font-style(
+      $family: $font-heading,
+      $size: 3rem,
+      $weight: 700,
+      $height: $line-height-sm,
+      $spacing: $letter-spacing-tight
+    );
+    margin-bottom: 2rem;
+
+    .text-gradient {
+      background: linear-gradient(
+        135deg,
+        #1e40af 0%,
+        #06b6d4 25%,
+        #10b981 50%,
+        #059669 75%,
+        #047857 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease-in-out infinite;
+
+      i {
+        display: inline-block;
+        margin-right: 0.5rem;
+        animation: iconPulse 2s ease-in-out infinite;
+        background: none !important;
+        -webkit-background-clip: initial !important;
+        background-clip: initial !important;
+
+        // Default blue color for non-danger icons
+        &:not(.text-danger) {
+          -webkit-text-fill-color: #1e40af !important;
+          color: #1e40af !important;
+        }
+      }
+    }
+
+    @keyframes gradientShift {
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .text-gradient-secondary {
+      background: linear-gradient(
+        135deg,
+        #059669 0%,
+        #10b981 25%,
+        #06b6d4 50%,
+        #1e40af 75%,
+        #1e3a8a 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradientShiftReverse 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientShiftReverse {
+      0%,
+      100% {
+        background-position: 100% 50%;
+      }
+      50% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes iconPulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    @media (max-width: 991px) {
+      @include font-style($size: 2.5rem);
+
+      .text-gradient i.text-danger {
+        font-size: 0.8em;
+        margin-right: 0.4rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      @include font-style($size: 2rem);
+
+      .text-gradient i.text-danger {
+        font-size: 0.7em;
+        margin-right: 0.3rem;
+      }
+    }
+  }
+
+  .slogan-text {
+    @include font-style(
+      $family: $primary-font,
+      $size: $font-size-lg,
+      $height: $line-height-lg,
+      $spacing: $letter-spacing-normal
+    );
+    color: $bs-secondary;
+    margin-bottom: 3rem;
+  }
+
+  .slogan-stats {
+    margin-top: 2rem;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: stretch !important;
+    gap: 1rem;
+
+    .col-4 {
+      flex: 1 !important;
+      display: flex !important;
+      min-width: 0 !important;
+    }
+
+    .stat-item {
+      padding: 1rem;
+      border-radius: 0.75rem;
+      background: rgba($bs-light, 0.8);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba($accent-cyan, 0.15);
+      }
+
+      i {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      h5 {
+        @include font-style(
+          $family: $font-heading,
+          $weight: 700,
+          $size: $font-size-base
+        );
+        margin-bottom: 0.25rem;
+      }
+
+      small {
+        @include font-style($family: $primary-font, $size: $font-size-sm);
+        color: $bs-secondary;
+      }
+    }
+  }
+
+  .slogan-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+
+    img,
+    video {
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      border-radius: 1rem;
+      border: none;
+      outline: none;
+    }
+
+    video {
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba($bs-dark, 0.4),
+        rgba($bs-primary, 0.3)
+      );
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 1rem;
+
+      .overlay-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        gap: 0.75rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: relative !important;
+
+        .play-icon {
+          cursor: pointer;
+          transition: transform 0.3s ease;
+          margin: 0 !important;
+          padding: 0 !important;
+          display: block !important;
+          line-height: 1 !important;
+          font-size: 3rem !important;
+          color: white !important;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+
+        .play-text {
+          @include font-style(
+            $family: $font-heading,
+            $weight: 700,
+            $size: $font-size-base
+          );
+          margin: 0 !important;
+          padding: 0 !important;
+          line-height: 1.2 !important;
+          text-align: center !important;
+          white-space: nowrap !important;
+          color: white !important;
+        }
+      }
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.05);
+      }
+
+      // Only show overlay when not in video mode
+      .image-overlay:not([style*="display: none"]) {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Special styling for heart icon to ensure red color shows
+  .text-gradient i.text-danger {
+    -webkit-text-fill-color: #dc3545 !important;
+    color: #dc3545 !important;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .slogan-section {
+    padding: 4rem 0;
+
+    .row {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slogan-content {
+      padding: 1rem 0;
+      text-align: center;
+      order: 2; // Text content appears after image on mobile
+    }
+
+    .slogan-image {
+      order: 1; // Image appears first on mobile
+      margin-bottom: 2rem;
+    }
+
+    .slogan-title {
+      @include font-style($size: 2.2rem);
+    }
+
+    .slogan-stats {
+      margin-top: 2rem;
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      gap: 0.75rem;
+
+      .col-4 {
+        flex: 1 !important;
+        display: flex !important;
+        min-width: 0 !important;
+      }
+
+      .stat-item {
+        padding: 0.8rem 0.5rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        i {
+          font-size: 1.8rem !important;
+          margin-bottom: 0.4rem;
+        }
+
+        h5 {
+          @include font-style($size: 1rem);
+          margin-bottom: 0.2rem;
+        }
+
+        small {
+          @include font-style($size: 0.8rem);
+        }
+      }
+    }
+
+    .slogan-image {
+      // Slightly reduce video and image width on tablet for better proportion
+      img,
+      video {
+        width: 95% !important;
+        max-width: 95% !important;
+        margin: 0 auto;
+        display: block;
+        border-radius: 1rem !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+      }
+
+      .image-overlay {
+        .overlay-content {
+          gap: 0.5rem;
+
+          .play-icon {
+            font-size: 2.5rem !important;
+          }
+
+          .play-text {
+            @include font-style($size: 0.9rem);
+            white-space: normal;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .slogan-section {
+    padding: 2.5rem 0;
+
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .slogan-title {
+      @include font-style($size: 1.8rem);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .slogan-text {
+      @include font-style($size: $font-size-base);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .slogan-stats {
+      margin-top: 2rem;
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      gap: 0.5rem;
+
+      .col-4 {
+        flex: 1 !important;
+        display: flex !important;
+        min-width: 0 !important;
+      }
+
+      .stat-item {
+        padding: 0.8rem 0.3rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        i {
+          font-size: 1.4rem !important;
+          margin-bottom: 0.3rem;
+        }
+
+        h5 {
+          @include font-style($size: 0.9rem);
+          margin-bottom: 0.2rem;
+          line-height: 1.2;
+        }
+
+        small {
+          @include font-style($size: 0.7rem);
+          line-height: 1.2;
+        }
+      }
+    }
+
+    .slogan-image {
+      // Reduce video and image width on mobile for better viewing
+      img,
+      video {
+        width: 85% !important;
+        max-width: 85% !important;
+        margin: 0 auto;
+        display: block;
+        border-radius: 1rem !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+      }
+
+      .image-overlay {
+        .overlay-content {
+          gap: 0.5rem;
+
+          .play-icon {
+            font-size: 2rem !important;
+          }
+
+          .play-text {
+            @include font-style($size: 0.85rem);
+            white-space: normal;
+            line-height: 1.3;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Additional responsive breakpoints for better video display
+@media (max-width: 768px) {
+  .slogan-section {
+    .slogan-image {
+      // Medium tablets and large phones
+      img,
+      video {
+        width: 88% !important;
+        max-width: 88% !important;
+        border-radius: 1rem !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .slogan-section {
+    .slogan-image {
+      // Small phones
+      img,
+      video {
+        width: 92% !important;
+        max-width: 92% !important;
+        border-radius: 0.8rem !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1) !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .slogan-section {
+    .slogan-image {
+      // Very small phones
+      img,
+      video {
+        width: 95% !important;
+        max-width: 95% !important;
+        border-radius: 0.6rem !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+      }
+    }
+  }
+}
+
+// Global video styling to ensure no borders and proper border-radius
+video {
+  border: none !important;
+  outline: none !important;
+  max-width: 100%;
+  height: auto;
+
+  &:focus {
+    border: none !important;
+    outline: none !important;
+  }
+
+  &.rounded-lg {
+    border-radius: 1rem !important;
+  }
+}
+
+// Responsive video utilities
+@media (max-width: 1200px) {
+  .slogan-section .slogan-image {
+    img,
+    video {
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .slogan-section .slogan-image {
+    img,
+    video {
+      transform: none !important; // Disable hover transform on tablets
+    }
+
+    &:hover {
+      img,
+      video {
+        transform: none !important;
+      }
+    }
+  }
+}
+
+// Landscape orientation adjustments
+@media (max-width: 768px) and (orientation: landscape) {
+  .slogan-section {
+    .slogan-image {
+      img,
+      video {
+        width: 80% !important;
+        max-width: 80% !important;
+      }
+    }
+  }
+}
+
+// Portrait orientation adjustments
+@media (max-width: 576px) and (orientation: portrait) {
+  .slogan-section {
+    .slogan-image {
+      img,
+      video {
+        width: 90% !important;
+        max-width: 90% !important;
+      }
+    }
+  }
+}

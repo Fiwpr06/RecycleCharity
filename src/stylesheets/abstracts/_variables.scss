@@ -1,25 +1,59 @@
 @use "sass:color";
 
-$primary-font: "Roboto", sans-serif;
-$font-heading: "Montserrat", sans-serif;
+$primary-font: "Nunito", sans-serif;
+$font-heading: "Nunito", sans-serif;
 
-$primary-color: #00b894; // Xanh lá nhạt (giữ nguyên)
-$bs-primary: #2ecc71; // Xanh lá tươi sáng
-$bs-primary-hover: rgba(#2ecc71, 0.2); // Hiệu ứng hover mờ
-$bs-secondary: #7f8c8d; // Xám nhạt
-$bs-success: #198754; // Xanh đậm (giữ nguyên)
-$bs-success-gradient: #27ae60; // Xanh đậm hơn cho gradient
-$bs-info: #3498db; // Xanh dương pastel
-$bs-warning: #f1c40f; // Vàng nhạt
-$bs-danger: #e74c3c; // Đỏ nhạt
+// Font Weight Variables - Nunito weights for softer, bolder look
+$font-weight-light: 300;
+$font-weight-normal: 500; // Tăng từ 400 lên 500 để dày hơn
+$font-weight-medium: 600;
+$font-weight-semibold: 700;
+$font-weight-bold: 800;
+$font-weight-extrabold: 900;
+
+// Typography Variables
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+
+$h1-font-size: 2.5rem;
+$h2-font-size: 2rem;
+$h3-font-size: 1.75rem;
+$h4-font-size: 1.5rem;
+$h5-font-size: 1.25rem;
+$h6-font-size: 1rem;
+
+$line-height-base: 1.6;
+$line-height-sm: 1.4;
+$line-height-lg: 1.8;
+
+$letter-spacing-tight: -0.025em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.025em;
+$letter-spacing-wider: 0.05em;
+
+// CharityEngine inspired color scheme
+$primary-color: #1e3a8a; // Xanh dương đậm chính
+$bs-primary: #1e40af; // Xanh dương đậm
+$bs-primary-hover: rgba(#1e40af, 0.2); // Hiệu ứng hover mờ
+$bs-secondary: #64748b; // Xám slate
+$bs-success: #059669; // Xanh emerald
+$bs-success-gradient: #047857; // Xanh emerald đậm hơn cho gradient
+$light-green: #36a336; // Xanh lá non cho text "là gì?"
+$bs-info: #0ea5e9; // Xanh sky
+$bs-warning: #f59e0b; // Cam amber
+$bs-danger: #dc2626; // Đỏ
 $bs-light: #ffffff;
-$bs-dark: #212529;
+$bs-dark: #1e293b; // Xám slate đậm
+$accent-cyan: #06b6d4; // Xanh cyan accent
+$accent-orange: #f97316; // Cam accent
 $link-hover-color: color.adjust($bs-primary, $lightness: -10%);
-$bg-light-gray: #f1f3f5;
+$bg-light-gray: #f8fafc; // Xám slate nhạt
 $bg-gradient-light: linear-gradient(
   135deg,
   $bs-light,
-  color.adjust($bg-light-gray, $lightness: -5%)
+  color.adjust($bg-light-gray, $lightness: -2%)
 );
 
 // Breakpoint

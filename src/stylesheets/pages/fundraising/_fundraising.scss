@@ -1,133 +1,362 @@
 @use "../../abstracts/" as *;
 @use "sass:color";
 
-// Fundraising Page Specific Styles
-#fundraising-progress {
+// Fundraising Section Styles
+.fundraising-section {
   font-family: $primary-font;
+  background: linear-gradient(135deg, $bs-light, rgba($bs-success, 0.02));
 
-  .card {
-    border: none;
-    border-radius: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  .fundraising-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(
+      135deg,
+      rgba($bs-success, 0.1),
+      rgba($bs-info, 0.1)
+    );
+    color: $bs-success;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid rgba($bs-success, 0.2);
 
-    &:hover {
-      box-shadow: 0 8px 20px rgba($bs-dark, 0.15);
+    i {
+      font-size: 1rem;
     }
   }
 
-  .text-success {
-    color: $bs-success !important;
-  }
+  .fundraising-title {
+    font-family: $font-heading;
+    line-height: 1.2;
+    color: #1e40af !important;
 
-  .text-secondary {
-    color: $bs-secondary !important;
-  }
-
-  .progress {
-    background-color: $bg-light-gray;
-    border-radius: 1rem;
-    transition: box-shadow 0.3s ease;
-
-    &:hover {
-      box-shadow: 0 2px 10px rgba($bs-dark, 0.1);
+    .text-gradient {
+      color: #1e40af !important;
+      background: none !important;
+      -webkit-background-clip: unset !important;
     }
   }
 
-  @keyframes growProgressBar {
-    from {
-      width: 0;
-    }
-    to {
-      width: var(--target-width);
-    }
-  }
-
-  .progress-bar {
-    border-radius: 1rem;
-    background: linear-gradient(90deg, $bs-success, $bs-info);
-    animation: growProgressBar 5s ease-out forwards;
-
-    span {
-      color: $bs-light;
-      text-shadow: 1px 1px 2px rgba($bs-dark, 0.3);
-      font-weight: 600;
-    }
-  }
-
-  .text-muted {
-    color: $bs-secondary !important;
+  .fundraising-description {
+    color: color.adjust($bs-secondary, $lightness: 10%);
+    font-size: 1.1rem;
+    line-height: 1.6;
   }
 }
 
-#donation-list {
-  font-family: $primary-font;
+// Progress Card Styles
+.progress-card {
+  border-radius: 1.5rem;
+  overflow: hidden;
 
-  h3 {
-    font-family: $font-heading;
-    background: linear-gradient(
-      90deg,
-      $primary-color,
-      $bs-primary
-    ); // Gradient từ #00b894 đến #2ecc71
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 0 1px 3px rgba($bs-dark, 0.1);
-  }
+  .card-header {
+    background: $bs-light;
+    border: none;
+    border-bottom: 3px solid #1e40af;
 
-  .table {
-    font-size: 0.95rem;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    background-color: $bs-light;
-    box-shadow: 0 4px 15px rgba($primary-color, 0.1); // Bóng đổ với màu chủ đạo
-
-    thead {
-      text-align: center;
-    }
-
-    th {
-      font-family: $font-heading;
-      font-weight: 600;
-      background: linear-gradient(
-        135deg,
-        $bs-light,
-        rgba($primary-color, 0.15)
-      );
-      color: $bs-dark;
-      padding: 0.75rem;
-      border-bottom: 2px solid rgba($primary-color, 0.3);
-    }
-
-    td {
-      padding: 0.75rem;
-      border-bottom: 1px solid rgba($primary-color, 0.1);
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: rgba($bs-primary, 0.15);
+    .progress-icon {
+      i {
+        font-size: 2rem;
+        opacity: 0.9;
+        color: #1e40af !important;
       }
     }
 
-    .text-end {
-      font-family: "Roboto Mono", monospace;
-      color: $bs-success;
+    .card-title {
+      font-family: $font-heading;
+      font-size: 1.5rem;
+      color: #1e40af !important;
+      font-weight: 700;
     }
 
-    .text-muted {
-      color: color.adjust($bs-secondary, $lightness: 15%) !important;
+    .card-subtitle {
+      font-size: 0.95rem;
+      color: rgba(30, 64, 175, 0.7) !important;
     }
   }
 
-  .text-primary {
-    color: $primary-color !important;
+  .card-body {
+    background: $bs-light;
+  }
+
+  .progress-stats {
+    .stat-item {
+      padding: 1rem;
+
+      .stat-icon {
+        i {
+          font-size: 2rem;
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      .stat-value {
+        font-size: 1.25rem;
+        font-family: $font-heading;
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .progress-container {
+    .progress-header {
+      .progress-label {
+        font-size: 1rem;
+        color: $bs-dark;
+      }
+
+      .progress-percentage {
+        font-size: 1.25rem;
+        font-family: $font-heading;
+      }
+    }
+
+    .custom-progress {
+      background-color: rgba($bg-light-gray, 0.8);
+      border-radius: 1rem;
+      box-shadow: inset 0 2px 4px rgba($bs-dark, 0.1);
+
+      .progress-bar {
+        border-radius: 1rem;
+        background: linear-gradient(90deg, $bs-success, $bs-info);
+        position: relative;
+        overflow: hidden;
+      }
+    }
+
+    .progress-footer {
+      .text-muted {
+        color: $bs-secondary !important;
+      }
+    }
   }
 }
 
+// Donors Section Styles
+.donors-section {
+  font-family: $primary-font;
+
+  .donors-card {
+    border-radius: 1.5rem;
+    overflow: hidden;
+
+    .card-header {
+      background: linear-gradient(
+        135deg,
+        rgba($bs-light, 0.9),
+        rgba($bs-primary, 0.05)
+      );
+      border: none;
+
+      .donors-icon {
+        i {
+          font-size: 2rem;
+        }
+      }
+
+      .donors-title {
+        font-family: $font-heading;
+        font-size: 1.75rem;
+        color: #1e40af !important;
+
+        .text-gradient {
+          color: #1e40af !important;
+          background: none !important;
+          -webkit-background-clip: unset !important;
+        }
+      }
+
+      .donors-subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    .card-body {
+      background: $bs-light;
+    }
+
+    .donors-footer {
+      .gratitude-message {
+        padding: 1rem;
+        background: rgba($bs-primary, 0.05);
+        border-radius: 0.5rem;
+
+        i {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+}
+
+// Donate CTA Section
+.donate-cta-section {
+  .cta-card {
+    border-radius: 2rem;
+    background: linear-gradient(135deg, $bs-light, rgba($bs-primary, 0.02));
+
+    .card-body {
+      .cta-icon {
+        i {
+          font-size: 3rem;
+          color: $bs-primary;
+          opacity: 0.8;
+        }
+      }
+
+      .cta-title {
+        font-family: $font-heading;
+        line-height: 1.2;
+        color: #1e40af !important;
+
+        .text-gradient {
+          color: #1e40af !important;
+          background: none !important;
+          -webkit-background-clip: unset !important;
+        }
+      }
+
+      .cta-description {
+        color: color.adjust($bs-secondary, $lightness: 10%);
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .cta-features {
+        .feature-item {
+          text-align: center;
+          padding: 1rem;
+
+          i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .feature-text {
+            .fw-semibold {
+              color: $bs-dark;
+              font-size: 0.9rem;
+            }
+
+            .text-muted {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.table {
+  font-size: 0.95rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 8px 30px rgba(30, 64, 175, 0.12);
+  border: 1px solid rgba(30, 64, 175, 0.1);
+
+  thead {
+    text-align: center;
+  }
+
+  th {
+    font-family: $font-heading;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1e40af, rgba(30, 64, 175, 0.8));
+    color: white;
+    padding: 1rem 0.75rem;
+    border: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  tbody tr {
+    transition: all 0.3s ease;
+
+    &:nth-child(even) {
+      background-color: rgba(30, 64, 175, 0.02);
+    }
+
+    &:hover {
+      background-color: rgba(30, 64, 175, 0.08);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.15);
+    }
+  }
+
+  td {
+    padding: 1rem 0.75rem;
+    border-bottom: 1px solid rgba(30, 64, 175, 0.08);
+    vertical-align: middle;
+    font-size: 0.9rem;
+
+    &:first-child {
+      font-weight: 600;
+      color: #1e40af;
+    }
+  }
+
+  .text-end {
+    font-family: "Roboto Mono", monospace;
+    color: #059669;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .text-muted {
+    color: #6b7280 !important;
+    font-size: 0.85rem;
+  }
+}
+
+.text-primary {
+  color: $bs-primary !important;
+}
+
 #donationTableContainer {
-  max-height: 400px;
+  max-height: 450px;
   overflow-y: auto;
+  border-radius: 1rem;
+
+  /* Custom scrollbar */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(30, 64, 175, 0.05);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(30, 64, 175, 0.3);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(30, 64, 175, 0.5);
+    }
+  }
 }
 
 #transparency-report {
@@ -138,10 +367,10 @@
 
   .section-title-sm {
     font-family: $font-heading;
-    background: linear-gradient(90deg, $primary-color, $bs-primary);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 0 1px 3px rgba($bs-dark, 0.1);
+    color: #1e40af !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    text-shadow: none;
     font-size: 2rem;
   }
 
@@ -154,58 +383,113 @@
     font-size: 0.95rem;
     border-collapse: separate;
     border-spacing: 0;
-    border-radius: 1rem;
+    border-radius: 1.2rem;
     overflow: hidden;
-    background-color: $bs-light;
-    box-shadow: 0 4px 20px rgba($primary-color, 0.15);
+    background-color: white;
+    box-shadow: 0 12px 40px rgba(30, 64, 175, 0.15);
+    border: 1px solid rgba(30, 64, 175, 0.1);
 
     .table-header {
-      background: linear-gradient(135deg, rgba($primary-color, 0.2), $bs-light);
-      color: $bs-dark;
-      font-weight: 600;
+      background: linear-gradient(135deg, #1e40af, rgba(30, 64, 175, 0.9));
+      color: white;
+      font-weight: 700;
       text-align: center;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.3),
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.3)
+        );
+      }
     }
 
     th {
-      padding: 1rem;
-      border-bottom: 2px solid rgba($primary-color, 0.3);
+      padding: 1.2rem 1rem;
+      border: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-family: $font-heading;
+    }
+
+    tbody tr {
+      transition: all 0.3s ease;
+
+      &:nth-child(even) {
+        background-color: rgba(30, 64, 175, 0.02);
+      }
+
+      &:hover {
+        background-color: rgba(30, 64, 175, 0.08);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(30, 64, 175, 0.15);
+      }
     }
 
     td {
-      padding: 1rem;
-      border-bottom: 1px solid rgba($primary-color, 0.1);
-      transition: background-color 0.3s ease;
+      padding: 1.2rem 1rem;
+      border-bottom: 1px solid rgba(30, 64, 175, 0.08);
+      vertical-align: middle;
 
-      &:hover {
-        background-color: rgba($bs-primary, 0.2);
+      &:first-child {
+        font-weight: 600;
+        color: #1e40af;
       }
     }
 
     .text-end {
       font-family: "Roboto Mono", monospace;
-      color: $bs-success;
-      font-weight: 500;
+      color: #059669;
+      font-weight: 700;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, #059669, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     i {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       vertical-align: middle;
-      margin-right: 0.5rem;
-      transition: transform 0.3s ease;
+      margin-right: 0.75rem;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 
       &:hover {
-        transform: scale(1.2);
-        color: $bs-primary;
+        transform: scale(1.2) rotate(5deg);
+        filter: drop-shadow(0 4px 8px rgba(30, 64, 175, 0.3));
       }
     }
 
     .table-footer {
-      background-color: rgba($primary-color, 0.05);
-      font-weight: 600;
+      background: linear-gradient(
+        135deg,
+        rgba(30, 64, 175, 0.1),
+        rgba(30, 64, 175, 0.05)
+      );
+      font-weight: 700;
+      border-top: 2px solid rgba(30, 64, 175, 0.2);
 
       th,
       td {
-        padding: 1rem;
+        padding: 1.2rem 1rem;
+        color: #1e40af;
+        font-size: 1rem;
+      }
+
+      th {
+        background: linear-gradient(135deg, #1e40af, rgba(30, 64, 175, 0.8));
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
     }
   }
@@ -216,32 +500,32 @@
 }
 
 #donationModal {
+  font-family: $primary-font; // Nunito for entire modal
+
   .modal-content {
     border: none;
     border-radius: 1rem;
-    box-shadow: 0 5px 25px rgba($bs-dark, 0.15);
+    box-shadow: 0 8px 30px rgba(30, 64, 175, 0.15);
   }
 
   .modal-header {
-    border-bottom: 1px solid rgba($primary-color, 0.2);
-    background: linear-gradient(90deg, rgba($primary-color, 0.1), $bs-light);
+    border-bottom: 2px solid rgba(30, 64, 175, 0.2);
+    background: linear-gradient(90deg, rgba(30, 64, 175, 0.05), $bs-light);
   }
 
   .modal-title {
-    background: linear-gradient(
-      90deg,
-      $primary-color,
-      $bs-primary
-    ); // Gradient từ #00b894 đến #2ecc71
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 0 1px 3px rgba($bs-dark, 0.1);
+    font-family: $font-heading; // Nunito
+    font-weight: 700;
+    color: #1e40af !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    text-shadow: none;
 
     i {
       vertical-align: middle;
-      background: linear-gradient(90deg, $primary-color, $bs-info);
-      -webkit-background-clip: text;
-      color: transparent;
+      color: #1e40af !important;
+      background: none !important;
+      -webkit-background-clip: unset !important;
       margin-right: 0.5rem;
       animation: pulse 1.5s infinite;
 
@@ -261,9 +545,10 @@
 
   .modal-body {
     padding: 1.5rem;
+    font-family: $primary-font; // Nunito
 
     .lead {
-      font-family: $font-heading;
+      font-family: $primary-font; // Nunito
       color: $bs-dark;
     }
 
@@ -295,7 +580,7 @@
       border-radius: 0.5rem;
       padding: 0.5rem;
       background: $bs-light;
-      box-shadow: 0 2px 10px rgba($primary-color, 0.1);
+      box-shadow: 0 2px 10px rgba($bs-primary, 0.1);
 
       &:hover {
         transform: scale(1.5);
@@ -308,8 +593,8 @@
   }
 
   .modal-footer {
-    border-top: 1px solid rgba($primary-color, 0.2);
-    background: linear-gradient(90deg, $bs-light, rgba($primary-color, 0.1));
+    border-top: 1px solid rgba($bs-primary, 0.2);
+    background: linear-gradient(90deg, $bs-light, rgba($bs-primary, 0.1));
 
     .btn-secondary {
       background-color: $bs-secondary;
@@ -324,17 +609,194 @@
   }
 }
 
-// Responsive Adjustments
-@media (max-width: 768px) {
-  #fundraising-progress .progress {
-    font-size: 0.9rem;
-    height: 25px;
+// Responsive Design for Fundraising
+@media (max-width: 991px) {
+  .fundraising-section {
+    .fundraising-title {
+      font-size: 2.5rem;
+    }
+
+    .fundraising-description {
+      font-size: 1rem;
+    }
   }
 
-  #donation-list .table th,
-  #donation-list .table td {
-    padding: 0.5rem;
+  .progress-card {
+    .card-header {
+      .progress-icon i {
+        font-size: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    .progress-stats .stat-item {
+      padding: 0.75rem;
+
+      .stat-icon i {
+        font-size: 1.5rem;
+      }
+
+      .stat-value {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .donors-section {
+    .donors-card .card-header {
+      .donors-title {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .donate-cta-section {
+    .cta-card .card-body {
+      .cta-icon i {
+        font-size: 2.5rem;
+      }
+
+      .cta-title {
+        font-size: 2rem;
+      }
+
+      .cta-features .feature-item {
+        padding: 0.75rem;
+
+        i {
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .fundraising-section {
+    .fundraising-title {
+      font-size: 2rem;
+    }
+
+    .fundraising-badge {
+      font-size: 0.8rem;
+      padding: 0.4rem 1rem;
+    }
+  }
+
+  .progress-card {
+    .card-header {
+      padding: 1.5rem;
+
+      .card-title {
+        font-size: 1.2rem;
+      }
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .progress-stats {
+      .stat-item {
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+
+        .stat-icon i {
+          font-size: 1.25rem;
+        }
+
+        .stat-value {
+          font-size: 1rem;
+        }
+
+        .stat-label {
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .progress-container .custom-progress {
+      height: 30px;
+    }
+  }
+
+  .donors-section {
+    .donors-card {
+      .card-header {
+        padding: 1.5rem;
+
+        .donors-title {
+          font-size: 1.3rem;
+        }
+
+        .donors-subtitle {
+          font-size: 0.9rem;
+        }
+      }
+
+      .card-body {
+        padding: 1.5rem;
+      }
+    }
+  }
+
+  .donate-cta-section {
+    .cta-card .card-body {
+      padding: 2rem 1.5rem;
+
+      .cta-icon i {
+        font-size: 2rem;
+      }
+
+      .cta-title {
+        font-size: 1.75rem;
+      }
+
+      .cta-description {
+        font-size: 1rem;
+      }
+
+      .cta-features .feature-item {
+        padding: 0.5rem;
+
+        i {
+          font-size: 1rem;
+        }
+
+        .feature-text {
+          .fw-semibold {
+            font-size: 0.8rem;
+          }
+
+          .text-muted {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+
+  .table th,
+  .table td {
+    padding: 0.6rem 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  .table th {
+    font-size: 0.75rem;
+    padding: 0.8rem 0.4rem;
+  }
+
+  .table .text-end {
     font-size: 0.9rem;
+  }
+
+  .table i {
+    font-size: 1rem;
+    margin-right: 0.5rem;
   }
 
   #transparency-report {
@@ -342,8 +804,22 @@
 
     .table th,
     .table td {
-      padding: 0.75rem;
+      padding: 0.8rem 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .table th {
+      font-size: 0.75rem;
+      padding: 1rem 0.5rem;
+    }
+
+    .table .text-end {
       font-size: 0.9rem;
+    }
+
+    .table i {
+      font-size: 1.1rem;
+      margin-right: 0.5rem;
     }
 
     .section-title-sm {
@@ -353,6 +829,10 @@
     .lead {
       font-size: 1rem;
     }
+  }
+
+  #donationTableContainer {
+    max-height: 350px;
   }
 
   #donationModal {

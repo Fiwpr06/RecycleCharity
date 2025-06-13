@@ -7,26 +7,80 @@
     rgba($bs-primary, 0.05)
   );
 
+  .section-label {
+    display: inline-block;
+    background: linear-gradient(135deg, $bs-primary, $primary-color);
+    color: $bs-light;
+    padding: 0.25rem 1rem;
+    border-radius: 50px;
+    @include font-style(
+      $family: $font-heading,
+      $weight: 500,
+      $size: $font-size-sm,
+      $spacing: $letter-spacing-normal
+    );
+    margin-bottom: 1rem;
+  }
+
   .section-title {
-    @include font-style($family: $font-heading, $size: 2.5rem, $weight: 700);
+    @include font-style(
+      $family: $font-heading,
+      $size: 2.5rem,
+      $weight: 700,
+      $height: $line-height-sm,
+      $spacing: $letter-spacing-tight
+    );
+
+    &.text-gradient {
+      background: linear-gradient(135deg, $primary-color, $bs-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   }
 
   .text-muted {
-    @include font-style($family: $primary-font, $size: 1.1rem);
+    @include font-style(
+      $family: $primary-font,
+      $size: $font-size-lg,
+      $height: $line-height-lg,
+      $spacing: $letter-spacing-normal
+    );
   }
 
   .metric-item {
     background: linear-gradient(135deg, #ffffff, rgba($bs-primary, 0.1));
     border-radius: 0.75rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba($bs-primary, 0.1);
 
     &:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba($bs-primary, 0.15);
+      border-color: rgba($bs-primary, 0.2);
+    }
+
+    .metric-icon {
+      i {
+        font-size: 3rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+      }
+    }
+
+    &:hover .metric-icon i {
+      opacity: 1;
+      transform: scale(1.1);
     }
 
     h3 {
-      @include font-style($family: $font-heading, $weight: 700);
-      font-size: 2.5rem;
+      @include font-style(
+        $family: $font-heading,
+        $weight: 700,
+        $size: 2.5rem,
+        $height: $line-height-sm,
+        $spacing: $letter-spacing-tight
+      );
       transition: color 0.3s ease;
 
       &.count-number {
@@ -35,23 +89,89 @@
     }
 
     p {
-      @include font-style($family: $primary-font, $size: 0.9rem);
+      @include font-style(
+        $family: $primary-font,
+        $size: $font-size-sm,
+        $height: $line-height-base,
+        $spacing: $letter-spacing-normal
+      );
+      font-weight: 500;
     }
   }
 
-  @media (min-width: 768px) {
+  // Desktop
+  @media (min-width: 1200px) {
     .metric-item h3 {
-      font-size: 3rem;
-    }
-  }
-
-  @media (max-width: 576px) {
-    .metric-item h3 {
-      font-size: 2rem;
+      @include font-style($size: 3.2rem);
     }
 
     .metric-item p {
-      @include font-style($family: $primary-font, $size: 0.85rem);
+      @include font-style($size: 1.1rem);
+    }
+  }
+
+  // Large tablets
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .metric-item h3 {
+      @include font-style($size: 2.8rem);
+    }
+
+    .metric-item p {
+      @include font-style($size: 1rem);
+    }
+  }
+
+  // Tablets
+  @media (max-width: 991px) {
+    padding: 3.5rem 0;
+
+    .metric-item {
+      margin-bottom: 2rem;
+
+      h3 {
+        @include font-style($size: 2.5rem);
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        @include font-style($size: 0.95rem);
+      }
+    }
+  }
+
+  // Mobile landscape
+  @media (max-width: 768px) {
+    padding: 3rem 0;
+
+    .metric-item {
+      margin-bottom: 1.8rem;
+
+      h3 {
+        @include font-style($size: 2.2rem);
+        margin-bottom: 0.4rem;
+      }
+
+      p {
+        @include font-style($size: 0.9rem);
+      }
+    }
+  }
+
+  // Mobile portrait
+  @media (max-width: 576px) {
+    padding: 2.5rem 0;
+
+    .metric-item {
+      margin-bottom: 1.5rem;
+
+      h3 {
+        @include font-style($size: 2rem);
+        margin-bottom: 0.3rem;
+      }
+
+      p {
+        @include font-style($family: $primary-font, $size: 0.85rem);
+      }
     }
   }
 }

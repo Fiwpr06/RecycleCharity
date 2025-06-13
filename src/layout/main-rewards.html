@@ -1,0 +1,287 @@
+<!-- Rewards Page Header -->
+<section class="rewards-header py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div
+        class="rewards-badge mb-3"
+        data-aos="fade-down"
+        data-aos-duration="800"
+      >
+        <i class="fas fa-gift me-2"></i>
+        <span>Đổi quà tích xu</span>
+      </div>
+      <h1
+        class="section-title display-4 fw-bold"
+        data-aos="fade-down"
+        data-aos-duration="1000"
+      >
+        <span class="text-primary">Đổi quà</span>
+        <span class="text-gradient">từ xu tích lũy</span>
+      </h1>
+      <p
+        class="lead text-muted col-md-8 mx-auto"
+        data-aos="fade-up"
+        data-aos-duration="1200"
+      >
+        Sử dụng xu tích lũy từ việc quyên góp rác tái chế để đổi lấy những món
+        quà ý nghĩa được làm bởi chính tay các em nhỏ!
+      </p>
+    </div>
+
+    <!-- User Points Display - Compact -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-auto" data-aos="fade-up" data-aos-duration="600">
+        <div class="points-badge">
+          <i class="fas fa-wallet me-2"></i>
+          <span class="points-label">Xu của bạn:</span>
+          <span class="points-amount" id="userPoints">1,250</span>
+          <span class="points-unit">xu</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rewards Categories -->
+<section class="rewards-categories py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2
+        class="section-title-sm fw-bold"
+        data-aos="fade-up"
+        data-aos-duration="800"
+      >
+        <i class="fas fa-tags me-2 text-primary"></i>Danh mục quà tặng
+      </h2>
+    </div>
+
+    <div class="row g-4 mb-5">
+      <!-- Category Filter Buttons -->
+      <div class="col-12" data-aos="fade-up" data-aos-duration="600">
+        <div class="category-filters text-center">
+          <button class="btn btn-category active" data-category="all">
+            <i class="fas fa-th-large me-2"></i>Tất cả
+          </button>
+          <button class="btn btn-category" data-category="handmade">
+            <i class="fas fa-hand-holding-heart me-2"></i>Đồ thủ công
+          </button>
+          <button class="btn btn-category" data-category="toys">
+            <i class="fas fa-teddy-bear me-2"></i>Đồ chơi
+          </button>
+          <button class="btn btn-category" data-category="accessories">
+            <i class="fas fa-key me-2"></i>Phụ kiện
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rewards Grid -->
+<section class="rewards-grid py-5">
+  <div class="container">
+    <div class="row g-4" id="rewardsGrid">
+      <!-- Reward Item 1 -->
+      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+        <div class="reward-item">
+          <div class="reward-image">
+            <img src="../assets/images/rewards/teddy-bear.webp" alt="Gấu bông handmade" data-item-id="1">
+            <div class="reward-badge">Handmade</div>
+            <div class="reward-cost">
+              <i class="fas fa-coins"></i>500
+            </div>
+          </div>
+          <div class="reward-content">
+            <h4 class="reward-title">Gấu bông handmade</h4>
+            <p class="reward-description">Gấu bông được các em nhỏ làm thủ công từ vải tái chế, mỗi chiếc đều độc đáo và đáng yêu.</p>
+            <div class="reward-meta">
+              <span class="reward-category">Đồ thủ công</span>
+              <span class="reward-stock">Còn 15 món</span>
+            </div>
+            <button class="btn btn-exchange">
+              <i class="fas fa-exchange-alt"></i>
+              Đổi ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reward Item 2 -->
+      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+        <div class="reward-item">
+          <div class="reward-image">
+            <img src="../assets/images/rewards/keychain.webp" alt="Móc khóa tái chế" data-item-id="2">
+            <div class="reward-badge">Eco-friendly</div>
+            <div class="reward-cost">
+              <i class="fas fa-coins"></i>200
+            </div>
+          </div>
+          <div class="reward-content">
+            <h4 class="reward-title">Móc khóa tái chế</h4>
+            <p class="reward-description">Móc khóa được làm từ nhựa tái chế, thiết kế sáng tạo bởi các em học sinh.</p>
+            <div class="reward-meta">
+              <span class="reward-category">Phụ kiện</span>
+              <span class="reward-stock">Còn 25 món</span>
+            </div>
+            <button class="btn btn-exchange">
+              <i class="fas fa-exchange-alt"></i>
+              Đổi ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reward Item 3 -->
+      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+        <div class="reward-item">
+          <div class="reward-image">
+            <img src="../assets/images/rewards/painting.webp" alt="Tranh vẽ tay" data-item-id="3">
+            <div class="reward-badge">Limited</div>
+            <div class="reward-cost">
+              <i class="fas fa-coins"></i>800
+            </div>
+          </div>
+          <div class="reward-content">
+            <h4 class="reward-title">Tranh vẽ tay</h4>
+            <p class="reward-description">Bức tranh được vẽ bởi các em nhỏ, thể hiện tình yêu với môi trường xanh.</p>
+            <div class="reward-meta">
+              <span class="reward-category">Đồ thủ công</span>
+              <span class="reward-stock low-stock">Còn 8 món</span>
+            </div>
+            <button class="btn btn-exchange">
+              <i class="fas fa-exchange-alt"></i>
+              Đổi ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reward Item 4 -->
+      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+        <div class="reward-item">
+          <div class="reward-image">
+            <img src="../assets/images/rewards/canvas-bag.webp" alt="Túi vải canvas" data-item-id="4">
+            <div class="reward-badge">Eco-friendly</div>
+            <div class="reward-cost">
+              <i class="fas fa-coins"></i>350
+            </div>
+          </div>
+          <div class="reward-content">
+            <h4 class="reward-title">Túi vải canvas</h4>
+            <p class="reward-description">Túi vải được thiết kế và in hình bởi các em, thay thế túi nilon bảo vệ môi trường.</p>
+            <div class="reward-meta">
+              <span class="reward-category">Phụ kiện</span>
+              <span class="reward-stock">Còn 20 món</span>
+            </div>
+            <button class="btn btn-exchange">
+              <i class="fas fa-exchange-alt"></i>
+              Đổi ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reward Item 5 -->
+      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+        <div class="reward-item">
+          <div class="reward-image">
+            <img src="../assets/images/rewards/wool-doll.webp" alt="Búp bê len" data-item-id="5">
+            <div class="reward-badge">Handmade</div>
+            <div class="reward-cost">
+              <i class="fas fa-coins"></i>600
+            </div>
+          </div>
+          <div class="reward-content">
+            <h4 class="reward-title">Búp bê len</h4>
+            <p class="reward-description">Búp bê được đan len thủ công bởi các em nhỏ, mỗi chiếc đều mang câu chuyện riêng.</p>
+            <div class="reward-meta">
+              <span class="reward-category">Đồ chơi</span>
+              <span class="reward-stock">Còn 12 món</span>
+            </div>
+            <button class="btn btn-exchange">
+              <i class="fas fa-exchange-alt"></i>
+              Đổi ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reward Item 6 -->
+      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+        <div class="reward-item">
+          <div class="reward-image">
+            <img src="../assets/images/rewards/bookmark.webp" alt="Bookmark handmade" data-item-id="6">
+            <div class="reward-badge">Eco-friendly</div>
+            <div class="reward-cost">
+              <i class="fas fa-coins"></i>150
+            </div>
+          </div>
+          <div class="reward-content">
+            <h4 class="reward-title">Bookmark handmade</h4>
+            <p class="reward-description">Bookmark được làm từ giấy tái chế, trang trí bởi các em với nhiều họa tiết đẹp mắt.</p>
+            <div class="reward-meta">
+              <span class="reward-category">Phụ kiện</span>
+              <span class="reward-stock">Còn 30 món</span>
+            </div>
+            <button class="btn btn-exchange">
+              <i class="fas fa-exchange-alt"></i>
+              Đổi ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reward Item 7 -->
+      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+        <div class="reward-item">
+          <div class="reward-image">
+            <img src="../assets/images/rewards/pencil-box.webp" alt="Hộp bút handmade" data-item-id="7">
+            <div class="reward-badge">Handmade</div>
+            <div class="reward-cost">
+              <i class="fas fa-coins"></i>400
+            </div>
+          </div>
+          <div class="reward-content">
+            <h4 class="reward-title">Hộp bút handmade</h4>
+            <p class="reward-description">Hộp bút được làm từ carton tái chế, trang trí sáng tạo bởi các em học sinh.</p>
+            <div class="reward-meta">
+              <span class="reward-category">Đồ thủ công</span>
+              <span class="reward-stock">Còn 18 món</span>
+            </div>
+            <button class="btn btn-exchange">
+              <i class="fas fa-exchange-alt"></i>
+              Đổi ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reward Item 8 -->
+      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+        <div class="reward-item">
+          <div class="reward-image">
+            <img src="../assets/images/rewards/wooden-toy-car.webp" alt="Xe đồ chơi gỗ" data-item-id="8">
+            <div class="reward-badge">Eco-friendly</div>
+            <div class="reward-cost">
+              <i class="fas fa-coins"></i>700
+            </div>
+          </div>
+          <div class="reward-content">
+            <h4 class="reward-title">Xe đồ chơi gỗ</h4>
+            <p class="reward-description">Xe đồ chơi được làm từ gỗ tái chế, an toàn và thân thiện với môi trường.</p>
+            <div class="reward-meta">
+              <span class="reward-category">Đồ chơi</span>
+              <span class="reward-stock">Còn 10 món</span>
+            </div>
+            <button class="btn btn-exchange">
+              <i class="fas fa-exchange-alt"></i>
+              Đổi ngay
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
