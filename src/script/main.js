@@ -1,17 +1,42 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "./video-modal.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Khởi tạo AOS
   AOS.init({
-    duration: 2000,
+    duration: 500,
     offset: 100,
   });
 
-  // Login/Register Modal
+  // Login/Register Modal with improved scrollbar handling
   const authModal = document.getElementById("authModal");
   if (authModal) {
+    // Store original body styles
+    let originalBodyOverflow = "";
+    let originalBodyPaddingRight = "";
+
+    // Handle modal show event
     authModal.addEventListener("show.bs.modal", (event) => {
+      // Store original body styles before modal opens
+      originalBodyOverflow = document.body.style.overflow;
+      originalBodyPaddingRight = document.body.style.paddingRight;
+
+      // Get scrollbar width
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+
+      // Apply styles to prevent layout shift
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = "0px";
+
+      // Fix navbar container to prevent shift - minimal changes
+      const navbar = document.querySelector(".navbar");
+      if (navbar) {
+        navbar.style.paddingRight = "0px";
+      }
+
+      // Handle tab switching
       const button = event.relatedTarget; // Nút kích hoạt modal
       const tab = button.getAttribute("data-tab"); // Lấy data-tab (login/register)
       console.log("Tab to show:", tab); // Debug giá trị tab
@@ -43,6 +68,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } else {
         console.error("No data-tab attribute found on button:", button);
+      }
+    });
+
+    // Handle modal hide event
+    authModal.addEventListener("hidden.bs.modal", () => {
+      // Restore original body styles
+      document.body.style.overflow = originalBodyOverflow;
+      document.body.style.paddingRight = originalBodyPaddingRight;
+
+      // Restore navbar styles
+      const navbar = document.querySelector(".navbar");
+      if (navbar) {
+        navbar.style.paddingRight = "";
+      }
+    });
+
+    // Prevent modal from closing when clicking inside modal content
+    authModal.addEventListener("click", (event) => {
+      if (event.target === authModal) {
+        // Only close if clicking on backdrop, not modal content
+        return;
       }
     });
   }
@@ -96,21 +142,98 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Navbar Active Link
   function setActiveNavLink() {
-    const currentPath =
-      window.location.pathname.split("/").pop() || "index.html";
-    const navLinks = document.querySelectorAll(".nav-link");
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll(
+      ".navbar-nav .nav-link[data-page]"
+    );
 
+    console.log("Current path:", currentPath); // Debug log
+
+    // Remove active class from all links first
     navLinks.forEach((link) => {
-      const linkPath = link.getAttribute("href").replace("./", "");
-      if (linkPath === currentPath) {
+      link.classList.remove("active");
+      link.removeAttribute("aria-current");
+    });
+
+    // Determine current page from path
+    let currentPage = "index"; // default
+    if (currentPath === "/" || currentPath === "/index.html") {
+      currentPage = "index";
+    } else {
+      // Extract page name from path (e.g., "/collection.html" -> "collection")
+      const pathParts = currentPath.split("/");
+      const fileName = pathParts[pathParts.length - 1];
+      if (fileName && fileName.includes(".")) {
+        currentPage = fileName.split(".")[0];
+      }
+    }
+
+    console.log("Current page:", currentPage); // Debug log
+
+    // Find and activate the current page link
+    navLinks.forEach((link) => {
+      const linkPage = link.getAttribute("data-page");
+      console.log("Link page:", linkPage); // Debug log
+
+      if (linkPage === currentPage) {
         link.classList.add("active");
         link.setAttribute("aria-current", "page");
-      } else {
-        link.classList.remove("active");
-        link.removeAttribute("aria-current");
+        console.log(`Active link set for page: ${linkPage}`); // Debug log
       }
     });
   }
 
   setActiveNavLink();
+
+  // Update active link when clicking on nav links
+  document
+    .querySelectorAll(".navbar-nav .nav-link[data-page]")
+    .forEach((link) => {
+      link.addEventListener("click", function () {
+        // Remove active from all navbar links
+        document
+          .querySelectorAll(".navbar-nav .nav-link[data-page]")
+          .forEach((l) => {
+            l.classList.remove("active");
+            l.removeAttribute("aria-current");
+          });
+
+        // Add active to clicked link
+        this.classList.add("active");
+        this.setAttribute("aria-current", "page");
+      });
+    });
+
+  // Modern Navbar Scroll Effect
+  let lastScrollTop = 0;
+  const navbar = document.querySelector(".navbar");
+
+  if (navbar) {
+    window.addEventListener(
+      "scroll",
+      () => {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        // Add/remove scrolled class for styling
+        if (scrollTop > 50) {
+          navbar.classList.add("navbar-scrolled");
+        } else {
+          navbar.classList.remove("navbar-scrolled");
+        }
+
+        // Hide/show navbar on scroll direction
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          // Scrolling down - hide navbar
+          navbar.classList.add("navbar-hidden");
+        } else {
+          // Scrolling up - show navbar
+          navbar.classList.remove("navbar-hidden");
+        }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+      },
+      { passive: true }
+    );
+  }
 });
