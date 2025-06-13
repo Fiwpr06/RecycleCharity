@@ -1,160 +1,222 @@
-<div class="row g-5">
+<!-- Map and Form Section -->
+<div class="row g-4 align-items-start">
   <!-- Map Section -->
   <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1000">
-    <h3 class="mb-3 fw-bold text-dark">
-      <i class="bi bi-geo-alt-fill me-2 text-primary"></i>Bản đồ điểm thu gom
-    </h3>
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control form-control-lg shadow-sm"
-        placeholder="Nhập địa chỉ của bạn để tìm điểm gần nhất..."
-        aria-label="Tìm điểm thu gom"
-        id="map-search-input"
-      />
-      <button class="btn btn-primary" type="button" id="button-search-map">
-        <i class="bi bi-search"></i> Tìm
-      </button>
+    <div class="map-container">
+      <div class="map-header mb-4">
+        <h3 class="map-title fw-bold">
+          <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+          Bản đồ điểm thu gom
+        </h3>
+        <p class="map-subtitle text-muted">Tìm điểm thu gom gần nhất với bạn</p>
+      </div>
+
+      <div class="map-search-container mb-3">
+        <div class="input-group input-group-lg">
+          <span class="input-group-text bg-white border-end-0">
+            <i class="fas fa-search text-muted"></i>
+          </span>
+          <input
+            type="text"
+            class="form-control border-start-0 shadow-sm"
+            placeholder="Nhập địa chỉ của bạn để tìm điểm gần nhất..."
+            aria-label="Tìm điểm thu gom"
+            id="map-search-input"
+          />
+          <button class="btn btn-cta" type="button" id="button-search-map">
+            <i class="fas fa-search me-2"></i>Tìm kiếm
+          </button>
+        </div>
+      </div>
+
+      <div class="map-wrapper">
+        <div
+          id="map-placeholder"
+          class="map-display rounded-3 shadow-sm"
+          style="height: 450px"
+        ></div>
+      </div>
     </div>
-    <div
-      id="map-placeholder"
-      class="border rounded shadow-sm bg-light"
-      style="height: 450px"
-    ></div>
   </div>
 
   <!-- Registration Form Section -->
   <div class="col-lg-5" data-aos="fade-left" data-aos-duration="1000">
-    <div class="card shadow-sm border-0">
-      <div class="card-body p-4 p-lg-5">
-        <h3 class="card-title text-center mb-4 fw-bold text-dark">
-          <i class="bi bi-pencil-square me-2 text-success"></i>Biểu mẫu đăng ký
-        </h3>
+    <div class="registration-card card border-0 shadow-lg">
+      <div class="card-header bg-gradient text-white text-center py-4">
+        <div class="form-icon mb-2">
+          <i class="fas fa-clipboard-list"></i>
+        </div>
+        <h3 class="card-title mb-0 fw-bold">Biểu mẫu đăng ký</h3>
+        <p class="card-subtitle mb-0 opacity-75">
+          Điền thông tin để chúng tôi liên hệ
+        </p>
+      </div>
+      <div class="card-body p-3 p-lg-4">
         <form id="collectionForm" novalidate>
-          <div class="mb-3">
-            <label for="fullName" class="form-label"
-              >Họ và tên <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control shadow-sm"
-              id="fullName"
-              required
-            />
-            <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
-          </div>
-          <div class="mb-3">
-            <label for="address" class="form-label"
-              >Địa chỉ thu gom <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control shadow-sm"
-              id="address"
-              required
-            />
-            <div class="invalid-feedback">Vui lòng nhập địa chỉ thu gom.</div>
-          </div>
-          <div class="mb-3">
-            <label for="phoneNumber" class="form-label"
-              >Số điện thoại <span class="text-danger">*</span></label
-            >
-            <input
-              type="tel"
-              class="form-control shadow-sm"
-              id="phoneNumber"
-              required
-              pattern="^\+?\d{10,15}$"
-            />
-            <div class="invalid-feedback">
-              Vui lòng nhập số điện thoại hợp lệ.
+          <!-- Contact Info Row -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label for="fullName" class="form-label fw-semibold">
+                <i class="fas fa-user me-2 text-primary"></i>
+                Họ và tên <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control shadow-sm"
+                id="fullName"
+                placeholder="Nhập họ và tên"
+                required
+              />
+              <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label"
-              >Loại rác tái chế <span class="text-danger">*</span></label
-            >
-            <div class="row">
-              <div class="col-6">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value="nhua"
-                    id="wasteTypePlastic"
-                  />
-                  <label class="form-check-label" for="wasteTypePlastic"
-                    >Nhựa</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value="giay"
-                    id="wasteTypePaper"
-                  />
-                  <label class="form-check-label" for="wasteTypePaper"
-                    >Giấy</label
-                  >
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value="kimloai"
-                    id="wasteTypeMetal"
-                  />
-                  <label class="form-check-label" for="wasteTypeMetal"
-                    >Kim loại</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value="thuytinh"
-                    id="wasteTypeGlass"
-                  />
-                  <label class="form-check-label" for="wasteTypeGlass"
-                    >Thủy tinh</label
-                  >
-                </div>
+            <div class="col-md-6">
+              <label for="phoneNumber" class="form-label fw-semibold">
+                <i class="fas fa-phone me-2 text-primary"></i>
+                Số điện thoại <span class="text-danger">*</span>
+              </label>
+              <input
+                type="tel"
+                class="form-control shadow-sm"
+                id="phoneNumber"
+                placeholder="Số điện thoại"
+                required
+                pattern="^\+?\d{10,15}$"
+              />
+              <div class="invalid-feedback">
+                Vui lòng nhập số điện thoại hợp lệ.
               </div>
             </div>
-            <div class="invalid-feedback d-block" id="wasteTypeFeedback">
-              Vui lòng chọn ít nhất một loại rác tái chế.
+          </div>
+
+          <!-- Address Row -->
+          <div class="row g-3 mb-3">
+            <div class="col-12">
+              <label for="address" class="form-label fw-semibold">
+                <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                Địa chỉ thu gom <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control shadow-sm"
+                id="address"
+                placeholder="Nhập địa chỉ cần thu gom"
+                required
+              />
+              <div class="invalid-feedback">Vui lòng nhập địa chỉ thu gom.</div>
             </div>
           </div>
-          <div class="mb-3">
-            <label for="quantity" class="form-label"
-              >Số lượng (ước tính kg)</label
-            >
-            <input
-              type="number"
-              class="form-control shadow-sm"
-              id="quantity"
-              min="0.5"
-              step="0.5"
-            />
+          <!-- Waste Type Row -->
+          <div class="row g-3 mb-3">
+            <div class="col-12">
+              <label class="form-label fw-semibold">
+                <i class="fas fa-recycle me-2 text-primary"></i>
+                Loại rác tái chế <span class="text-danger">*</span>
+              </label>
+              <div class="waste-type-container">
+                <div class="row g-2">
+                  <div class="col-3">
+                    <div class="waste-type-card">
+                      <input
+                        class="form-check-input d-none"
+                        type="checkbox"
+                        value="nhua"
+                        id="wasteTypePlastic"
+                      />
+                      <label class="waste-type-label" for="wasteTypePlastic">
+                        <i class="fas fa-bottle-water"></i>
+                        <span>Nhựa</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="waste-type-card">
+                      <input
+                        class="form-check-input d-none"
+                        type="checkbox"
+                        value="giay"
+                        id="wasteTypePaper"
+                      />
+                      <label class="waste-type-label" for="wasteTypePaper">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Giấy</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="waste-type-card">
+                      <input
+                        class="form-check-input d-none"
+                        type="checkbox"
+                        value="kimloai"
+                        id="wasteTypeMetal"
+                      />
+                      <label class="waste-type-label" for="wasteTypeMetal">
+                        <i class="fas fa-cog"></i>
+                        <span>Kim loại</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="waste-type-card">
+                      <input
+                        class="form-check-input d-none"
+                        type="checkbox"
+                        value="thuytinh"
+                        id="wasteTypeGlass"
+                      />
+                      <label class="waste-type-label" for="wasteTypeGlass">
+                        <i class="fas fa-wine-bottle"></i>
+                        <span>Thủy tinh</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="invalid-feedback d-block" id="wasteTypeFeedback">
+                Vui lòng chọn ít nhất một loại rác tái chế.
+              </div>
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="collectionTime" class="form-label"
-              >Thời gian thu gom mong muốn</label
-            >
-            <select class="form-select shadow-sm" id="collectionTime">
-              <option selected disabled value="">Chọn thời gian...</option>
-              <option value="sang_t2_t6">Buổi sáng (Thứ 2 - Thứ 6)</option>
-              <option value="chieu_t2_t6">Buổi chiều (Thứ 2 - Thứ 6)</option>
-              <option value="cuoi_tuan">Cuối tuần</option>
-              <option value="linh_hoat">Linh hoạt (sẽ liên hệ)</option>
-            </select>
+
+          <!-- Quantity and Time Row -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label for="quantity" class="form-label fw-semibold">
+                <i class="fas fa-weight-hanging me-2 text-primary"></i>
+                Số lượng (kg)
+              </label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  class="form-control shadow-sm"
+                  id="quantity"
+                  placeholder="5.5"
+                  min="0.5"
+                  step="0.5"
+                />
+                <span class="input-group-text">kg</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="collectionTime" class="form-label fw-semibold">
+                <i class="fas fa-clock me-2 text-primary"></i>
+                Thời gian thu gom
+              </label>
+              <select class="form-select shadow-sm" id="collectionTime">
+                <option selected disabled value="">Chọn thời gian...</option>
+                <option value="sang_t2_t6">🌅 Buổi sáng (T2-T6)</option>
+                <option value="chieu_t2_t6">🌆 Buổi chiều (T2-T6)</option>
+                <option value="cuoi_tuan">🎯 Cuối tuần</option>
+                <option value="linh_hoat">📞 Linh hoạt</option>
+              </select>
+            </div>
           </div>
+
+          <!-- Submit Button -->
           <div class="d-grid">
-            <button type="submit" class="btn btn-success btn-lg">
-              <i class="bi bi-send-fill me-2"></i>Gửi yêu cầu
+            <button type="submit" class="btn btn-cta btn-lg shadow-sm">
+              <i class="fas fa-paper-plane me-2"></i>
+              Gửi yêu cầu thu gom
             </button>
           </div>
         </form>
