@@ -1,5 +1,8 @@
-// Video Inline Handler - 100% Working Solution - v6.0 - PERFECT CENTERED TEXT & FIXED AUDIO
-console.log("Video handler script v6.0 loaded at:", new Date().toISOString());
+// YouTube Video Handler - v7.0 - Updated for YouTube iframe
+console.log(
+  "YouTube video handler script v7.0 loaded at:",
+  new Date().toISOString()
+);
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM loaded, checking if video elements exist...");
 
@@ -10,9 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const sloganImageContainer = document.querySelector(".slogan-image");
 
   if (storyImage && storyVideo && playOverlay && sloganImageContainer) {
-    console.log("Video elements found, initializing video handler...");
+    console.log("Video elements found, initializing YouTube video handler...");
     // Đợi một chút để đảm bảo tất cả elements đã load
-    setTimeout(initVideoHandler, 100);
+    setTimeout(initYouTubeVideoHandler, 100);
   } else {
     console.log(
       "Video elements not found, skipping video handler (not homepage)"
@@ -20,13 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function initVideoHandler() {
+function initYouTubeVideoHandler() {
   const storyImage = document.getElementById("storyImage");
   const storyVideo = document.getElementById("storyVideo");
   const playOverlay = document.getElementById("playOverlay");
   const sloganImageContainer = document.querySelector(".slogan-image");
 
-  console.log("Video elements found:", {
+  console.log("YouTube video elements found:", {
     storyImage: !!storyImage,
     storyVideo: !!storyVideo,
     playOverlay: !!playOverlay,
@@ -36,52 +39,29 @@ function initVideoHandler() {
   // Tất cả elements đã được kiểm tra trước khi gọi function này
 
   let isVideoMode = false;
-  let pauseCheckInterval;
 
-  // Function để hiện lại ảnh - FORCE RESET
+  // Function để hiện lại ảnh - FORCE RESET cho YouTube
   function forceShowImage() {
     console.log("FORCE: Switching back to image");
     isVideoMode = false;
 
-    // Clear any intervals
-    if (pauseCheckInterval) {
-      clearInterval(pauseCheckInterval);
-      pauseCheckInterval = null;
-    }
-
-    // Force stop video and audio completely
-    storyVideo.pause();
-    storyVideo.currentTime = 0;
-    storyVideo.muted = true; // Mute để đảm bảo không có âm thanh
-    storyVideo.volume = 0; // Set volume về 0
-
-    // Load lại video để dừng hoàn toàn
-    const currentSrc =
-      storyVideo.src || storyVideo.querySelector("source")?.src;
-    if (currentSrc) {
-      storyVideo.src = "";
-      storyVideo.load(); // Force reload
-      setTimeout(() => {
-        storyVideo.src = currentSrc;
-        storyVideo.load();
-        storyVideo.muted = false; // Unmute cho lần phát tiếp theo
-        storyVideo.volume = 1; // Restore volume
-      }, 100);
+    // Stop YouTube video by resetting src to stop autoplay
+    const currentSrc = storyVideo.src;
+    if (currentSrc.includes("autoplay=1")) {
+      storyVideo.src = currentSrc.replace("autoplay=1", "autoplay=0");
     }
 
     // Force hide video
-    storyVideo.style.display = "none !important";
+    storyVideo.style.display = "none";
     storyVideo.style.visibility = "hidden";
 
     // Force show image
-    storyImage.style.display = "block !important";
+    storyImage.style.display = "block";
     storyImage.style.visibility = "visible";
-    playOverlay.style.display = "flex !important";
+    playOverlay.style.display = "flex";
     playOverlay.style.visibility = "visible";
-    playOverlay.style.opacity = "";
-    playOverlay.style.pointerEvents = "";
-
-    // Remove any inline styles that might interfere
+    playOverlay.style.opacity = "1";
+    playOverlay.style.pointerEvents = "auto";
     setTimeout(() => {
       storyVideo.removeAttribute("style");
       storyImage.removeAttribute("style");
@@ -94,9 +74,9 @@ function initVideoHandler() {
     }, 50);
   }
 
-  // Function để chuyển sang video
+  // Function để chuyển sang YouTube video
   function showVideo() {
-    console.log("FORCE: Switching to video");
+    console.log("FORCE: Switching to YouTube video");
     isVideoMode = true;
 
     // Hide image and overlay completely
@@ -106,32 +86,15 @@ function initVideoHandler() {
     playOverlay.style.visibility = "hidden";
     playOverlay.style.pointerEvents = "none";
 
-    // Show and play video
+    // Show YouTube video and enable autoplay
     storyVideo.style.display = "block";
-    storyVideo.currentTime = 0;
-    storyVideo.play().catch(function (error) {
-      console.log("Không thể tự động phát video:", error);
-    });
-
-    // Start monitoring video state
-    startVideoMonitoring();
-  }
-
-  // Monitor video state continuously
-  function startVideoMonitoring() {
-    if (pauseCheckInterval) {
-      clearInterval(pauseCheckInterval);
+    const currentSrc = storyVideo.src;
+    if (currentSrc.includes("autoplay=0")) {
+      storyVideo.src = currentSrc.replace("autoplay=0", "autoplay=1");
     }
-
-    pauseCheckInterval = setInterval(() => {
-      if (isVideoMode && storyVideo.paused && storyVideo.currentTime > 0) {
-        console.log("Video detected as paused, switching to image");
-        forceShowImage();
-      }
-    }, 100); // Check every 100ms
   }
 
-  // Click handler
+  // Click handler để chuyển sang video
   sloganImageContainer.addEventListener("click", function (e) {
     console.log(
       "Container clicked, current mode:",
@@ -145,57 +108,19 @@ function initVideoHandler() {
     }
   });
 
-  // Multiple event listeners for video pause
-  storyVideo.addEventListener("pause", function () {
-    console.log("Video pause event triggered");
-    if (isVideoMode) {
-      setTimeout(forceShowImage, 50);
-    }
-  });
-
-  storyVideo.addEventListener("ended", function () {
-    console.log("Video ended event triggered");
+  // Click on video iframe để quay lại image
+  storyVideo.addEventListener("click", function (e) {
+    e.stopPropagation();
+    console.log("YouTube iframe clicked, switching back to image");
     forceShowImage();
   });
 
-  // Hide overlay when video starts playing
-  storyVideo.addEventListener("play", function () {
-    console.log("Video play event triggered");
-    if (isVideoMode) {
-      playOverlay.style.display = "none";
-      playOverlay.style.opacity = "0";
-      playOverlay.style.visibility = "hidden";
-      playOverlay.style.pointerEvents = "none";
-    }
-  });
-
-  // Additional safety nets
-  storyVideo.addEventListener("waiting", function () {
-    console.log("Video waiting event");
-  });
-
-  storyVideo.addEventListener("stalled", function () {
-    console.log("Video stalled event");
-  });
-
-  // Click on video to pause
-  storyVideo.addEventListener("click", function (e) {
-    e.stopPropagation();
-    if (!storyVideo.paused) {
-      console.log("Video clicked, pausing...");
-      storyVideo.pause();
-    }
-  });
-
-  // Keyboard support
+  // Keyboard support để quay lại image
   document.addEventListener("keydown", function (e) {
-    if (isVideoMode && e.code === "Space") {
+    if (isVideoMode && e.code === "Escape") {
       e.preventDefault();
-      if (storyVideo.paused) {
-        storyVideo.play();
-      } else {
-        storyVideo.pause();
-      }
+      console.log("Escape pressed, switching back to image");
+      forceShowImage();
     }
   });
 
