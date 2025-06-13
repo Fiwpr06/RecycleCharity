@@ -1,45 +1,63 @@
 @use "../../abstracts/" as *;
+@use "sass:color";
+
+// Contact page header section
+.container.py-5 {
+  .section-title {
+    font-family: $font-heading !important;
+    color: #1e40af !important; // Consistent with homepage titles
+    font-weight: 700;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  .lead.text-muted {
+    font-family: $primary-font !important;
+    color: $bs-secondary !important;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+}
 
 .contact-card {
   border: none;
-  background: linear-gradient(
-    135deg,
-    #ffffff,
-    rgba(#00b894, 0.1)
-  ); // Gradient trắng đến xanh lá nhạt
-  border-radius: 1rem;
-  box-shadow: 0 0.5rem 1rem rgba(#212529, 0.1); // Bóng đổ nhẹ
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(145deg, $bs-light, rgba($bs-light, 0.8));
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba($bs-dark, 0.1);
+  transition: all 0.4s ease;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba($bs-primary, 0.1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $bs-primary, $primary-color);
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 1rem 2rem rgba(#00b894, 0.2); // Bóng đổ xanh lá khi hover
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba($bs-primary, 0.15);
   }
 
   .card-body {
-    padding: 2rem;
+    padding: 2rem 1.75rem 1.75rem; // Reduced padding
 
     .card-title {
-      font-family: "Quicksand", sans-serif; // Font heading
-      font-size: 1.8rem;
-      color: #2ecc71; // Xanh lá tươi sáng
-      margin-bottom: 1.5rem;
+      font-family: $font-heading !important;
+      font-size: 1.6rem; // Slightly smaller
+      color: #1e40af !important; // Consistent with homepage titles
+      margin-bottom: 1.25rem; // Reduced margin
+      font-weight: 700;
+      letter-spacing: $letter-spacing-tight;
 
       i {
-        color: #00b894; // Xanh lá nhạt cho icon
-        animation: pulse 1.5s infinite;
-
-        @keyframes pulse {
-          0% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.2);
-          }
-          100% {
-            transform: scale(1);
-          }
-        }
+        color: $bs-primary;
+        margin-right: 0.5rem;
       }
     }
   }
@@ -47,99 +65,111 @@
 
 #contactForm {
   .form-label {
-    font-family: "Open Sans", sans-serif; // Font chính
+    font-family: $primary-font !important;
     font-weight: 600;
-    color: #212529; // Màu đen đậm
+    color: $bs-dark;
     font-size: 1rem;
   }
 
   .form-control {
-    border-radius: 0.5rem;
-    border: 1px solid #ced4da;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    font-family: "Open Sans", sans-serif;
+    border-radius: 0.75rem;
+    border: 2px solid rgba($bs-primary, 0.1);
+    transition: all 0.3s ease;
+    font-family: $primary-font !important;
+    padding: 0.625rem 0.875rem; // Reduced padding
+    font-size: 0.95rem; // Slightly smaller font
 
     &:focus {
-      border-color: #2ecc71; // Xanh lá tươi sáng khi focus
-      box-shadow: 0 0 0 0.25rem rgba(#2ecc71, 0.2); // Halo xanh lá
+      border-color: $bs-primary;
+      box-shadow: 0 0 0 0.25rem rgba($bs-primary, 0.1);
       outline: none;
+      transform: translateY(-2px);
     }
 
     &::placeholder {
-      color: #7f8c8d; // Xám nhạt
-      opacity: 0.8;
+      color: $bs-secondary;
+      opacity: 0.7;
     }
   }
 
   textarea.form-control {
-    resize: vertical; // Chỉ cho phép resize dọc
+    resize: vertical;
+    min-height: 100px; // Reduced height
   }
 
   .btn-success {
-    background-color: #198754; // Xanh đậm
+    background: linear-gradient(135deg, $bs-success, $light-green);
     border: none;
-    border-radius: 0.5rem;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    font-family: "Open Sans", sans-serif;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    font-family: $primary-font !important;
     font-weight: 600;
+    padding: 0.75rem 1.75rem; // Reduced padding
+    font-size: 1rem; // Smaller font size
 
     &:hover {
-      background-color: #27ae60; // Xanh đậm hơn khi hover
-      transform: scale(1.05);
+      background: linear-gradient(
+        135deg,
+        color.adjust($bs-success, $lightness: -10%),
+        $bs-success
+      );
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba($bs-success, 0.3);
     }
 
     &:focus {
-      box-shadow: 0 0 0 0.25rem rgba(#198754, 0.3);
+      box-shadow: 0 0 0 0.25rem rgba($bs-success, 0.25);
     }
 
     i {
-      vertical-align: middle;
+      margin-right: 0.5rem;
     }
   }
 }
 
 #formFeedback {
-  font-family: "Open Sans", sans-serif;
+  font-family: $primary-font !important;
   font-size: 0.9rem;
   font-weight: 500;
 }
 
 .contact-info-card {
-  background: linear-gradient(
-    135deg,
-    #ffffff,
-    rgba(#00b894, 0.05)
-  ); // Gradient trắng đến xanh lá nhạt
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 0.25rem 0.75rem rgba(#212529, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(145deg, $bs-light, rgba($bs-light, 0.8));
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba($bs-dark, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  border: 1px solid rgba($bs-primary, 0.1);
+  margin-bottom: 2rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $bs-info, $accent-cyan);
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1.5rem rgba(#00b894, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba($bs-primary, 0.15);
   }
 
   .section-title-sm {
-    font-family: "Quicksand", sans-serif;
+    font-family: $font-heading !important;
     font-size: 1.6rem;
-    color: #2ecc71; // Xanh lá tươi sáng
-    margin-bottom: 1rem;
+    color: #1e40af !important; // Consistent with homepage titles
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: $letter-spacing-tight;
 
     i {
-      animation: pulse 1.5s infinite;
-
-      @keyframes pulse {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.2);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
+      margin-right: 0.5rem;
+      color: $bs-info;
     }
   }
 }
@@ -150,32 +180,35 @@
   li {
     display: flex;
     align-items: flex-start;
-    font-family: "Open Sans", sans-serif;
+    font-family: $primary-font !important;
     font-size: 1rem;
-    color: #212529;
+    color: $bs-dark;
+    line-height: 1.6;
 
     &:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
 
     i {
       font-size: 1.3rem;
-      width: 30px;
+      width: 35px;
       flex-shrink: 0;
-      color: #00b894; // Xanh lá nhạt
+      color: $bs-primary;
+      margin-top: 0.1rem;
     }
 
     strong {
       margin-right: 0.5rem;
+      font-weight: 600;
     }
 
     a {
-      color: #212529;
+      color: $bs-dark;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
 
       &:hover {
-        color: #2ecc71; // Xanh lá tươi sáng
+        color: $bs-primary;
         text-decoration: underline;
       }
     }
@@ -184,18 +217,40 @@
 
 .social-icons-contact {
   .btn {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    font-size: 1.3rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    border-width: 2px;
+    font-weight: 600;
 
     &:hover {
-      transform: scale(1.15);
-      box-shadow: 0 0 0.5rem rgba(#00b894, 0.3);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 8px 25px rgba($bs-primary, 0.2);
+    }
+
+    &.btn-outline-primary:hover {
+      background: $bs-primary;
+      border-color: $bs-primary;
+    }
+
+    &.btn-outline-danger:hover {
+      background: $bs-danger;
+      border-color: $bs-danger;
+    }
+
+    &.btn-outline-dark:hover {
+      background: $bs-dark;
+      border-color: $bs-dark;
+    }
+
+    &.btn-outline-info:hover {
+      background: $bs-info;
+      border-color: $bs-info;
     }
   }
 }
@@ -206,22 +261,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 0.75rem;
+  background: $bs-light;
+  border: 2px solid rgba($bs-primary, 0.1);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba($bs-primary, 0.2);
+    box-shadow: 0 8px 25px rgba($bs-primary, 0.1);
+  }
+
+  iframe {
+    border-radius: 1.5rem;
+  }
 
   p {
-    font-family: "Open Sans", sans-serif;
+    font-family: $primary-font !important;
     font-size: 0.95rem;
-    color: #6c757d;
+    color: $bs-secondary;
   }
 }
 
 // Responsive Adjustments
 @media (max-width: 768px) {
+  .container.py-5 {
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .lead.text-muted {
+      font-size: 1rem;
+    }
+  }
+
   .contact-card {
     .card-body {
-      padding: 1.5rem;
+      padding: 2rem 1.5rem 1.5rem;
 
       .card-title {
         font-size: 1.5rem;
@@ -234,14 +310,19 @@
       font-size: 0.9rem;
     }
 
+    .form-control {
+      padding: 0.625rem 0.875rem;
+    }
+
     .btn-success {
-      font-size: 0.9rem;
-      padding: 0.75rem;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
     }
   }
 
   .contact-info-card {
-    padding: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
 
     .section-title-sm {
       font-size: 1.4rem;
@@ -253,13 +334,14 @@
 
     i {
       font-size: 1.2rem;
+      width: 30px;
     }
   }
 
   .social-icons-contact .btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
   }
 
   #contact-map-placeholder {

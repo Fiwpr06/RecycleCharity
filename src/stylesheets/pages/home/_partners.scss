@@ -30,9 +30,13 @@
     gap: 2rem;
     justify-items: center;
     align-items: center;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
 
     @media (min-width: 768px) {
       grid-template-columns: repeat(5, 1fr);
+      justify-content: center;
     }
 
     .partner-item {
@@ -87,12 +91,47 @@
     .partner-grid {
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 1.5rem;
+      justify-content: center;
+      justify-items: center;
 
       .partner-item {
         max-width: 150px;
+        margin: 0 auto;
 
         .partner-caption {
           font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .partner-section {
+    padding: 2.5rem 0;
+
+    .section-title {
+      @include font-style($family: $font-heading, $size: 1.8rem);
+    }
+
+    .partner-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      justify-content: center;
+      justify-items: center;
+      max-width: 500px;
+      margin: 0 auto;
+
+      .partner-item {
+        max-width: 140px;
+        margin: 0 auto;
+
+        .partner-image {
+          height: 75%;
+        }
+
+        .partner-caption {
+          font-size: 0.85rem;
         }
       }
     }
@@ -105,19 +144,19 @@
 
     .section-title {
       @include font-style($family: $font-heading, $size: 1.5rem);
-
-      &::after {
-        width: 40px;
-        height: 3px;
-      }
     }
 
     .partner-grid {
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      justify-content: center;
+      justify-items: center;
+      max-width: 350px;
+      margin: 0 auto;
 
       .partner-item {
         max-width: 120px;
+        margin: 0 auto;
 
         .partner-image {
           height: 70%;
@@ -126,6 +165,12 @@
         .partner-caption {
           font-size: 0.8rem;
         }
+      }
+
+      // Căn giữa item cuối cùng nếu lẻ
+      .partner-item:nth-child(5) {
+        grid-column: 1 / -1;
+        justify-self: center;
       }
     }
   }

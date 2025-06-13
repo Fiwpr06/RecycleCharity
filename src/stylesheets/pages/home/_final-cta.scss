@@ -29,30 +29,80 @@
     z-index: 1;
   }
 
+  .cta-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, $bs-warning, $accent-orange);
+    color: $bs-light;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    @include font-style($family: $font-heading, $weight: 600, $size: $font-size-sm, $spacing: $letter-spacing-normal);
+    box-shadow: 0 4px 15px rgba($bs-warning, 0.3);
+    animation: pulse 2s infinite;
+
+    i {
+      color: $bs-light;
+    }
+  }
+
   h2 {
-    @include font-style($family: $font-heading, $size: 2.5rem, $weight: 700);
-    color: $bs-dark;
+    @include font-style($family: $font-heading, $size: 2.5rem, $weight: 700, $height: $line-height-sm, $spacing: $letter-spacing-tight);
+
+    &.text-gradient {
+      background: linear-gradient(135deg, $bs-primary, $accent-cyan);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   }
 
   .lead {
-    @include font-style($family: $primary-font, $size: 1.1rem);
+    @include font-style($family: $primary-font, $size: $font-size-lg, $height: $line-height-lg, $spacing: $letter-spacing-normal);
     color: color.adjust($bs-secondary, $lightness: 10%);
   }
 
-  .btn-primary {
-    background-color: $bs-primary;
-    border-color: $bs-primary;
-    color: white;
-    padding: 0.75rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
+  .cta-actions {
+    .btn {
+      @include font-style($family: $font-heading, $size: $font-size-lg, $weight: 600, $spacing: $letter-spacing-normal);
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
 
-    &:hover {
-      background-color: color.adjust($bs-primary, $lightness: -10%);
-      border-color: color.adjust($bs-primary, $lightness: -10%);
-      transform: translateY(-3px);
-      box-shadow: 0 4px 15px rgba($bs-dark, 0.2);
+      &.pulse-btn {
+        animation: pulse 2s infinite;
+      }
+
+      &.btn-primary {
+        background: linear-gradient(135deg, $bs-primary, $primary-color);
+        border: none;
+        color: white;
+
+        &:hover {
+          background: linear-gradient(135deg, color.adjust($bs-primary, $lightness: -10%), color.adjust($primary-color, $lightness: -10%));
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px rgba($bs-primary, 0.3);
+        }
+      }
+
+      &.btn-outline-primary {
+        border: 2px solid $bs-primary;
+        color: $bs-primary;
+        background: transparent;
+
+        &:hover {
+          background: $bs-primary;
+          color: white;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+
+  .cta-urgency {
+    small {
+      background: rgba($bs-warning, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      border: 1px solid rgba($bs-warning, 0.3);
     }
   }
 }
@@ -62,11 +112,11 @@
     padding: 4rem 0;
 
     h2 {
-      @include font-style($family: $font-heading, $size: 2rem);
+      @include font-style($family: $font-heading, $size: $h2-font-size, $height: $line-height-sm, $spacing: $letter-spacing-tight);
     }
 
     .lead {
-      @include font-style($family: $primary-font, $size: 1rem);
+      @include font-style($family: $primary-font, $size: $font-size-base, $height: $line-height-base, $spacing: $letter-spacing-normal);
     }
   }
 }
@@ -76,16 +126,28 @@
     padding: 3rem 0;
 
     h2 {
-      @include font-style($family: $font-heading, $size: 1.5rem);
+      @include font-style($family: $font-heading, $size: $h4-font-size, $height: $line-height-sm, $spacing: $letter-spacing-tight);
     }
 
     .lead {
-      @include font-style($family: $primary-font, $size: 0.9rem);
+      @include font-style($family: $primary-font, $size: $font-size-sm, $height: $line-height-base, $spacing: $letter-spacing-normal);
     }
 
     .btn-primary {
       padding: 0.5rem 1.5rem;
-      font-size: 1rem;
+      @include font-style($size: $font-size-base);
     }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
   }
 }

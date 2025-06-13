@@ -1,13 +1,138 @@
 @use "../abstracts/" as *;
 
 h1,
+.h1 {
+  @include font-style(
+    $family: $font-heading,
+    $weight: $font-weight-extrabold,
+    $size: $h1-font-size,
+    $height: $line-height-sm,
+    $spacing: $letter-spacing-tight
+  );
+}
+
 h2,
+.h2 {
+  @include font-style(
+    $family: $font-heading,
+    $weight: $font-weight-bold,
+    $size: $h2-font-size,
+    $height: $line-height-sm,
+    $spacing: $letter-spacing-tight
+  );
+}
+
 h3,
+.h3 {
+  @include font-style(
+    $family: $font-heading,
+    $weight: $font-weight-semibold,
+    $size: $h3-font-size,
+    $height: $line-height-base,
+    $spacing: $letter-spacing-normal
+  );
+}
+
 h4,
+.h4 {
+  @include font-style(
+    $family: $font-heading,
+    $weight: $font-weight-semibold,
+    $size: $h4-font-size,
+    $height: $line-height-base,
+    $spacing: $letter-spacing-normal
+  );
+}
+
 h5,
+.h5 {
+  @include font-style(
+    $family: $font-heading,
+    $weight: $font-weight-medium,
+    $size: $h5-font-size,
+    $height: $line-height-base,
+    $spacing: $letter-spacing-normal
+  );
+}
+
 h6,
-.navbar-brand,
-.nav-link,
+.h6 {
+  @include font-style(
+    $family: $font-heading,
+    $weight: $font-weight-medium,
+    $size: $h6-font-size,
+    $height: $line-height-base,
+    $spacing: $letter-spacing-normal
+  );
+}
+
+.navbar-brand {
+  @include font-style(
+    $family: $font-heading,
+    $weight: $font-weight-bold,
+    $spacing: $letter-spacing-wide
+  );
+}
+
+.nav-link {
+  @include font-style(
+    $family: $font-heading,
+    $weight: $font-weight-medium,
+    $spacing: $letter-spacing-normal
+  );
+}
+
 .section-title {
-  @include font-style($family: $font-heading, $weight: 700);
+  @include font-style(
+    $family: $font-heading,
+    $weight: $font-weight-bold,
+    $spacing: $letter-spacing-tight
+  );
+}
+
+p,
+.text-base {
+  @include font-style(
+    $family: $primary-font,
+    $weight: $font-weight-normal,
+    $size: $font-size-base,
+    $height: $line-height-base,
+    $spacing: $letter-spacing-normal
+  );
+}
+
+.text-sm {
+  @include font-style(
+    $family: $primary-font,
+    $size: $font-size-sm,
+    $height: $line-height-base,
+    $spacing: $letter-spacing-normal
+  );
+}
+
+.text-lg {
+  @include font-style(
+    $family: $primary-font,
+    $size: $font-size-lg,
+    $height: $line-height-lg,
+    $spacing: $letter-spacing-normal
+  );
+}
+
+.text-xl {
+  @include font-style(
+    $family: $primary-font,
+    $size: $font-size-xl,
+    $height: $line-height-lg,
+    $spacing: $letter-spacing-normal
+  );
+}
+
+.lead {
+  @include font-style(
+    $family: $primary-font,
+    $size: $font-size-lg,
+    $height: $line-height-lg,
+    $spacing: $letter-spacing-normal
+  );
 }
