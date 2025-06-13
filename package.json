@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "parcel ./src/pages/index.html",
-    "build": "parcel build ./src/pages/index.html",
+    "build": "parcel build ./src/pages/*.html",
     "preview": "parcel serve dist/index.html"
   },
   "devDependencies": {
@@ -28,6 +28,7 @@
     "aos": "^2.3.4",
     "dotenv": "^16.5.0",
     "leaflet": "^1.9.4",
+    "sharp": "^0.34.2",
     "sweetalert2": "^11.21.2"
   }
 }
