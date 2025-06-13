@@ -61,6 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
         : '<i class="bi bi-volume-up-fill"></i>';
     });
   } else {
-    console.error("Required elements not found!");
+    console.log("Video elements not found on this page - this is normal for pages without video.");
   }
 });

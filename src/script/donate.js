@@ -31,37 +31,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   const percentage = Math.min((totalDonated / targetAmount) * 100, 100);
 
   if (totalDonatedElement) {
-    totalDonatedElement.textContent = `Đã quyên góp: ${formatCurrency(
-      totalDonated
-    )}`;
+    totalDonatedElement.textContent = formatCurrency(totalDonated);
   }
 
   if (targetAmountElement) {
-    targetAmountElement.textContent = `Mục tiêu: ${formatCurrency(
-      targetAmount
-    )}`;
+    targetAmountElement.textContent = formatCurrency(targetAmount);
   }
 
-  const observerProgressBarElement = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          progressBarElement.style.setProperty(
-            "--target-width",
-            `${percentage}%`
-          );
-          progressBarElement.classList.add("animate");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.7 }
-  );
-
+  // Set progress bar values directly without animation
   if (progressBarElement && progressPercentageElement) {
-    observerProgressBarElement.observe(progressBarElement);
-    progressBarElement.setAttribute("aria-valuenow", percentage.toFixed(0));
     progressPercentageElement.textContent = `${percentage.toFixed(0)}%`;
+    progressBarElement.setAttribute("aria-valuenow", percentage.toFixed(0));
+    progressBarElement.style.width = `${percentage}%`;
   }
 
   // Lấy ngày quyên góp gần nhất
@@ -80,7 +61,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   function renderDonationTable(donations) {
     if (!donationTableContainer) {
-      console.error("Không tìm thấy container cho bảng quyên góp.");
+      console.log(
+        "Donation table container not found on this page - this is normal for pages without donation table."
+      );
       return;
     }
 
@@ -91,9 +74,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       "table-hover",
       "table-bordered"
     );
-    table.setAttribute("data-aos", "fade-up");
-    table.setAttribute("data-aos-duration", "1000");
-    table.setAttribute("data-aos-delay", "200");
+    // Only add AOS attributes if AOS is available
+    if (typeof AOS !== "undefined") {
+      table.setAttribute("data-aos", "fade-up");
+      table.setAttribute("data-aos-duration", "1000");
+      table.setAttribute("data-aos-delay", "200");
+    }
 
     const thead = document.createElement("thead");
     thead.classList.add("table-light");
@@ -161,5 +147,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   donationsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   renderDonationTable(data.donations);
-  AOS.refresh();
+
+  // Refresh AOS if available
+  if (typeof AOS !== "undefined") {
+    AOS.refresh();
+  }
 });
