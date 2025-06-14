@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="../assets/icon/recycle.svg" />
+    <title>Quản lý hệ thống - Recycle Charity</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../stylesheets/main.scss" />
+  </head>
+  <body>
+    <!-- header -->
+    <include src="./layout/header.html" locals="{}"></include>
+
+    <!-- main content -->
+    <main class="container-fluid my-5 pt-5" style="height: 90vh;">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-2 col-md-3">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title mb-0">
+                <i class="bi bi-gear me-2"></i>Quản lý
+              </h6>
+            </div>
+            <div class="card-body p-0">
+              <div class="list-group list-group-flush">
+                <a href="#dashboard" class="list-group-item list-group-item-action active" data-tab="dashboard">
+                  <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                </a>
+                <a href="#users" class="list-group-item list-group-item-action" data-tab="users">
+                  <i class="bi bi-people me-2"></i>Quản lý Users
+                </a>
+                <a href="#stats" class="list-group-item list-group-item-action" data-tab="stats">
+                  <i class="bi bi-bar-chart me-2"></i>Thống kê
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-10 col-md-9">
+          <!-- Dashboard Tab -->
+          <div id="dashboard" class="tab-content-item active">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2><i class="bi bi-speedometer2 me-2"></i>Dashboard</h2>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row mb-4">
+              <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <h4 id="totalUsers">0</h4>
+                        <p class="mb-0">Tổng Users</p>
+                      </div>
+                      <div class="align-self-center">
+                        <i class="bi bi-people fs-1"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="card bg-success text-white">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <h4 id="activeUsers">0</h4>
+                        <p class="mb-0">Users Hoạt động</p>
+                      </div>
+                      <div class="align-self-center">
+                        <i class="bi bi-person-check fs-1"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="card bg-warning text-white">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <h4 id="adminUsers">0</h4>
+                        <p class="mb-0">Admins</p>
+                      </div>
+                      <div class="align-self-center">
+                        <i class="bi bi-person-gear fs-1"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <div class="card bg-info text-white">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <h4 id="regularUsers">0</h4>
+                        <p class="mb-0">Users Thường</p>
+                      </div>
+                      <div class="align-self-center">
+                        <i class="bi bi-person fs-1"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Hoạt động gần đây</h5>
+              </div>
+              <div class="card-body">
+                <p class="text-muted">Tính năng này sẽ được phát triển trong phiên bản tiếp theo.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Users Management Tab -->
+          <div id="users" class="tab-content-item">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2><i class="bi bi-people me-2"></i>Quản lý Users</h2>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">
+                <i class="bi bi-plus-lg me-2"></i>Tạo User Mới
+              </button>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" id="searchUsers" placeholder="Tìm kiếm theo tên hoặc email...">
+                  </div>
+                  <div class="col-md-3">
+                    <select class="form-select" id="filterRole">
+                      <option value="">Tất cả vai trò</option>
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <select class="form-select" id="filterStatus">
+                      <option value="">Tất cả trạng thái</option>
+                      <option value="true">Hoạt động</option>
+                      <option value="false">Không hoạt động</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <button class="btn btn-outline-primary w-100" id="searchBtn">
+                      <i class="bi bi-search"></i> Tìm
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Tên</th>
+                        <th>Email</th>
+                        <th>Vai trò</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày tạo</th>
+                        <th>Thao tác</th>
+                      </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                      <tr>
+                        <td colspan="6" class="text-center">
+                          <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Pagination -->
+                <nav aria-label="Users pagination">
+                  <ul class="pagination justify-content-center" id="usersPagination">
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats Tab -->
+          <div id="stats" class="tab-content-item">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2><i class="bi bi-bar-chart me-2"></i>Thống kê</h2>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Thống kê đăng ký theo tháng</h5>
+              </div>
+              <div class="card-body">
+                <canvas id="monthlyChart" width="400" height="200"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Create User Modal -->
+    <div class="modal fade" id="createUserModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Tạo User Mới</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="createUserForm">
+              <div class="mb-3">
+                <label for="createUserName" class="form-label">Họ và tên *</label>
+                <input type="text" class="form-control" id="createUserName" required>
+              </div>
+              <div class="mb-3">
+                <label for="createUserEmail" class="form-label">Email *</label>
+                <input type="email" class="form-control" id="createUserEmail" required>
+              </div>
+              <div class="mb-3">
+                <label for="createUserPassword" class="form-label">Mật khẩu *</label>
+                <input type="password" class="form-control" id="createUserPassword" required>
+              </div>
+              <div class="mb-3">
+                <label for="createUserPhone" class="form-label">Số điện thoại</label>
+                <input type="tel" class="form-control" id="createUserPhone">
+              </div>
+              <div class="mb-3">
+                <label for="createUserRole" class="form-label">Vai trò</label>
+                <select class="form-select" id="createUserRole">
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div id="createUserFormFeedback"></div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" form="createUserForm" class="btn btn-primary">Tạo User</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <include src="./layout/footer.html" locals="{}"></include>
+
+    <!-- Bootstrap JS Bundle -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom JS -->
+    <script type="module" src="../script/auth.js"></script>
+    <script type="module" src="../script/admin.js"></script>
+  </body>
+</html>

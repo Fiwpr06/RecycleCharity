@@ -13,8 +13,8 @@ const createAdmin = async () => {
     console.log('Đã kết nối MongoDB');
 
     // Kiểm tra admin đã tồn tại chưa
-    const adminExists = await User.findOne({ 
-      email: process.env.ADMIN_EMAIL 
+    const adminExists = await User.findOne({
+      email: process.env.ADMIN_EMAIL
     });
 
     if (adminExists) {

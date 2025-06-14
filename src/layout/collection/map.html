@@ -52,7 +52,17 @@
         </p>
       </div>
       <div class="card-body p-3 p-lg-4">
-        <form id="collectionForm" novalidate>
+        <!-- Authentication Check -->
+        <div id="authRequiredMessage" class="alert alert-warning text-center" style="display: none;">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          <strong>Vui lòng đăng nhập để sử dụng dịch vụ thu gom rác!</strong>
+          <br>
+          <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#authModal" data-tab="login">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập ngay
+          </button>
+        </div>
+
+        <form id="collectionForm" novalidate style="display: none;">
           <!-- Contact Info Row -->
           <div class="row g-3 mb-3">
             <div class="col-md-6">
@@ -105,110 +115,108 @@
               <div class="invalid-feedback">Vui lòng nhập địa chỉ thu gom.</div>
             </div>
           </div>
-          <!-- Waste Type Row -->
+          <!-- Waste Types with Weight -->
           <div class="row g-3 mb-3">
             <div class="col-12">
               <label class="form-label fw-semibold">
                 <i class="fas fa-recycle me-2 text-primary"></i>
-                Loại rác tái chế <span class="text-danger">*</span>
+                Loại rác và khối lượng ước tính
               </label>
+              <div class="alert alert-info py-2">
+                <small>
+                  <i class="bi bi-info-circle me-1"></i>
+                  <strong>Bảng giá:</strong> Kim loại (20 xu/kg) • Nhựa (10 xu/kg) • Giấy (5 xu/kg) • Thủy tinh (3 xu/kg)
+                </small>
+              </div>
               <div class="waste-type-container">
                 <div class="row g-2">
-                  <div class="col-3">
-                    <div class="waste-type-card">
-                      <input
-                        class="form-check-input d-none"
-                        type="checkbox"
-                        value="nhua"
-                        id="wasteTypePlastic"
-                      />
-                      <label class="waste-type-label" for="wasteTypePlastic">
-                        <i class="fas fa-bottle-water"></i>
-                        <span>Nhựa</span>
-                      </label>
+                  <!-- Metal -->
+                  <div class="col-6 col-md-3">
+                    <div class="waste-type-card text-center p-2">
+                      <i class="fas fa-cog text-warning fs-4 mb-1"></i>
+                      <h6 class="mb-1">Kim loại</h6>
+                      <small class="text-muted d-block mb-2">20 xu/kg</small>
+                      <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="metalWeight"
+                          placeholder="0" min="0" step="0.1">
+                        <span class="input-group-text">kg</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-3">
-                    <div class="waste-type-card">
-                      <input
-                        class="form-check-input d-none"
-                        type="checkbox"
-                        value="giay"
-                        id="wasteTypePaper"
-                      />
-                      <label class="waste-type-label" for="wasteTypePaper">
-                        <i class="fas fa-newspaper"></i>
-                        <span>Giấy</span>
-                      </label>
+                  <!-- Plastic -->
+                  <div class="col-6 col-md-3">
+                    <div class="waste-type-card text-center p-2">
+                      <i class="fas fa-bottle-water text-info fs-4 mb-1"></i>
+                      <h6 class="mb-1">Nhựa</h6>
+                      <small class="text-muted d-block mb-2">10 xu/kg</small>
+                      <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="plasticWeight"
+                          placeholder="0" min="0" step="0.1">
+                        <span class="input-group-text">kg</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-3">
-                    <div class="waste-type-card">
-                      <input
-                        class="form-check-input d-none"
-                        type="checkbox"
-                        value="kimloai"
-                        id="wasteTypeMetal"
-                      />
-                      <label class="waste-type-label" for="wasteTypeMetal">
-                        <i class="fas fa-cog"></i>
-                        <span>Kim loại</span>
-                      </label>
+                  <!-- Paper -->
+                  <div class="col-6 col-md-3">
+                    <div class="waste-type-card text-center p-2">
+                      <i class="fas fa-newspaper text-success fs-4 mb-1"></i>
+                      <h6 class="mb-1">Giấy</h6>
+                      <small class="text-muted d-block mb-2">5 xu/kg</small>
+                      <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="paperWeight"
+                          placeholder="0" min="0" step="0.1">
+                        <span class="input-group-text">kg</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-3">
-                    <div class="waste-type-card">
-                      <input
-                        class="form-check-input d-none"
-                        type="checkbox"
-                        value="thuytinh"
-                        id="wasteTypeGlass"
-                      />
-                      <label class="waste-type-label" for="wasteTypeGlass">
-                        <i class="fas fa-wine-bottle"></i>
-                        <span>Thủy tinh</span>
-                      </label>
+                  <!-- Glass -->
+                  <div class="col-6 col-md-3">
+                    <div class="waste-type-card text-center p-2">
+                      <i class="fas fa-wine-bottle text-primary fs-4 mb-1"></i>
+                      <h6 class="mb-1">Thủy tinh</h6>
+                      <small class="text-muted d-block mb-2">3 xu/kg</small>
+                      <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="glassWeight"
+                          placeholder="0" min="0" step="0.1">
+                        <span class="input-group-text">kg</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="invalid-feedback d-block" id="wasteTypeFeedback">
-                Vui lòng chọn ít nhất một loại rác tái chế.
+            </div>
+          </div>
+
+          <!-- Estimated Points -->
+          <div class="row g-3 mb-3">
+            <div class="col-12">
+              <div class="alert alert-success text-center py-2">
+                <strong>
+                  <i class="fas fa-coins me-1"></i>Điểm xu ước tính:
+                  <span id="estimatedPoints" class="fw-bold">0</span> xu
+                </strong>
+                <br>
+                <small class="text-muted">Điểm thực tế sẽ được tính dựa trên khối lượng thu gom thực tế</small>
               </div>
             </div>
           </div>
 
-          <!-- Quantity and Time Row -->
+          <!-- Schedule and Notes -->
           <div class="row g-3 mb-3">
             <div class="col-md-6">
-              <label for="quantity" class="form-label fw-semibold">
-                <i class="fas fa-weight-hanging me-2 text-primary"></i>
-                Số lượng (kg)
+              <label for="scheduledDate" class="form-label fw-semibold">
+                <i class="fas fa-calendar me-2 text-primary"></i>
+                Ngày mong muốn
               </label>
-              <div class="input-group">
-                <input
-                  type="number"
-                  class="form-control shadow-sm"
-                  id="quantity"
-                  placeholder="5.5"
-                  min="0.5"
-                  step="0.5"
-                />
-                <span class="input-group-text">kg</span>
-              </div>
+              <input type="date" class="form-control shadow-sm" id="scheduledDate">
             </div>
             <div class="col-md-6">
-              <label for="collectionTime" class="form-label fw-semibold">
-                <i class="fas fa-clock me-2 text-primary"></i>
-                Thời gian thu gom
+              <label for="notes" class="form-label fw-semibold">
+                <i class="fas fa-sticky-note me-2 text-primary"></i>
+                Ghi chú thêm
               </label>
-              <select class="form-select shadow-sm" id="collectionTime">
-                <option selected disabled value="">Chọn thời gian...</option>
-                <option value="sang_t2_t6">🌅 Buổi sáng (T2-T6)</option>
-                <option value="chieu_t2_t6">🌆 Buổi chiều (T2-T6)</option>
-                <option value="cuoi_tuan">🎯 Cuối tuần</option>
-                <option value="linh_hoat">📞 Linh hoạt</option>
-              </select>
+              <input type="text" class="form-control shadow-sm" id="notes"
+                placeholder="Thông tin bổ sung...">
             </div>
           </div>
 

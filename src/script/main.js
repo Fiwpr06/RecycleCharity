@@ -1,6 +1,7 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./video-modal.js";
+import "./auth.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Khởi tạo AOS

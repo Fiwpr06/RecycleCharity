@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="../assets/icon/recycle.svg" />
+    <title>Cài đặt tài khoản - Recycle Charity</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/simplelightbox@2/dist/simple-lightbox.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../stylesheets/main.scss" />
+  </head>
+  <body class="profile-page">
+    <!-- Top Navigation -->
+    <nav class="profile-navbar">
+      <a href="./index.html" class="navbar-brand">
+        <img src="../assets/icon/recycle.svg" alt="Recycle Charity" width="32" height="32">
+        Recycle Charity
+      </a>
+
+      <div class="navbar-user">
+        <div class="user-avatar">
+          <i class="bi bi-person"></i>
+        </div>
+        <div class="user-info">
+          <div class="user-name" id="headerUserName">Người dùng</div>
+          <div class="user-points">
+            <i class="fas fa-coins"></i><span id="headerUserPoints">1,250</span> xu
+          </div>
+        </div>
+        <button class="navbar-toggle" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="profile-sidebar" id="profileSidebar">
+      <div class="list-group list-group-flush">
+        <!-- Thông tin cá nhân -->
+        <div class="list-group-item list-group-item-light">
+          <small class="text-muted fw-bold">THÔNG TIN CÁ NHÂN</small>
+        </div>
+        <a href="./profile.html" class="list-group-item list-group-item-action">
+          <i class="bi bi-person"></i><span>Thông tin cá nhân</span>
+        </a>
+        <a href="./profile-rewards.html" class="list-group-item list-group-item-action">
+          <i class="fas fa-gift"></i><span>Đổi quà</span>
+        </a>
+        <a href="./profile-password.html" class="list-group-item list-group-item-action">
+          <i class="bi bi-key"></i><span>Đổi mật khẩu</span>
+        </a>
+        <a href="./profile-settings.html" class="list-group-item list-group-item-action active">
+          <i class="bi bi-gear"></i><span>Cài đặt tài khoản</span>
+        </a>
+
+        <!-- Chức năng User -->
+        <div class="list-group-item list-group-item-light">
+          <small class="text-muted fw-bold">HOẠT ĐỘNG</small>
+        </div>
+        <a href="#" onclick="showUserFeature('waste-collection')" class="list-group-item list-group-item-action">
+          <i class="bi bi-recycle"></i><span>Đăng ký thu gom rác</span>
+        </a>
+        <a href="#" onclick="showUserFeature('quiz-history')" class="list-group-item list-group-item-action">
+          <i class="bi bi-question-circle"></i><span>Lịch sử Quiz</span>
+        </a>
+        <a href="#" onclick="showUserFeature('chat-history')" class="list-group-item list-group-item-action">
+          <i class="bi bi-chat-dots"></i><span>Lịch sử Chat AI</span>
+        </a>
+        <a href="#" onclick="showUserFeature('messages')" class="list-group-item list-group-item-action">
+          <i class="bi bi-envelope"></i><span>Tin nhắn đã gửi</span>
+        </a>
+
+        <!-- Chức năng Admin (chỉ hiện với Admin) -->
+        <div class="list-group-item list-group-item-light admin-only" style="display: none;">
+          <small class="text-muted fw-bold">QUẢN TRỊ</small>
+        </div>
+        <a href="#" onclick="showAdminFeature('waste-requests')" class="list-group-item list-group-item-action admin-only" style="display: none;">
+          <i class="bi bi-clipboard-check"></i><span>Duyệt đơn thu gom</span>
+          <span class="badge bg-warning ms-auto" id="pendingRequestsCount">0</span>
+        </a>
+        <a href="#" onclick="showAdminFeature('messages')" class="list-group-item list-group-item-action admin-only" style="display: none;">
+          <i class="bi bi-inbox"></i><span>Tin nhắn từ người dùng</span>
+          <span class="badge bg-info ms-auto" id="unreadMessagesCount">0</span>
+        </a>
+        <a href="#" onclick="showAdminFeature('users')" class="list-group-item list-group-item-action admin-only" style="display: none;">
+          <i class="bi bi-people"></i><span>Quản lý người dùng</span>
+        </a>
+        <a href="#" onclick="showAdminFeature('stats')" class="list-group-item list-group-item-action admin-only" style="display: none;">
+          <i class="bi bi-graph-up"></i><span>Thống kê hệ thống</span>
+        </a>
+
+        <!-- Logout Section -->
+        <div class="list-group-item list-group-item-light">
+          <small class="text-muted fw-bold">TÀI KHOẢN</small>
+        </div>
+        <a href="#" class="list-group-item list-group-item-action text-danger logout-btn" onclick="handleProfileLogout()">
+          <i class="bi bi-box-arrow-right"></i><span>Đăng xuất</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- main content -->
+    <main class="profile-content" id="profileContent">
+      <!-- Page Header -->
+      <div class="profile-header text-center">
+        <h1 class="display-5 fw-bold">
+          <i class="bi bi-gear me-3"></i>Cài đặt tài khoản
+        </h1>
+        <p class="lead">Xem thông tin chi tiết và cài đặt tài khoản</p>
+      </div>
+
+      <!-- Account Settings -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-gear me-2"></i>Cài đặt tài khoản
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Thông tin tài khoản</h6>
+              <ul class="list-unstyled">
+                <li><strong>ID:</strong> <span id="accountId">-</span></li>
+                <li><strong>Ngày tạo:</strong> <span id="accountCreated">-</span></li>
+                <li><strong>Lần đăng nhập cuối:</strong> <span id="accountLastLogin">-</span></li>
+                <li><strong>Trạng thái:</strong> <span id="accountStatus" class="badge bg-success">Hoạt động</span></li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h6>Thống kê hoạt động</h6>
+              <ul class="list-unstyled">
+                <li><strong>Số lần đăng nhập:</strong> <span id="loginCount">-</span></li>
+                <li><strong>Hoạt động gần nhất:</strong> <span id="lastActivity">-</span></li>
+              </ul>
+            </div>
+          </div>
+          <hr>
+          <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <strong>Lưu ý:</strong> Nếu bạn cần hỗ trợ hoặc có vấn đề với tài khoản,
+            vui lòng liên hệ với chúng tôi qua trang <a href="./contact.html">Liên hệ</a>.
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bootstrap JS Bundle -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Custom JS -->
+    <script type="module" src="../script/auth.js"></script>
+    <script type="module" src="../script/profile.js"></script>
+    <script src="../script/profile-common.js"></script>
+  </body>
+</html>

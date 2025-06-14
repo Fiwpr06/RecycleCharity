@@ -23,8 +23,8 @@ function initializeRewardsPage() {
 
 // Category filtering functionality
 function initializeCategoryFilters() {
-  const categoryButtons = document.querySelectorAll(".btn-category");
-  const rewardItems = document.querySelectorAll(".reward-item");
+  const categoryButtons = document.querySelectorAll(".btn-group .btn[data-category]");
+  const rewardCards = document.querySelectorAll(".reward-card");
 
   categoryButtons.forEach((button) => {
     button.addEventListener("click", function () {
@@ -35,21 +35,21 @@ function initializeCategoryFilters() {
       this.classList.add("active");
 
       // Filter reward items
-      filterRewardItems(category, rewardItems);
+      filterRewardCards(category, rewardCards);
     });
   });
 }
 
-function filterRewardItems(category, items) {
-  items.forEach((item) => {
-    const itemCategory = getItemCategory(item);
+function filterRewardCards(category, cards) {
+  cards.forEach((card) => {
+    const itemCategory = getCardCategory(card);
 
     if (category === "all" || itemCategory === category) {
-      item.parentElement.style.display = "block";
-      item.parentElement.classList.add("fade-in");
+      card.parentElement.style.display = "block";
+      card.parentElement.classList.add("fade-in");
     } else {
-      item.parentElement.style.display = "none";
-      item.parentElement.classList.remove("fade-in");
+      card.parentElement.style.display = "none";
+      card.parentElement.classList.remove("fade-in");
     }
   });
 
@@ -61,38 +61,43 @@ function filterRewardItems(category, items) {
   }
 }
 
-function getItemCategory(item) {
-  const categorySpan = item.querySelector(".reward-category");
-  if (!categorySpan) return "";
+function getCardCategory(card) {
+  // Get category from card title to determine the actual category
+  const titleElement = card.querySelector(".card-title");
+  if (!titleElement) return "";
 
-  const categoryText = categorySpan.textContent.trim();
+  const titleText = titleElement.textContent.trim();
 
-  // Map Vietnamese categories to English keys
-  const categoryMap = {
-    "Đồ thủ công": "handmade",
-    "Đồ chơi": "toys",
-    "Phụ kiện": "accessories",
-  };
+  // Map product names to category keys based on their type
+  if (titleText.includes("Gấu bông") || titleText.includes("Tranh vẽ") || titleText.includes("Búp bê") || titleText.includes("Hộp bút")) {
+    return "handmade";
+  } else if (titleText.includes("Xe đồ chơi") || titleText.includes("búp bê")) {
+    return "toys";
+  } else if (titleText.includes("Móc khóa") || titleText.includes("Túi vải") || titleText.includes("Bookmark")) {
+    return "accessories";
+  }
 
-  return categoryMap[categoryText] || "";
+  return "";
 }
 
 // Exchange button functionality
 function initializeExchangeButtons() {
-  const exchangeButtons = document.querySelectorAll(".btn-exchange");
+  const exchangeButtons = document.querySelectorAll(".btn-primary");
 
   exchangeButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const rewardItem = this.closest(".reward-item");
-      handleExchange(rewardItem);
-    });
+    if (button.textContent.includes("Đổi")) {
+      button.addEventListener("click", function () {
+        const rewardCard = this.closest(".reward-card");
+        handleExchange(rewardCard);
+      });
+    }
   });
 }
 
-function handleExchange(rewardItem) {
-  const itemName = rewardItem.querySelector(".reward-title").textContent;
+function handleExchange(rewardCard) {
+  const itemName = rewardCard.querySelector(".card-title").textContent;
   const itemCost = parseInt(
-    rewardItem.querySelector(".reward-cost").textContent.replace(/\D/g, "")
+    rewardCard.querySelector(".badge.bg-warning").textContent.replace(/\D/g, "")
   );
   const currentPoints = getCurrentUserPoints();
 
@@ -104,7 +109,7 @@ function handleExchange(rewardItem) {
     updateUserPoints(currentPoints - itemCost);
 
     // Update stock
-    updateItemStock(rewardItem);
+    updateCardStock(rewardCard);
   } else {
     // Show insufficient points message
     showInsufficientPoints(itemName, itemCost, currentPoints);
@@ -160,26 +165,27 @@ function showInsufficientPoints(itemName, cost, currentPoints) {
   }, 5000);
 }
 
-function updateItemStock(rewardItem) {
-  const stockElement = rewardItem.querySelector(".reward-stock");
+function updateCardStock(rewardCard) {
+  const stockElement = rewardCard.querySelector("small");
   const currentStock = parseInt(stockElement.textContent.replace(/\D/g, ""));
   const newStock = currentStock - 1;
 
   if (newStock > 0) {
     stockElement.textContent = `Còn ${newStock} món`;
+    stockElement.className = "text-success";
 
     // Add low stock warning if needed
     if (newStock <= 5) {
-      stockElement.classList.add("low-stock");
+      stockElement.className = "text-warning";
     }
   } else {
     stockElement.textContent = "Hết hàng";
-    stockElement.classList.add("out-of-stock");
+    stockElement.className = "text-danger";
 
     // Disable exchange button
-    const exchangeButton = rewardItem.querySelector(".btn-exchange");
+    const exchangeButton = rewardCard.querySelector(".btn-primary");
     exchangeButton.disabled = true;
-    exchangeButton.innerHTML = '<i class="fas fa-times"></i> Hết hàng';
+    exchangeButton.innerHTML = '<i class="fas fa-times me-1"></i>Hết hàng';
     exchangeButton.classList.add("btn-secondary");
     exchangeButton.classList.remove("btn-primary");
   }
@@ -231,28 +237,33 @@ function addCustomStyles() {
       font-weight: bold;
     }
 
-    .btn-category.active {
-      background-color: #1E40AF !important;
+    .btn-outline-primary.active {
+      background-color: #0d6efd !important;
       color: white !important;
-      border-color: #1E40AF !important;
+      border-color: #0d6efd !important;
     }
 
-    .btn-category {
+    .btn-group .btn {
       margin: 0 5px 10px 0;
       transition: all 0.3s ease;
     }
 
-    .btn-category:hover {
-      background-color: #1E40AF;
-      color: white;
-      border-color: #1E40AF;
+    .btn-group .btn:hover {
+      transform: translateY(-2px);
     }
 
-    .btn-exchange {
+    .reward-card {
       transition: all 0.3s ease;
+      border: 1px solid #dee2e6;
     }
 
-    .btn-exchange:hover {
+    .reward-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      border-color: #0d6efd;
+    }
+
+    .reward-card .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }

@@ -4,17 +4,89 @@ const userInput = document.getElementById("userInput");
 const sendTextBtn = document.getElementById("sendTextBtn");
 const sendVoiceBtn = document.getElementById("sendVoiceBtn");
 
+// API Configuration
+const API_BASE_URL = 'http://localhost:5001/api';
+let isLoading = false;
+
+// Hàm format text với markdown-like syntax nâng cao
+const formatMessage = (text) => {
+  // Thay thế các ký tự markdown cơ bản
+  let formattedText = text
+    // Headers (##)
+    .replace(/^##\s+(.+)$/gm, '<h4 class="message-header">$1</h4>')
+    // Bold text với highlight
+    .replace(/\*\*(.*?)\*\*/g, '<span class="highlight-text">$1</span>')
+    // Italic text
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    // Code blocks hoặc technical terms
+    .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+    // Important notes với !
+    .replace(/^!\s+(.+)$/gm, '<div class="important-note"><i class="bi bi-exclamation-triangle"></i> $1</div>')
+    // Tips với >
+    .replace(/^>\s+(.+)$/gm, '<div class="tip-box"><i class="bi bi-lightbulb"></i> $1</div>')
+    // Line breaks - double line breaks become paragraph breaks
+    .replace(/\n\n/g, '</p><p>')
+    // Single line breaks
+    .replace(/\n/g, '<br>')
+    // Bullet points với * hoặc -
+    .replace(/^[\*\-]\s+(.+)$/gm, '<li>$1</li>')
+    // Numbered lists
+    .replace(/^\d+\.\s+(.+)$/gm, '<li class="numbered-item">$1</li>');
+
+  // Wrap consecutive <li> elements in <ul>
+  formattedText = formattedText.replace(/(<li(?:\s+class="[^"]*")?>.*?<\/li>)(?:\s*<li(?:\s+class="[^"]*")?>.*?<\/li>)*/gs, (match) => {
+    if (match.includes('numbered-item')) {
+      return '<ol class="formatted-list numbered-list">' + match.replace(/class="numbered-item"/g, '') + '</ol>';
+    }
+    return '<ul class="formatted-list">' + match + '</ul>';
+  });
+
+  // Wrap in paragraph tags if not already wrapped
+  if (!formattedText.startsWith('<p>') && !formattedText.startsWith('<ul>') && !formattedText.startsWith('<ol>') && !formattedText.startsWith('<h4>')) {
+    formattedText = '<p>' + formattedText + '</p>';
+  }
+
+  // Clean up empty paragraphs
+  formattedText = formattedText.replace(/<p><\/p>/g, '');
+
+  return formattedText;
+};
+
 // Hàm tạo tin nhắn (AI hoặc người dùng)
 const createMessage = (messageText, isUser = false) => {
   const messageDiv = document.createElement("div");
   messageDiv.classList.add("mb-3", isUser ? "user-message" : "ai-message");
 
+  // Thêm avatar cho AI
+  if (!isUser) {
+    const avatarDiv = document.createElement("div");
+    avatarDiv.classList.add("ai-avatar");
+    avatarDiv.innerHTML = `
+      <div class="ai-icon">
+        <i class="bi bi-robot"></i>
+      </div>
+      <div class="ai-status-indicator"></div>
+    `;
+    messageDiv.appendChild(avatarDiv);
+  }
+
   const bubbleDiv = document.createElement("div");
   bubbleDiv.classList.add("message-bubble", isUser ? "user" : "ai");
 
-  const messageP = document.createElement("p");
-  messageP.classList.add("mb-0");
-  messageP.textContent = messageText;
+  const messageP = document.createElement("div");
+  messageP.classList.add("mb-0", "message-content");
+
+  if (isUser) {
+    // User messages - plain text
+    messageP.textContent = messageText;
+  } else {
+    // AI messages - formatted HTML với animation
+    messageP.innerHTML = formatMessage(messageText);
+    // Thêm animation cho AI message
+    setTimeout(() => {
+      messageP.classList.add("message-appear");
+    }, 100);
+  }
 
   const timeSpan = document.createElement("span");
   timeSpan.classList.add("message-time", "small", "text-muted");
@@ -36,26 +108,80 @@ const scrollToBottom = () => {
   chatArea.scrollTop = chatArea.scrollHeight;
 };
 
-// Hàm mô phỏng phản hồi AI
-const getAIResponse = (userMessage) => {
-  const message = userMessage.toLowerCase();
-  if (message.includes("phân loại rác")) {
-    return "Rác có thể được phân loại thành: rác tái chế (nhựa, giấy, kim loại), rác hữu cơ (thức ăn thừa), và rác không tái chế (đồ bẩn, không sử dụng được). Bạn nên rửa sạch và phân loại trước khi vứt nhé!";
-  } else if (message.includes("tái chế nhựa")) {
-    return "Nhựa có thể tái chế bằng cách phân loại (PET, HDPE, v.v.), sau đó được xử lý tại các cơ sở tái chế để làm thành sản phẩm mới như chai nhựa, sợi vải, hoặc đồ gia dụng.";
-  } else if (message.includes("lợi ích")) {
-    return "Tái chế giúp giảm lượng rác thải, tiết kiệm tài nguyên thiên nhiên, giảm ô nhiễm môi trường, và tiết kiệm năng lượng. Nó cũng góp phần bảo vệ hành tinh cho thế hệ tương lai!";
-  } else if (message.includes("rác hữu cơ")) {
-    return "Rác hữu cơ (như thức ăn thừa, lá cây) có thể được xử lý bằng cách ủ phân tại nhà hoặc gửi đến các cơ sở xử lý để biến thành phân bón hữu cơ.";
+// Hàm tạo tin nhắn loading
+const createLoadingMessage = () => {
+  const messageDiv = document.createElement("div");
+  messageDiv.classList.add("mb-3", "ai-message", "loading-message");
+
+  const bubbleDiv = document.createElement("div");
+  bubbleDiv.classList.add("message-bubble", "ai");
+
+  const loadingDiv = document.createElement("div");
+  loadingDiv.classList.add("mb-0");
+  loadingDiv.innerHTML = `
+    <div class="typing-indicator">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+    </div>
+  `;
+
+  bubbleDiv.appendChild(loadingDiv);
+  messageDiv.appendChild(bubbleDiv);
+
+  return messageDiv;
+};
+
+// Hàm gọi API để chat với AI
+const callAIAPI = async (message) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/ai/chat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: message })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Có lỗi xảy ra khi gọi API');
+    }
+
+    return data.data.message;
+  } catch (error) {
+    console.error('API Error:', error);
+
+    // Handle different types of errors
+    if (error.message.includes('Failed to fetch')) {
+      return 'Không thể kết nối đến server. Vui lòng kiểm tra kết nối mạng và thử lại.';
+    }
+
+    return error.message || 'Có lỗi xảy ra khi xử lý câu hỏi. Vui lòng thử lại sau.';
+  }
+};
+
+// Hàm cập nhật trạng thái loading cho button
+const setLoadingState = (loading) => {
+  isLoading = loading;
+  sendTextBtn.disabled = loading;
+  userInput.disabled = loading;
+
+  if (loading) {
+    sendTextBtn.innerHTML = '<i class="bi bi-hourglass-split"></i>';
   } else {
-    return "Cảm ơn câu hỏi của bạn! Tôi có thể giúp gì thêm về tái chế không? Ví dụ: phân loại rác, tái chế nhựa, hoặc lợi ích của tái chế.";
+    sendTextBtn.innerHTML = '<i class="bi bi-send-fill"></i>';
   }
 };
 
 // Hàm gửi tin nhắn
-const sendMessage = () => {
+const sendMessage = async () => {
   const messageText = userInput.value.trim();
-  if (!messageText) return; // Không gửi nếu input rỗng
+  if (!messageText || isLoading) return; // Không gửi nếu input rỗng hoặc đang loading
+
+  // Set loading state
+  setLoadingState(true);
 
   // Thêm tin nhắn người dùng
   const userMessage = createMessage(messageText, true);
@@ -65,13 +191,42 @@ const sendMessage = () => {
   // Reset input
   userInput.value = "";
 
-  // Mô phỏng phản hồi AI sau 1 giây
-  setTimeout(() => {
-    const aiResponse = getAIResponse(messageText);
+  // Thêm loading message
+  const loadingMessage = createLoadingMessage();
+  chatArea.appendChild(loadingMessage);
+  scrollToBottom();
+
+  try {
+    // Gọi API để lấy phản hồi từ AI
+    const aiResponse = await callAIAPI(messageText);
+
+    // Xóa loading message
+    chatArea.removeChild(loadingMessage);
+
+    // Thêm phản hồi AI
     const aiMessage = createMessage(aiResponse, false);
     chatArea.appendChild(aiMessage);
     scrollToBottom();
-  }, 1000);
+
+  } catch (error) {
+    console.error('Send Message Error:', error);
+
+    // Xóa loading message
+    if (chatArea.contains(loadingMessage)) {
+      chatArea.removeChild(loadingMessage);
+    }
+
+    // Thêm error message
+    const errorMessage = createMessage(
+      'Xin lỗi, có lỗi xảy ra khi xử lý câu hỏi của bạn. Vui lòng thử lại sau.',
+      false
+    );
+    chatArea.appendChild(errorMessage);
+    scrollToBottom();
+  } finally {
+    // Reset loading state
+    setLoadingState(false);
+  }
 };
 
 // Sự kiện nhấn nút gửi

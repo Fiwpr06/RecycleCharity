@@ -1,0 +1,202 @@
+<!-- Waste Collection Registration Form -->
+<div class="row justify-content-center mt-5">
+  <div class="col-lg-10">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-gradient-primary text-white text-center py-4">
+        <h3 class="mb-0">
+          <i class="bi bi-recycle me-2"></i>Đăng ký thu gom rác tái chế
+        </h3>
+        <p class="mb-0 mt-2 opacity-90">Điền thông tin để đăng ký dịch vụ thu gom rác tại nhà</p>
+      </div>
+      <div class="card-body p-4">
+        <!-- Authentication Check -->
+        <div id="authRequiredMessage" class="alert alert-warning text-center" style="display: none;">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          <strong>Vui lòng đăng nhập để sử dụng dịch vụ thu gom rác!</strong>
+          <br>
+          <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#authModal" data-tab="login">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập ngay
+          </button>
+        </div>
+
+        <!-- Waste Collection Form -->
+        <form id="wasteCollectionForm" style="display: none;">
+          <!-- Contact Information -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <h5 class="text-primary mb-3">
+                <i class="bi bi-person-lines-fill me-2"></i>Thông tin liên hệ
+              </h5>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="contactName" class="form-label">Tên người liên hệ *</label>
+              <input type="text" class="form-control" id="contactName" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="contactPhone" class="form-label">Số điện thoại *</label>
+              <input type="tel" class="form-control" id="contactPhone" required>
+            </div>
+            <div class="col-12 mb-3">
+              <label for="contactAddress" class="form-label">Địa chỉ thu gom *</label>
+              <textarea class="form-control" id="contactAddress" rows="3" required 
+                placeholder="Nhập địa chỉ chi tiết để đội thu gom có thể tìm đến..."></textarea>
+            </div>
+          </div>
+
+          <!-- Waste Types -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <h5 class="text-primary mb-3">
+                <i class="bi bi-trash3 me-2"></i>Loại rác và khối lượng ước tính
+              </h5>
+              <div class="alert alert-info">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong>Bảng giá thu gom:</strong>
+                Kim loại (20 xu/kg) • Nhựa (10 xu/kg) • Giấy (5 xu/kg) • Thủy tinh (3 xu/kg)
+              </div>
+            </div>
+            
+            <!-- Metal -->
+            <div class="col-md-6 col-lg-3 mb-3">
+              <div class="waste-type-card">
+                <div class="text-center mb-2">
+                  <i class="fas fa-cog text-warning fs-2"></i>
+                  <h6 class="mt-2 mb-1">Kim loại</h6>
+                  <small class="text-muted">20 xu/kg</small>
+                </div>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="metalWeight" 
+                    placeholder="0" min="0" step="0.1">
+                  <span class="input-group-text">kg</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Plastic -->
+            <div class="col-md-6 col-lg-3 mb-3">
+              <div class="waste-type-card">
+                <div class="text-center mb-2">
+                  <i class="fas fa-bottle-water text-info fs-2"></i>
+                  <h6 class="mt-2 mb-1">Nhựa</h6>
+                  <small class="text-muted">10 xu/kg</small>
+                </div>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="plasticWeight" 
+                    placeholder="0" min="0" step="0.1">
+                  <span class="input-group-text">kg</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Paper -->
+            <div class="col-md-6 col-lg-3 mb-3">
+              <div class="waste-type-card">
+                <div class="text-center mb-2">
+                  <i class="fas fa-newspaper text-success fs-2"></i>
+                  <h6 class="mt-2 mb-1">Giấy</h6>
+                  <small class="text-muted">5 xu/kg</small>
+                </div>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="paperWeight" 
+                    placeholder="0" min="0" step="0.1">
+                  <span class="input-group-text">kg</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Glass -->
+            <div class="col-md-6 col-lg-3 mb-3">
+              <div class="waste-type-card">
+                <div class="text-center mb-2">
+                  <i class="fas fa-wine-bottle text-primary fs-2"></i>
+                  <h6 class="mt-2 mb-1">Thủy tinh</h6>
+                  <small class="text-muted">3 xu/kg</small>
+                </div>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="glassWeight" 
+                    placeholder="0" min="0" step="0.1">
+                  <span class="input-group-text">kg</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Estimated Points -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="alert alert-success text-center">
+                <h5 class="mb-1">
+                  <i class="fas fa-coins me-2"></i>Điểm xu ước tính: 
+                  <span id="estimatedPoints" class="fw-bold">0</span> xu
+                </h5>
+                <small class="text-muted">Điểm thực tế sẽ được tính dựa trên khối lượng thu gom thực tế</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Schedule -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <h5 class="text-primary mb-3">
+                <i class="bi bi-calendar-event me-2"></i>Thời gian thu gom
+              </h5>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="scheduledDate" class="form-label">Ngày mong muốn</label>
+              <input type="date" class="form-control" id="scheduledDate">
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <label for="notes" class="form-label">Ghi chú thêm</label>
+              <textarea class="form-control" id="notes" rows="3" 
+                placeholder="Thông tin bổ sung về vị trí, thời gian thuận tiện..."></textarea>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="row">
+            <div class="col-12 text-center">
+              <button type="submit" class="btn btn-primary btn-lg px-5">
+                <i class="bi bi-send me-2"></i>Gửi yêu cầu thu gom
+              </button>
+            </div>
+          </div>
+
+          <!-- Feedback -->
+          <div id="wasteCollectionFeedback" class="mt-3"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">
+          <i class="bi bi-check-circle me-2"></i>Đăng ký thành công!
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="mb-3">
+          <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
+        </div>
+        <h5>Yêu cầu thu gom đã được gửi!</h5>
+        <p class="mb-3">Mã yêu cầu: <strong id="requestId"></strong></p>
+        <p class="text-muted">Chúng tôi sẽ liên hệ với bạn trong vòng 24 giờ để xác nhận lịch thu gom.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='./profile.html'">
+          <i class="bi bi-person me-2"></i>Xem trong hồ sơ
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
